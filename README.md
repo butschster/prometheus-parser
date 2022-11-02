@@ -4,8 +4,9 @@
 [![Latest Stable Version](https://poser.pugx.org/butschster/prometheus-parser/v/stable)](https://packagist.org/packages/butschster/prometheus-parser)
 [![phpunit](https://github.com/butschster/prometheus-parser/actions/workflows/phpunit.yml/badge.svg)](https://github.com/butschster/prometheus-parser/actions)
 [![psalm](https://github.com/butschster/prometheus-parser/actions/workflows/psalm.yml/badge.svg)](https://github.com/butschster/prometheus-parser/actions)
-[![Codecov](https://codecov.io/gh/butschster/prometheus-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/butschster/prometheus-parser/)
 [![Total Downloads](https://poser.pugx.org/butschster/prometheus-parser/downloads)](https://packagist.org/packages/butschster/prometheus-parser)
+
+![Github cover Prometheus parser](https://user-images.githubusercontent.com/773481/199663705-3540ce54-086e-476e-bf91-cd607c98df9f.jpg)
 
 ## Requirements
 

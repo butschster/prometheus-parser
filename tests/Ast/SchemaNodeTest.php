@@ -21,7 +21,8 @@ go_gc_duration_seconds{quantile="0", test="0.25"} 3.332e-05
 go_gc_duration_seconds{quantile="0.5"} 4.716e-05
 go_gc_duration_seconds{quantile="1"} 0.000218257
 go_gc_duration_seconds_sum 0.000298737
-go_gc_duration_seconds_count 3
+# A weird metric from before the epoch:
+go_gc_duration_seconds_count 3 218257
 SCHEMA
         );
     }
@@ -68,9 +69,27 @@ SCHEMA
             $this->node->getMetrics()['go_gc_duration_seconds']->metrics[4]->value
         );
 
+        $this->assertNull(
+            $this->node->getMetrics()['go_gc_duration_seconds']->metrics[3]->timestamp
+        );
+
+        $this->assertNull(
+            $this->node->getMetrics()['go_gc_duration_seconds']->metrics[3]->comment
+        );
+
         $this->assertSame(
             'go_gc_duration_seconds_count',
             $this->node->getMetrics()['go_gc_duration_seconds']->metrics[4]->name
+        );
+
+        $this->assertSame(
+            'A weird metric from before the epoch:',
+            $this->node->getMetrics()['go_gc_duration_seconds']->metrics[4]->comment
+        );
+
+        $this->assertSame(
+            218257,
+            $this->node->getMetrics()['go_gc_duration_seconds']->metrics[4]->timestamp
         );
     }
 

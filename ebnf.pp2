@@ -1,11 +1,27 @@
+/**
+* Prometheus version 2.0 text-based format schema parser.
+*/
+
+
+/**
+* --------------------------------------------------------------------------
+*  Values
+* --------------------------------------------------------------------------
+*/
 %token   T_WHITESPACE               \s+
 
 %token  T_HELP                      HELP
 %token  T_TYPE                      TYPE
 %token  T_COMMENT                   ^\#\s[a-zA-Z0-9\s\.\,\!\?\:]+\:
-%token  T_FLOAT                     [0-9]+\.[0-9]+(e(\+|\-)?[0-9]+)?     // 123.123
-%token  T_INF                       (\+|\-)Inf     // 123.123
-%token  T_INT                       (\-)?[0-9]+                              // 123
+
+/**
+ * --------------------------------------------------------------------------
+ *  Numbers
+ * --------------------------------------------------------------------------
+ */
+%token  T_FLOAT                     [0-9]+\.[0-9]+(e(\+|\-)?[0-9]+)?
+%token  T_INF                       (\+|\-)Inf
+%token  T_INT                       (\-)?[0-9]+
 
 %token  T_METRIC_TYPE               (summary|counter|gauge|histogram|untyped)
 %token  T_METRIC_NAME               [a-z_]+
@@ -13,6 +29,11 @@
 %token  T_TEXT                      [a-zA-Z0-9\s\.\,\!\?\:]+
 %token  T_QUOTED_STRING             \"([a-zA-Z0-9\s\.\,\!\?\:\\\"\+]+)\"     // "string"
 
+/**
+* --------------------------------------------------------------------------
+*  Syntax
+* --------------------------------------------------------------------------
+*/
 %token  T_EQUAL                     \=
 %token  T_HASH                      \#
 %token  T_LBRACE                    {
@@ -20,9 +41,14 @@
 %token  T_DOT                       \.
 %token  T_EOR                       \\r
 %token  T_EOL                       \\n
-%token  T_EOI                       \\0
 
 
+/**
+* --------------------------------------------------------------------------
+*  Prometheus Grammar
+* --------------------------------------------------------------------------
+* @see https://prometheus.io/docs/instrumenting/exposition_formats/
+*/
 #Document
 :
     Schema()
@@ -46,6 +72,10 @@
         Metric()*
     )
 
+/**
+* Possible value:
+* # A histogram, which has a pretty complex representation in the text format:
+*/
 #Comment -> {
    return new \Butschster\Prometheus\Ast\CommentNode($children);
 }
@@ -55,6 +85,10 @@
     Eol()?
 )
 
+/**
+* Possible value:
+* # HELP http_request_duration_seconds A histogram of the request duration.
+*/
 #Help -> {
    return new \Butschster\Prometheus\Ast\HelpNode($children);
 }
@@ -70,6 +104,10 @@
     Eol()?
 )
 
+/**
+* Possible value:
+* # TYPE http_request_duration_seconds histogram
+*/
 #Type -> {
    return new \Butschster\Prometheus\Ast\TypeNode($children);
 }
@@ -85,6 +123,13 @@
     Eol()?
 )
 
+/**
+* Possible values:
+* # Minimalistic line:
+* metric_without_timestamp_and_labels 12.47
+* http_requests_total{method="post",code="200"} 1027 1395066363000
+* http_request_duration_seconds_sum 53423
+*/
 #Metric -> {
    return new \Butschster\Prometheus\Ast\MetricNode($children);
 }
@@ -93,6 +138,16 @@
     ::T_WHITESPACE::*<T_METRIC_NAME>Labels()?::T_WHITESPACE::MetricValue()(::T_WHITESPACE::MetricTimestamp())?Eol()?
 )
 
+/**
+* Possible values:
+* 1027
+* 3
+* +Inf
+* 12.47
+* 1.7560473e+07
+* 1.7560473e-07
+* 1.458255915e9
+*/
 #MetricValue -> {
    return new \Butschster\Prometheus\Ast\MetricValueNode($children);
 }
@@ -100,6 +155,11 @@
     (<T_FLOAT>|<T_INT>|<T_INF>)
 )
 
+/**
+* Possible values:
+* 1395066363000
+* -3982045
+*/
 #MetricTimestamp -> {
    return new \Butschster\Prometheus\Ast\MetricTimestampNode($children);
 }
@@ -107,6 +167,12 @@
     <T_INT>
 )
 
+/**
+* Possible values:
+* {quantile="0", test="0.25"}
+* {problem="division by zero"}
+* {path="C:\\DIR\\FILE.TXT",error="Cannot find file:\n\"FILE.TXT\""}
+*/
 #Labels -> {
    return new \Butschster\Prometheus\Ast\LabelsNode($children);
 }
@@ -114,6 +180,13 @@
     ::T_LBRACE::(Label()(::T_COMMA::::T_WHITESPACE::*)?)*::T_RBRACE::
 )
 
+/**
+* Possible values:
+* quantile="0"
+* problem="division by zero"
+* path="C:\\DIR\\FILE.TXT"
+* error="Cannot find file:\n\"FILE.TXT\""
+*/
 #Label -> {
    return new \Butschster\Prometheus\Ast\LabelNode($children);
 }

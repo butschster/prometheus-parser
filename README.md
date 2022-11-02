@@ -1,11 +1,11 @@
 # Prometheus metrics parser for PHP
 
-[![PHP Version Require](https://poser.pugx.org/>butschster/prometheus-parser/require/php)](https://packagist.org/packages/>butschster/prometheus-parser)
-[![Latest Stable Version](https://poser.pugx.org/>butschster/prometheus-parser/v/stable)](https://packagist.org/packages/>butschster/prometheus-parser)
-[![phpunit](https://github.com/>butschster/prometheus-parser/actions/workflows/phpunit.yml/badge.svg)](https://github.com/>butschster/prometheus-parser/actions)
-[![psalm](https://github.com/>butschster/prometheus-parser/actions/workflows/psalm.yml/badge.svg)](https://github.com/>butschster/prometheus-parser/actions)
-[![Codecov](https://codecov.io/gh/>butschster/prometheus-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/>butschster/prometheus-parser/)
-[![Total Downloads](https://poser.pugx.org/>butschster/prometheus-parser/downloads)](https://packagist.org/packages/>butschster/prometheus-parser)
+[![PHP Version Require](https://poser.pugx.org/butschster/prometheus-parser/require/php)](https://packagist.org/packages/butschster/prometheus-parser)
+[![Latest Stable Version](https://poser.pugx.org/butschster/prometheus-parser/v/stable)](https://packagist.org/packages/butschster/prometheus-parser)
+[![phpunit](https://github.com/butschster/prometheus-parser/actions/workflows/phpunit.yml/badge.svg)](https://github.com/butschster/prometheus-parser/actions)
+[![psalm](https://github.com/butschster/prometheus-parser/actions/workflows/psalm.yml/badge.svg)](https://github.com/butschster/prometheus-parser/actions)
+[![Codecov](https://codecov.io/gh/butschster/prometheus-parser/branch/master/graph/badge.svg)](https://codecov.io/gh/butschster/prometheus-parser/)
+[![Total Downloads](https://poser.pugx.org/butschster/prometheus-parser/downloads)](https://packagist.org/packages/butschster/prometheus-parser)
 
 ## Requirements
 

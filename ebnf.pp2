@@ -1,0 +1,107 @@
+%token   T_WHITESPACE               \s+
+
+%token  T_HELP                      HELP
+%token  T_TYPE                      TYPE
+
+
+%token  T_FLOAT                     [0-9]+\.[0-9]+(e(\-|\+)[0-9]+)?           // 123.123
+%token  T_INT                       [0-9]+                              // 123
+
+%token  T_METRIC_TYPE               (summary|counter|gauge|histogram|untyped)
+%token  T_METRIC_NAME               [a-z_]+
+%token  T_COMMA                     \,
+%token  T_TEXT                      [a-zA-Z0-9\s\.\,\!\?]+
+%token  T_QUOTED_STRING             ('{3}|["']{1})([^'"][\s\S]*?)\1     // 'string' "string" '''string'''
+
+%token  T_EQUAL                     \=
+%token  T_HASH                      \#
+%token  T_LBRACE                    {
+%token  T_RBRACE                    }
+%token  T_DOT                       \.
+%token  T_EOR                       \\r
+%token  T_EOL                       \\n
+%token  T_EOI                       \\0
+
+
+#Document
+:
+    Schema()
+;
+
+#Schema -> {
+   return new \Butschster\Prometheus\Ast\SchemaNode($children);
+}
+:
+    MetricData()*
+;
+
+#MetricData -> {
+   return new \Butschster\Prometheus\Ast\MetricDataNode($children);
+}
+:
+    (
+        Help()
+        Type()
+        Metric()*
+    )
+
+#Help -> {
+   return new \Butschster\Prometheus\Ast\HelpNode($children);
+}
+: (
+    ::T_WHITESPACE::*
+    ::T_HASH::
+    ::T_WHITESPACE::
+    ::T_HELP::
+    ::T_WHITESPACE::
+    <T_METRIC_NAME>
+    ::T_WHITESPACE::
+    <T_TEXT>
+)
+
+#Type -> {
+   return new \Butschster\Prometheus\Ast\TypeNode($children);
+}
+: (
+    ::T_WHITESPACE::*
+    ::T_HASH::
+    ::T_WHITESPACE::
+    ::T_TYPE::
+    ::T_WHITESPACE::
+    <T_METRIC_NAME>
+    ::T_WHITESPACE::
+    <T_METRIC_TYPE>
+    Eol()?
+)
+
+#Metric -> {
+   return new \Butschster\Prometheus\Ast\MetricNode($children);
+}
+: (
+    ::T_WHITESPACE::*<T_METRIC_NAME>Labels()?::T_WHITESPACE::MetricValue()Eol()?
+)
+
+#MetricValue -> {
+   return new \Butschster\Prometheus\Ast\MetricValueNode($children);
+}
+: (
+    (<T_FLOAT>|<T_INT>)
+)
+
+#Labels -> {
+   return new \Butschster\Prometheus\Ast\LabelsNode($children);
+}
+: (
+    ::T_LBRACE::(Label()(::T_COMMA::::T_WHITESPACE::*)?)*::T_RBRACE::
+)
+
+#Label -> {
+   return new \Butschster\Prometheus\Ast\LabelNode($children);
+}
+: (
+    <T_METRIC_NAME>::T_EQUAL::<T_QUOTED_STRING>
+)
+
+#Eol: (
+    ::T_WHITESPACE::*::T_EOL::
+)

@@ -6,7 +6,7 @@ namespace Butschster\Prometheus\Tests\Ast;
 
 use Butschster\Prometheus\Ast\SchemaNode;
 
-final class SchemaNodeTest extends TestCase
+class SchemaNodeTest extends TestCase
 {
     private ?SchemaNode $node;
 

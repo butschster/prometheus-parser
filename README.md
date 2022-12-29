@@ -8,13 +8,17 @@
 
 ![Github cover Prometheus parser](https://user-images.githubusercontent.com/773481/199663705-3540ce54-086e-476e-bf91-cd607c98df9f.jpg)
 
+Welcome to the Prometheus Metrics Parser! This package makes it easy to extract valuable information from metrics in the Prometheus text-based format. Whether you're looking to analyze your metrics data, integrate it into other systems, or just want a better way to visualize it, this package has you covered.
+
+With just a few lines of code, you can easily extract valuable insights from your Prometheus metrics.
+
 ## Requirements
 
 - PHP 8.1 and above
 
 ## Quick start
 
-From the command line run
+To install the package, run the following command from the root directory of your project:
 
 ```shell
 composer require butschster/prometheus-parser
@@ -24,6 +28,8 @@ That's it!
 
 
 ## Usage
+
+To get started, simply pass a string containing your Prometheus metric data to the `parse()` method. The method will return a schema object with metric objects, each of which contains the following properties:
 
 ```php
 use Butschster\Prometheus\ParserFactory;
@@ -89,6 +95,8 @@ foreach ($metrics['go_gc_duration_seconds'] as $metric) {
 ```
 
 # Enjoy!
+
+---
 
 ## License
 

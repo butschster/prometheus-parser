@@ -13,7 +13,7 @@ final class CommentNode
     {
         foreach ($children as $child) {
             if ($child->getName() === 'T_COMMENT') {
-                $this->comment = \substr(\trim($child->getValue()), 2);
+                $this->comment = \stripslashes(\strtr(\substr(\trim($child->getValue()), 2), ['\n' => "\n"]));
             }
         }
     }

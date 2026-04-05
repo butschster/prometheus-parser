@@ -8,25 +8,43 @@ use Traversable;
 
 final class MetricDataNode implements \IteratorAggregate
 {
-    public readonly string $description;
+    public readonly ?string $description;
     public readonly string $type;
+    public readonly ?string $unit;
     public readonly string $name;
     /** @var MetricNode[] */
     public array $metrics;
 
-    /** @param \Phplrt\Lexer\Token\Token[] $children */
     public function __construct(array $children)
     {
+        // from HELP if available
+        $description = null;
+        // from TYPE if available
+        $type = 'unknown';
+        // from UNIT if available
+        $unit = null;
+        // from either HELP, TYPE, or UNIT
+        $name = '';
+
         foreach ($children as $child) {
             if ($child instanceof HelpNode) {
-                $this->description = $child->description;
-                $this->name = $child->metric;
+                $description = $child->description;
+                $name = $child->metric;
             } elseif ($child instanceof TypeNode) {
-                $this->type = $child->type;
+                $type = $child->type;
+                $name = $child->metric;
+            } elseif ($child instanceof UnitNode) {
+                $unit = $child->unit;
+                $name = $child->metric;
             } elseif ($child instanceof MetricNode) {
                 $this->metrics[] = $child;
             }
         }
+
+        $this->description = $description;
+        $this->type = $type;
+        $this->unit = $unit;
+        $this->name = $name;
     }
 
     public function getIterator(): Traversable

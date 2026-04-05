@@ -8,26 +8,23 @@
 *  Values
 * --------------------------------------------------------------------------
 */
-%token   T_WHITESPACE               \s+
+%token  T_WHITESPACE                [\x20\t]+     // any number of blanks and/or tabs
 
 %token  T_HELP                      HELP
 %token  T_TYPE                      TYPE
-%token  T_COMMENT                   ^\#\s[a-zA-Z0-9\s\.\,\!\?\:]+\:
+%token  T_UNIT                      UNIT
+%token  T_EOF                       EOF
+%token  T_COMMENT                   ^\#(?![\x20\t]+(?:HELP|TYPE|UNIT|EOF))[\x20\t]+([^\n\\]|\\[n"\\])+$
 
 /**
  * --------------------------------------------------------------------------
  *  Numbers
  * --------------------------------------------------------------------------
  */
-%token  T_FLOAT                     [0-9]+\.[0-9]+(e(\+|\-)?[0-9]+)?
-%token  T_INF                       (\+|\-)Inf
-%token  T_INT                       (\-)?[0-9]+
-
-%token  T_METRIC_TYPE               (summary|counter|gauge|histogram|untyped)
-%token  T_METRIC_NAME               [a-z_]+
-%token  T_COMMA                     \,
-%token  T_TEXT                      [a-zA-Z0-9\s\.\,\!\?\:]+
-%token  T_QUOTED_STRING             \"([a-zA-Z0-9\s\.\,\!\?\:\\\"\+]+)\"     // "string"
+%token  T_FLOAT                     [+-]?[0-9]*\.[0-9]+([eE][+-]?[0-9]+)?|[+-]?[0-9]+[eE][+-]?[0-9]+
+%token  T_INF                       [+-](?i)inf(inity)?
+%token  T_INT                       [+-]?[0-9]+
+%token  T_NAN                       (?i)nan
 
 /**
 * --------------------------------------------------------------------------
@@ -38,9 +35,14 @@
 %token  T_HASH                      \#
 %token  T_LBRACE                    {
 %token  T_RBRACE                    }
-%token  T_DOT                       \.
-%token  T_EOR                       \\r
-%token  T_EOL                       \\n
+%token  T_COMMA                     \,
+%token  T_EOR                       \r
+%token  T_EOL                       \n
+
+%token  T_METRIC_TYPE               (summary|counter|gauge|histogram|gaugehistogram|stateset|info|unknown|untyped)
+%token  T_METRIC_NAME               [a-z_:][a-z0-9_:]*
+%token  T_QUOTED_STRING             \"([^\n"\\]|\\[n"\\])+\"     // "string"
+%token  T_TEXT                      ([^\n\\]|\\[n"\\])+
 
 
 /**
@@ -59,6 +61,7 @@
 }
 :
     MetricData()*
+    Eof()?
 ;
 
 #MetricData -> {
@@ -67,8 +70,15 @@
 :
     (
         Comment()*
-        Help()
-        Type()
+        (
+            Help()
+            Type()
+            Unit()?
+            |
+            Type()
+            Unit()?
+            Help()?
+        )
         Metric()*
     )
 
@@ -88,6 +98,7 @@
 /**
 * Possible value:
 * # HELP http_request_duration_seconds A histogram of the request duration.
+* # HELP prometheus_tsdb_clean_start -1: lockfile is disabled. 0: a lockfile from a previous execution was replaced. 1: lockfile creation was clean
 */
 #Help -> {
    return new \Butschster\Prometheus\Ast\HelpNode($children);
@@ -99,9 +110,23 @@
     ::T_HELP::
     ::T_WHITESPACE::
     <T_METRIC_NAME>
-    ::T_WHITESPACE::
-    <T_TEXT>
+    (
+        ::T_WHITESPACE::
+        HelpDocstring()
+    )?
     Eol()?
+)
+
+/**
+* Possible values:
+* A histogram of the request duration.
+* -1: lockfile is disabled. 0: a lockfile from a previous execution was replaced. 1: lockfile creation was clean
+*/
+#HelpDocstring -> {
+   return new \Butschster\Prometheus\Ast\HelpDocstringNode($children);
+}
+: (
+    ((<T_METRIC_NAME>|<T_METRIC_TYPE>|MetricValue()|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
 )
 
 /**
@@ -120,6 +145,54 @@
     <T_METRIC_NAME>
     ::T_WHITESPACE::
     <T_METRIC_TYPE>
+    Eol()?
+)
+
+/**
+* Possible value:
+* # UNIT http_request_duration_seconds seconds
+*/
+#Unit -> {
+   return new \Butschster\Prometheus\Ast\UnitNode($children);
+}
+: (
+    ::T_WHITESPACE::*
+    ::T_HASH::
+    ::T_WHITESPACE::
+    ::T_UNIT::
+    ::T_WHITESPACE::
+    <T_METRIC_NAME>
+    (
+        ::T_WHITESPACE::
+        UnitUnit()
+    )?
+    Eol()?
+)
+
+/**
+* Possible values:
+* seconds
+* bytes
+*/
+#UnitUnit -> {
+   return new \Butschster\Prometheus\Ast\UnitUnitNode($children);
+}
+: (
+    <T_METRIC_NAME>
+)
+
+/**
+* Possible value:
+* # EOF
+*/
+#Eof -> {
+   return new \Butschster\Prometheus\Ast\EofNode($children);
+}
+: (
+    ::T_WHITESPACE::*
+    ::T_HASH::
+    ::T_WHITESPACE::
+    ::T_EOF::
     Eol()?
 )
 
@@ -143,16 +216,18 @@
 * 1027
 * 3
 * +Inf
+* +Infinity
 * 12.47
 * 1.7560473e+07
 * 1.7560473e-07
 * 1.458255915e9
+* NaN
 */
 #MetricValue -> {
    return new \Butschster\Prometheus\Ast\MetricValueNode($children);
 }
 : (
-    (<T_FLOAT>|<T_INT>|<T_INF>)
+    (<T_FLOAT>|<T_INT>|<T_INF>|<T_NAN>)
 )
 
 /**
@@ -194,6 +269,6 @@
     <T_METRIC_NAME>::T_EQUAL::<T_QUOTED_STRING>
 )
 
-#Eol: (
-    ::T_WHITESPACE::*::T_EOL::
+Eol: (
+    (::T_WHITESPACE::*::T_EOL::)+
 )

@@ -9,7 +9,7 @@ final class HelpTest extends TestCase
     public function testParseHelp(): void
     {
         $this->assertAst(
-            <<<SCHEMA
+            <<<'SCHEMA'
 # HELP http_requests_total The total number of HTTP requests.
 # TYPE http_requests_total counter
 http_requests_total{method="post",code="200"} 1027 1395066363000
@@ -48,20 +48,21 @@ rpc_duration_seconds_sum 1.7560473e+07
 rpc_duration_seconds_count 2693
 SCHEMA
             ,
-            <<<AST
+            <<<'AST'
 <Document offset="0">
     <Schema offset="0">
         <MetricData offset="0">
             <Help offset="0">
                 <T_METRIC_NAME offset="7">http_requests_total</T_METRIC_NAME>
-                <T_TEXT offset="27">The total number of HTTP requests.
-</T_TEXT>
+                <HelpDocstring offset="27">
+                    <T_TEXT offset="27">The total number of HTTP requests.</T_TEXT>
+                </HelpDocstring>
             </Help>
             <Type offset="62">
                 <T_METRIC_NAME offset="69">http_requests_total</T_METRIC_NAME>
                 <T_METRIC_TYPE offset="89">counter</T_METRIC_TYPE>
             </Type>
-            <Metric offset="96">
+            <Metric offset="97">
                 <T_METRIC_NAME offset="97">http_requests_total</T_METRIC_NAME>
                 <Labels offset="116">
                     <Label offset="117">
@@ -80,7 +81,7 @@ SCHEMA
                     <T_INT offset="148">1395066363000</T_INT>
                 </MetricTimestamp>
             </Metric>
-            <Metric offset="161">
+            <Metric offset="162">
                 <T_METRIC_NAME offset="162">http_requests_total</T_METRIC_NAME>
                 <Labels offset="181">
                     <Label offset="182">
@@ -99,235 +100,236 @@ SCHEMA
                     <T_INT offset="213">1395066363000</T_INT>
                 </MetricTimestamp>
             </Metric>
-            <Metric offset="226">
-                <Comment offset="226">
+            <Metric offset="228">
+                <Comment offset="228">
                     <T_COMMENT offset="228"># Escaping in label values:</T_COMMENT>
                 </Comment>
                 <T_METRIC_NAME offset="256">msdos_file_access_time_seconds</T_METRIC_NAME>
                 <Labels offset="286">
                     <Label offset="287">
                         <T_METRIC_NAME offset="287">path</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="292">"C:\DIR\FILE.TXT"</T_QUOTED_STRING>
+                        <T_QUOTED_STRING offset="292">"C:\\DIR\\FILE.TXT"</T_QUOTED_STRING>
                     </Label>
-                    <Label offset="310">
-                        <T_METRIC_NAME offset="310">error</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="316">"Cannot find file:
-\"FILE.TXT\""</T_QUOTED_STRING>
-                    </Label>
-                </Labels>
-                <MetricValue offset="350">
-                    <T_FLOAT offset="350">1.458255915e9</T_FLOAT>
-                </MetricValue>
-            </Metric>
-            <Metric offset="363">
-                <Comment offset="363">
-                    <T_COMMENT offset="365"># Minimalistic line:</T_COMMENT>
-                </Comment>
-                <T_METRIC_NAME offset="386">metric_without_timestamp_and_labels</T_METRIC_NAME>
-                <MetricValue offset="422">
-                    <T_FLOAT offset="422">12.47</T_FLOAT>
-                </MetricValue>
-            </Metric>
-            <Metric offset="427">
-                <Comment offset="427">
-                    <T_COMMENT offset="429"># A weird metric from before the epoch:</T_COMMENT>
-                </Comment>
-                <T_METRIC_NAME offset="469">something_weird</T_METRIC_NAME>
-                <Labels offset="484">
-                    <Label offset="485">
-                        <T_METRIC_NAME offset="485">problem</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="493">"division by zero"</T_QUOTED_STRING>
+                    <Label offset="312">
+                        <T_METRIC_NAME offset="312">error</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="318">"Cannot find file:\n\"FILE.TXT\""</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="513">
-                    <T_INF offset="513">+Inf</T_INF>
+                <MetricValue offset="353">
+                    <T_FLOAT offset="353">1.458255915e9</T_FLOAT>
                 </MetricValue>
-                <MetricTimestamp offset="518">
-                    <T_INT offset="518">-3982045</T_INT>
+            </Metric>
+            <Metric offset="368">
+                <Comment offset="368">
+                    <T_COMMENT offset="368"># Minimalistic line:</T_COMMENT>
+                </Comment>
+                <T_METRIC_NAME offset="389">metric_without_timestamp_and_labels</T_METRIC_NAME>
+                <MetricValue offset="425">
+                    <T_FLOAT offset="425">12.47</T_FLOAT>
+                </MetricValue>
+            </Metric>
+            <Metric offset="432">
+                <Comment offset="432">
+                    <T_COMMENT offset="432"># A weird metric from before the epoch:</T_COMMENT>
+                </Comment>
+                <T_METRIC_NAME offset="472">something_weird</T_METRIC_NAME>
+                <Labels offset="487">
+                    <Label offset="488">
+                        <T_METRIC_NAME offset="488">problem</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="496">"division by zero"</T_QUOTED_STRING>
+                    </Label>
+                </Labels>
+                <MetricValue offset="516">
+                    <T_INF offset="516">+Inf</T_INF>
+                </MetricValue>
+                <MetricTimestamp offset="521">
+                    <T_INT offset="521">-3982045</T_INT>
                 </MetricTimestamp>
             </Metric>
         </MetricData>
-        <MetricData offset="526">
-            <Comment offset="526">
-                <T_COMMENT offset="528"># A histogram, which has a pretty complex representation in the text format:</T_COMMENT>
+        <MetricData offset="531">
+            <Comment offset="531">
+                <T_COMMENT offset="531"># A histogram, which has a pretty complex representation in the text format:</T_COMMENT>
             </Comment>
-            <Help offset="604">
-                <T_METRIC_NAME offset="612">http_request_duration_seconds</T_METRIC_NAME>
-                <T_TEXT offset="642">A histogram of the request duration.
-</T_TEXT>
+            <Help offset="608">
+                <T_METRIC_NAME offset="615">http_request_duration_seconds</T_METRIC_NAME>
+                <HelpDocstring offset="645">
+                    <T_TEXT offset="645">A histogram of the request duration.</T_TEXT>
+                </HelpDocstring>
             </Help>
-            <Type offset="679">
-                <T_METRIC_NAME offset="686">http_request_duration_seconds</T_METRIC_NAME>
-                <T_METRIC_TYPE offset="716">histogram</T_METRIC_TYPE>
+            <Type offset="682">
+                <T_METRIC_NAME offset="689">http_request_duration_seconds</T_METRIC_NAME>
+                <T_METRIC_TYPE offset="719">histogram</T_METRIC_TYPE>
             </Type>
-            <Metric offset="725">
-                <T_METRIC_NAME offset="726">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="762">
-                    <Label offset="763">
-                        <T_METRIC_NAME offset="763">le</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="766">"0.05"</T_QUOTED_STRING>
+            <Metric offset="729">
+                <T_METRIC_NAME offset="729">http_request_duration_seconds_bucket</T_METRIC_NAME>
+                <Labels offset="765">
+                    <Label offset="766">
+                        <T_METRIC_NAME offset="766">le</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="769">"0.05"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="774">
-                    <T_INT offset="774">24054</T_INT>
+                <MetricValue offset="777">
+                    <T_INT offset="777">24054</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="779">
-                <T_METRIC_NAME offset="780">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="816">
-                    <Label offset="817">
-                        <T_METRIC_NAME offset="817">le</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="820">"0.1"</T_QUOTED_STRING>
+            <Metric offset="783">
+                <T_METRIC_NAME offset="783">http_request_duration_seconds_bucket</T_METRIC_NAME>
+                <Labels offset="819">
+                    <Label offset="820">
+                        <T_METRIC_NAME offset="820">le</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="823">"0.1"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="827">
-                    <T_INT offset="827">33444</T_INT>
+                <MetricValue offset="830">
+                    <T_INT offset="830">33444</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="832">
-                <T_METRIC_NAME offset="833">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="869">
-                    <Label offset="870">
-                        <T_METRIC_NAME offset="870">le</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="873">"0.2"</T_QUOTED_STRING>
+            <Metric offset="836">
+                <T_METRIC_NAME offset="836">http_request_duration_seconds_bucket</T_METRIC_NAME>
+                <Labels offset="872">
+                    <Label offset="873">
+                        <T_METRIC_NAME offset="873">le</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="876">"0.2"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="880">
-                    <T_INT offset="880">100392</T_INT>
+                <MetricValue offset="883">
+                    <T_INT offset="883">100392</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="886">
-                <T_METRIC_NAME offset="887">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="923">
-                    <Label offset="924">
-                        <T_METRIC_NAME offset="924">le</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="927">"0.5"</T_QUOTED_STRING>
+            <Metric offset="890">
+                <T_METRIC_NAME offset="890">http_request_duration_seconds_bucket</T_METRIC_NAME>
+                <Labels offset="926">
+                    <Label offset="927">
+                        <T_METRIC_NAME offset="927">le</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="930">"0.5"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="934">
-                    <T_INT offset="934">129389</T_INT>
+                <MetricValue offset="937">
+                    <T_INT offset="937">129389</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="940">
-                <T_METRIC_NAME offset="941">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="977">
-                    <Label offset="978">
-                        <T_METRIC_NAME offset="978">le</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="981">"1"</T_QUOTED_STRING>
+            <Metric offset="944">
+                <T_METRIC_NAME offset="944">http_request_duration_seconds_bucket</T_METRIC_NAME>
+                <Labels offset="980">
+                    <Label offset="981">
+                        <T_METRIC_NAME offset="981">le</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="984">"1"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="986">
-                    <T_INT offset="986">133988</T_INT>
+                <MetricValue offset="989">
+                    <T_INT offset="989">133988</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="992">
-                <T_METRIC_NAME offset="993">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="1029">
-                    <Label offset="1030">
-                        <T_METRIC_NAME offset="1030">le</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="1033">"+Inf"</T_QUOTED_STRING>
+            <Metric offset="996">
+                <T_METRIC_NAME offset="996">http_request_duration_seconds_bucket</T_METRIC_NAME>
+                <Labels offset="1032">
+                    <Label offset="1033">
+                        <T_METRIC_NAME offset="1033">le</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="1036">"+Inf"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="1041">
-                    <T_INT offset="1041">144320</T_INT>
+                <MetricValue offset="1044">
+                    <T_INT offset="1044">144320</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="1047">
-                <T_METRIC_NAME offset="1048">http_request_duration_seconds_sum</T_METRIC_NAME>
-                <MetricValue offset="1082">
-                    <T_INT offset="1082">53423</T_INT>
+            <Metric offset="1051">
+                <T_METRIC_NAME offset="1051">http_request_duration_seconds_sum</T_METRIC_NAME>
+                <MetricValue offset="1085">
+                    <T_INT offset="1085">53423</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="1087">
-                <T_METRIC_NAME offset="1088">http_request_duration_seconds_count</T_METRIC_NAME>
-                <MetricValue offset="1124">
-                    <T_INT offset="1124">144320</T_INT>
+            <Metric offset="1091">
+                <T_METRIC_NAME offset="1091">http_request_duration_seconds_count</T_METRIC_NAME>
+                <MetricValue offset="1127">
+                    <T_INT offset="1127">144320</T_INT>
                 </MetricValue>
             </Metric>
         </MetricData>
-        <MetricData offset="1130">
-            <Comment offset="1130">
-                <T_COMMENT offset="1132"># Finally a summary, which has a complex representation, too:</T_COMMENT>
+        <MetricData offset="1135">
+            <Comment offset="1135">
+                <T_COMMENT offset="1135"># Finally a summary, which has a complex representation, too:</T_COMMENT>
             </Comment>
-            <Help offset="1193">
-                <T_METRIC_NAME offset="1201">rpc_duration_seconds</T_METRIC_NAME>
-                <T_TEXT offset="1222">A summary of the RPC duration in seconds.
-</T_TEXT>
+            <Help offset="1197">
+                <T_METRIC_NAME offset="1204">rpc_duration_seconds</T_METRIC_NAME>
+                <HelpDocstring offset="1225">
+                    <T_TEXT offset="1225">A summary of the RPC duration in seconds.</T_TEXT>
+                </HelpDocstring>
             </Help>
-            <Type offset="1264">
-                <T_METRIC_NAME offset="1271">rpc_duration_seconds</T_METRIC_NAME>
-                <T_METRIC_TYPE offset="1292">summary</T_METRIC_TYPE>
+            <Type offset="1267">
+                <T_METRIC_NAME offset="1274">rpc_duration_seconds</T_METRIC_NAME>
+                <T_METRIC_TYPE offset="1295">summary</T_METRIC_TYPE>
             </Type>
-            <Metric offset="1299">
-                <T_METRIC_NAME offset="1300">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1320">
-                    <Label offset="1321">
-                        <T_METRIC_NAME offset="1321">quantile</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="1330">"0.01"</T_QUOTED_STRING>
+            <Metric offset="1303">
+                <T_METRIC_NAME offset="1303">rpc_duration_seconds</T_METRIC_NAME>
+                <Labels offset="1323">
+                    <Label offset="1324">
+                        <T_METRIC_NAME offset="1324">quantile</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="1333">"0.01"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="1338">
-                    <T_INT offset="1338">3102</T_INT>
+                <MetricValue offset="1341">
+                    <T_INT offset="1341">3102</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="1342">
-                <T_METRIC_NAME offset="1343">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1363">
-                    <Label offset="1364">
-                        <T_METRIC_NAME offset="1364">quantile</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="1373">"0.05"</T_QUOTED_STRING>
+            <Metric offset="1346">
+                <T_METRIC_NAME offset="1346">rpc_duration_seconds</T_METRIC_NAME>
+                <Labels offset="1366">
+                    <Label offset="1367">
+                        <T_METRIC_NAME offset="1367">quantile</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="1376">"0.05"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="1381">
-                    <T_INT offset="1381">3272</T_INT>
+                <MetricValue offset="1384">
+                    <T_INT offset="1384">3272</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="1385">
-                <T_METRIC_NAME offset="1386">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1406">
-                    <Label offset="1407">
-                        <T_METRIC_NAME offset="1407">quantile</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="1416">"0.5"</T_QUOTED_STRING>
+            <Metric offset="1389">
+                <T_METRIC_NAME offset="1389">rpc_duration_seconds</T_METRIC_NAME>
+                <Labels offset="1409">
+                    <Label offset="1410">
+                        <T_METRIC_NAME offset="1410">quantile</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="1419">"0.5"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="1423">
-                    <T_INT offset="1423">4773</T_INT>
+                <MetricValue offset="1426">
+                    <T_INT offset="1426">4773</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="1427">
-                <T_METRIC_NAME offset="1428">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1448">
-                    <Label offset="1449">
-                        <T_METRIC_NAME offset="1449">quantile</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="1458">"0.9"</T_QUOTED_STRING>
+            <Metric offset="1431">
+                <T_METRIC_NAME offset="1431">rpc_duration_seconds</T_METRIC_NAME>
+                <Labels offset="1451">
+                    <Label offset="1452">
+                        <T_METRIC_NAME offset="1452">quantile</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="1461">"0.9"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="1465">
-                    <T_INT offset="1465">9001</T_INT>
+                <MetricValue offset="1468">
+                    <T_INT offset="1468">9001</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="1469">
-                <T_METRIC_NAME offset="1470">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1490">
-                    <Label offset="1491">
-                        <T_METRIC_NAME offset="1491">quantile</T_METRIC_NAME>
-                        <T_QUOTED_STRING offset="1500">"0.99"</T_QUOTED_STRING>
+            <Metric offset="1473">
+                <T_METRIC_NAME offset="1473">rpc_duration_seconds</T_METRIC_NAME>
+                <Labels offset="1493">
+                    <Label offset="1494">
+                        <T_METRIC_NAME offset="1494">quantile</T_METRIC_NAME>
+                        <T_QUOTED_STRING offset="1503">"0.99"</T_QUOTED_STRING>
                     </Label>
                 </Labels>
-                <MetricValue offset="1508">
-                    <T_INT offset="1508">76656</T_INT>
+                <MetricValue offset="1511">
+                    <T_INT offset="1511">76656</T_INT>
                 </MetricValue>
             </Metric>
-            <Metric offset="1513">
-                <T_METRIC_NAME offset="1514">rpc_duration_seconds_sum</T_METRIC_NAME>
-                <MetricValue offset="1539">
-                    <T_FLOAT offset="1539">1.7560473e+07</T_FLOAT>
+            <Metric offset="1517">
+                <T_METRIC_NAME offset="1517">rpc_duration_seconds_sum</T_METRIC_NAME>
+                <MetricValue offset="1542">
+                    <T_FLOAT offset="1542">1.7560473e+07</T_FLOAT>
                 </MetricValue>
             </Metric>
-            <Metric offset="1552">
-                <T_METRIC_NAME offset="1553">rpc_duration_seconds_count</T_METRIC_NAME>
-                <MetricValue offset="1580">
-                    <T_INT offset="1580">2693</T_INT>
+            <Metric offset="1556">
+                <T_METRIC_NAME offset="1556">rpc_duration_seconds_count</T_METRIC_NAME>
+                <MetricValue offset="1583">
+                    <T_INT offset="1583">2693</T_INT>
                 </MetricValue>
             </Metric>
         </MetricData>

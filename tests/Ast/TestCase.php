@@ -7,7 +7,7 @@ namespace Butschster\Prometheus\Tests\Ast;
 use Butschster\Prometheus\Parser;
 use Butschster\Prometheus\ParserFactory;
 
-abstract class TestCase extends \Butschster\Prometheus\Tests\Parsers\TestCase
+abstract class TestCase extends \Butschster\Prometheus\Tests\TestCase
 {
     protected Parser $parser;
 

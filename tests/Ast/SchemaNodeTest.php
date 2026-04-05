@@ -8,13 +8,18 @@ use Butschster\Prometheus\Ast\SchemaNode;
 
 class SchemaNodeTest extends TestCase
 {
-    private ?SchemaNode $node;
+    protected ?SchemaNode $node;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->node = $this->parser->parse(<<<SCHEMA
+        $this->setNode();
+    }
+
+    protected function setNode(): void
+    {
+        $this->node = $this->parser->parse(<<<'SCHEMA'
 # HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.
 # TYPE go_gc_duration_seconds summary
 go_gc_duration_seconds{quantile="0", test="0.25"} 3.332e-05
@@ -40,6 +45,13 @@ SCHEMA
         $this->assertSame(
             'summary',
             $this->node->getMetrics()['go_gc_duration_seconds']->type
+        );
+    }
+
+    function testSchemaUnit(): void
+    {
+        $this->assertNull(
+            $this->node->getMetrics()['go_gc_duration_seconds']->unit
         );
     }
 
@@ -113,6 +125,12 @@ SCHEMA
         $this->assertSame(
             '0.25',
             $this->node->getMetrics()['go_gc_duration_seconds']->metrics[0]->labels[1]->value
+        );
+    }
+
+    function testSchemaEof() {
+        $this->assertNull(
+            $this->node->eof
         );
     }
 }

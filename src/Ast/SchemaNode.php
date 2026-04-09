@@ -14,14 +14,25 @@ final class SchemaNode implements \IteratorAggregate
     /** @var non-empty-array<string, MetricDataNode> */
     private array $metrics;
 
+    public readonly ?bool $eof;
+
     /**
-     * @param MetricDataNode[] $children
+     * @param (MetricDataNode|EofNode)[] $children
      */
     public function __construct(array $children)
     {
+        // EOF is present in OpenMetrics but not in Prometheus Text Format
+        $eof = null;
+
         foreach ($children as $child) {
-            $this->metrics[$child->name] = $child;
+            if ($child instanceof EofNode) {
+                $eof = true;
+            } else {
+                $this->metrics[$child->name] = $child;
+            }
         }
+
+        $this->eof = $eof;
     }
 
     /**

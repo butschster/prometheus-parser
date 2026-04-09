@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Butschster\Prometheus\Ast;
 
-final class HelpNode
+final class UnitNode
 {
     public readonly string $metric;
-    public readonly ?string $description;
+    public readonly ?string $unit;
 
     public function __construct(array $children)
     {
-        // HELP with empty value string must be treated as if it were not present
-        $description = null;
+        // UNIT with empty value string must be treated as if it were not present
+        $unit = null;
 
         foreach ($children as $child) {
-            if ($child instanceof HelpDocstringNode) {
-                $description = $child->description;
+            if ($child instanceof UnitUnitNode) {
+                $unit = $child->unit;
             } elseif ($child->getName() === 'T_METRIC_NAME') {
                 $this->metric = \trim($child->getValue());
             }
         }
 
-        $this->description = $description;
+        $this->unit = $unit;
     }
 }

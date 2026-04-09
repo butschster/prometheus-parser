@@ -36,7 +36,7 @@ use Butschster\Prometheus\ParserFactory;
 
 $parser = ParserFactory::create();
 
-$schema = $parser->parse(<<<SCHEMA
+$schema = $parser->parse(<<<'SCHEMA'
 # HELP http_requests_total The total number of HTTP requests.
 # TYPE http_requests_total counter
 http_requests_total{method="post",code="200"} 1027 1395066363000
@@ -90,7 +90,7 @@ foreach ($metrics['go_gc_duration_seconds'] as $metric) {
     $metric->name; // go_gc_duration_seconds
     $metric->value; // Value
     $metric->timestamp; // Timestamp
-    $metric->lables; // Array of labels
+    $metric->labels; // Array of labels
 }
 ```
 

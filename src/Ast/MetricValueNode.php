@@ -9,11 +9,16 @@ use Phplrt\Lexer\Token\Token;
 final class MetricValueNode
 {
     public readonly float|int $value;
+    public readonly string $originalValue;
 
     public function __construct(Token $value)
     {
-        $this->value = \ctype_digit($value->getValue())
-            ? (int)$value->getValue()
-            : (float)$value->getValue();
+        $this->originalValue = $value->getValue();
+        $this->value = match ($value->getName()) {
+            'T_INT' => (int)$value->getValue(),
+            'T_FLOAT' => (float)$value->getValue(),
+            'T_INF' => INF,
+            'T_NAN' => NAN,
+        };
     }
 }

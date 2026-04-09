@@ -16,7 +16,7 @@ final class LabelNode
             if ($child->getName() === 'T_METRIC_NAME') {
                 $this->name = \trim($child->getValue());
             } elseif ($child->getName() === 'T_QUOTED_STRING') {
-                $this->value = \stripslashes(\substr($child->getValue(), 1, -1));
+                $this->value = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
             }
         }
     }

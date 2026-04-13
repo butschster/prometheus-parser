@@ -1,4 +1,20 @@
 <?php
+
+declare(strict_types=1);
+
+/**
+ * @var array{
+ *     initial: array-key,
+ *     tokens: array{
+ *         default: array<non-empty-string, non-empty-string>,
+ *         ...
+ *     },
+ *     skip: list<non-empty-string>,
+ *     grammar: array<array-key, \Phplrt\Parser\Grammar\RuleInterface>,
+ *     reducers: array<array-key, callable(\Phplrt\Parser\Context, mixed):mixed>,
+ *     transitions?: array<array-key, mixed>
+ * }
+ */
 return [
     'initial' => 'Document',
     'tokens' => [
@@ -27,12 +43,8 @@ return [
             'T_TEXT' => '([^\\n\\\\]|\\\\[n"\\\\])+',
         ],
     ],
-    'skip' => [
-        
-    ],
-    'transitions' => [
-        
-    ],
+    'skip' => [],
+    'transitions' => [],
     'grammar' => [
         0 => new \Phplrt\Parser\Grammar\Repetition('MetricData', 0, INF),
         1 => new \Phplrt\Parser\Grammar\Optional('Eof'),
@@ -155,49 +167,49 @@ return [
         'UnitUnit' => new \Phplrt\Parser\Grammar\Lexeme('T_METRIC_NAME', true),
     ],
     'reducers' => [
-        'Comment' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Comment' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\CommentNode($children);
         },
-        'Eof' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Eof' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\EofNode($children);
         },
-        'Help' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Help' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\HelpNode($children);
         },
-        'HelpDocstring' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'HelpDocstring' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\HelpDocstringNode($children);
         },
-        'Label' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Label' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\LabelNode($children);
         },
-        'Labels' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Labels' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\LabelsNode($children);
         },
-        'Metric' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Metric' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\MetricNode($children);
         },
-        'MetricData' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'MetricData' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\MetricDataNode($children);
         },
-        'MetricStartTimestamp' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'MetricStartTimestamp' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\MetricStartTimestampNode($children);
         },
-        'MetricTimestamp' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'MetricTimestamp' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\MetricTimestampNode($children);
         },
-        'MetricValue' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'MetricValue' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\MetricValueNode($children);
         },
-        'Schema' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Schema' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\SchemaNode($children);
         },
-        'Type' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Type' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\TypeNode($children);
         },
-        'Unit' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'Unit' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\UnitNode($children);
         },
-        'UnitUnit' => function (\Phplrt\Parser\Context $ctx, $children) {
+        'UnitUnit' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\UnitUnitNode($children);
         },
     ],

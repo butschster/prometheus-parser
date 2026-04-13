@@ -55,7 +55,18 @@ SCHEMA
             <Help offset="0">
                 <T_METRIC_NAME offset="7">http_requests_total</T_METRIC_NAME>
                 <HelpDocstring offset="27">
-                    <T_TEXT offset="27">The total number of HTTP requests.</T_TEXT>
+                    <T_METRIC_NAME offset="27">The</T_METRIC_NAME>
+                    <T_WHITESPACE offset="30"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="31">total</T_METRIC_NAME>
+                    <T_WHITESPACE offset="36"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="37">number</T_METRIC_NAME>
+                    <T_WHITESPACE offset="43"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="44">of</T_METRIC_NAME>
+                    <T_WHITESPACE offset="46"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="47">HTTP</T_METRIC_NAME>
+                    <T_WHITESPACE offset="51"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="52">requests</T_METRIC_NAME>
+                    <T_TEXT offset="60">.</T_TEXT>
                 </HelpDocstring>
             </Help>
             <Type offset="62">
@@ -154,7 +165,18 @@ SCHEMA
             <Help offset="608">
                 <T_METRIC_NAME offset="615">http_request_duration_seconds</T_METRIC_NAME>
                 <HelpDocstring offset="645">
-                    <T_TEXT offset="645">A histogram of the request duration.</T_TEXT>
+                    <T_METRIC_NAME offset="645">A</T_METRIC_NAME>
+                    <T_WHITESPACE offset="646"> </T_WHITESPACE>
+                    <T_METRIC_TYPE offset="647">histogram</T_METRIC_TYPE>
+                    <T_WHITESPACE offset="656"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="657">of</T_METRIC_NAME>
+                    <T_WHITESPACE offset="659"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="660">the</T_METRIC_NAME>
+                    <T_WHITESPACE offset="663"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="664">request</T_METRIC_NAME>
+                    <T_WHITESPACE offset="671"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="672">duration</T_METRIC_NAME>
+                    <T_TEXT offset="680">.</T_TEXT>
                 </HelpDocstring>
             </Help>
             <Type offset="682">
@@ -253,7 +275,22 @@ SCHEMA
             <Help offset="1197">
                 <T_METRIC_NAME offset="1204">rpc_duration_seconds</T_METRIC_NAME>
                 <HelpDocstring offset="1225">
-                    <T_TEXT offset="1225">A summary of the RPC duration in seconds.</T_TEXT>
+                    <T_METRIC_NAME offset="1225">A</T_METRIC_NAME>
+                    <T_WHITESPACE offset="1226"> </T_WHITESPACE>
+                    <T_METRIC_TYPE offset="1227">summary</T_METRIC_TYPE>
+                    <T_WHITESPACE offset="1234"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="1235">of</T_METRIC_NAME>
+                    <T_WHITESPACE offset="1237"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="1238">the</T_METRIC_NAME>
+                    <T_WHITESPACE offset="1241"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="1242">RPC</T_METRIC_NAME>
+                    <T_WHITESPACE offset="1245"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="1246">duration</T_METRIC_NAME>
+                    <T_WHITESPACE offset="1254"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="1255">in</T_METRIC_NAME>
+                    <T_WHITESPACE offset="1257"> </T_WHITESPACE>
+                    <T_METRIC_NAME offset="1258">seconds</T_METRIC_NAME>
+                    <T_TEXT offset="1265">.</T_TEXT>
                 </HelpDocstring>
             </Help>
             <Type offset="1267">

@@ -133,4 +133,19 @@ SCHEMA
             $this->node->eof
         );
     }
+
+    function testEmptySchema() {
+        $emptyNode = $this->parser->parse(<<<'SCHEMA'
+SCHEMA
+        );
+
+        $this->assertCount(
+            0,
+            $emptyNode->getMetrics()
+        );
+
+        $this->assertNull(
+            $emptyNode->eof
+        );
+    }
 }

@@ -69,4 +69,3 @@ final class StateSetTypeValidator implements ValidatorInterface
         }
     }
 }
-

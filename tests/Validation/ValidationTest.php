@@ -98,7 +98,7 @@ SCHEMA
         $this->assertNotNull($schema);
     }
 
-    function testStateSetInvalidMetricValue(): void
+    function testStateSetInvalidMetricValueNotZeroOrOne(): void
     {
         $this->expectException(InvalidMetricValueException::class);
         $this->expectExceptionMessageMatches('/"0" or "1"/');

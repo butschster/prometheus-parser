@@ -186,6 +186,29 @@ SCHEMA
         );
     }
 
+    function testContainsStartTimestamp(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help st@ should not be mistaken for T_START_TIMESTAMP
+# TYPE test_help summary
+test_help 0
+# HELP test_help:prefix st@1234 should not be mistaken for T_START_TIMESTAMP
+# TYPE test_help:prefix summary
+test_help:prefix 0
+SCHEMA
+        );
+
+        $this->assertSame(
+            'st@ should not be mistaken for T_START_TIMESTAMP',
+            $node->getMetrics()['test_help']->description
+        );
+
+        $this->assertSame(
+            'st@1234 should not be mistaken for T_START_TIMESTAMP',
+            $node->getMetrics()['test_help:prefix']->description
+        );
+    }
+
     function testContainsQuotedString(): void
     {
         $node = $this->parser->parse(<<<'SCHEMA'

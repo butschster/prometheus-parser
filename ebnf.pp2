@@ -39,8 +39,9 @@
 %token  T_EOR                       \r
 %token  T_EOL                       \n
 
+%token  T_START_TIMESTAMP           st@
 %token  T_METRIC_TYPE               (summary|counter|gauge|histogram|gaugehistogram|stateset|info|unknown|untyped)
-%token  T_METRIC_NAME               [a-z_:][a-z0-9_:]*
+%token  T_METRIC_NAME               [a-zA-Z_:][a-zA-Z0-9_:]*
 %token  T_QUOTED_STRING             \"([^\n"\\]|\\[n"\\])+\"     // "string"
 %token  T_TEXT                      ([^\n\\]|\\[n"\\])+
 
@@ -126,7 +127,7 @@
    return new \Butschster\Prometheus\Ast\HelpDocstringNode($children);
 }
 : (
-    ((<T_METRIC_NAME>|<T_METRIC_TYPE>|MetricValue()|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
+    ((<T_METRIC_NAME>|<T_METRIC_TYPE>|MetricValue()|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
 )
 
 /**
@@ -202,13 +203,27 @@
 * metric_without_timestamp_and_labels 12.47
 * http_requests_total{method="post",code="200"} 1027 1395066363000
 * http_request_duration_seconds_sum 53423
+* foo_total 17.0 1520879607.789 st@1520430000.123
 */
 #Metric -> {
    return new \Butschster\Prometheus\Ast\MetricNode($children);
 }
 : (
     Comment()*
-    ::T_WHITESPACE::*<T_METRIC_NAME>Labels()?::T_WHITESPACE::MetricValue()(::T_WHITESPACE::MetricTimestamp())?Eol()?
+    ::T_WHITESPACE::*
+    <T_METRIC_NAME>
+    Labels()?
+    ::T_WHITESPACE::
+    MetricValue()
+    (
+        ::T_WHITESPACE::
+        MetricTimestamp()
+    )?
+    (
+        ::T_WHITESPACE::
+        MetricStartTimestamp()
+    )?
+    Eol()?
 )
 
 /**
@@ -233,13 +248,25 @@
 /**
 * Possible values:
 * 1395066363000
-* -3982045
+* -3982045.123
 */
 #MetricTimestamp -> {
    return new \Butschster\Prometheus\Ast\MetricTimestampNode($children);
 }
 : (
-    <T_INT>
+    (<T_INT>|<T_FLOAT>)
+)
+
+/**
+* Possible values:
+* st@1395066363000
+* st@-3982045.123
+*/
+#MetricStartTimestamp -> {
+   return new \Butschster\Prometheus\Ast\MetricStartTimestampNode($children);
+}
+: (
+    ::T_START_TIMESTAMP::(<T_INT>|<T_FLOAT>)
 )
 
 /**

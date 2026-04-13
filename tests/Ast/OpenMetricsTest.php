@@ -37,4 +37,21 @@ SCHEMA
             $this->node->eof
         );
     }
+
+    function testEmptySchema() {
+        $emptyNode = $this->parser->parse(<<<'SCHEMA'
+# EOF
+
+SCHEMA
+        );
+
+        $this->assertCount(
+            0,
+            $emptyNode->getMetrics()
+        );
+
+        $this->assertTrue(
+            $emptyNode->eof
+        );
+    }
 }

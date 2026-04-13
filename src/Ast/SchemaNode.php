@@ -11,8 +11,8 @@ use Traversable;
  */
 final class SchemaNode implements \IteratorAggregate
 {
-    /** @var non-empty-array<string, MetricDataNode> */
-    private array $metrics;
+    /** @var array<string, MetricDataNode> */
+    private array $metrics = [];
 
     public readonly ?bool $eof;
 

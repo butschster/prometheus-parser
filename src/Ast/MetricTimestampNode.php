@@ -8,10 +8,13 @@ use Phplrt\Lexer\Token\Token;
 
 final class MetricTimestampNode
 {
-    public ?int $timestamp = null;
+    public int|float|null $timestamp = null;
 
     public function __construct(Token $value)
     {
-        $this->timestamp = (int) $value->getValue();
+        $this->timestamp = match ($value->getName()) {
+            'T_INT' => (int)$value->getValue(),
+            'T_FLOAT' => (float)$value->getValue(),
+        };
     }
 }

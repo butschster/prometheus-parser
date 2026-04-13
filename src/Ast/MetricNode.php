@@ -12,6 +12,7 @@ final class MetricNode
     public int|float|null $timestamp = null;
     public int|float|null $startTimestamp = null;
     public array $labels = [];
+    public ?ExemplarNode $exemplar = null;
 
     public function __construct(array $children)
     {
@@ -26,6 +27,8 @@ final class MetricNode
                 $this->startTimestamp = $child->startTimestamp;
             } elseif ($child instanceof CommentNode) {
                 $this->comment = $child->comment;
+            } elseif ($child instanceof ExemplarNode) {
+                $this->exemplar = $child;
             } elseif ($child->getName() === 'T_METRIC_NAME') {
                 $this->name = \trim($child->getValue());
             }

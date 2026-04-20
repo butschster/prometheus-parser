@@ -105,6 +105,7 @@
 * Possible value:
 * # HELP http_request_duration_seconds A histogram of the request duration.
 * # HELP prometheus_tsdb_clean_start -1: lockfile is disabled. 0: a lockfile from a previous execution was replaced. 1: lockfile creation was clean
+* # HELP jvm_memory_used_after_last_gc_bytes Measure of memory used, as measured after the most recent garbage collection event on this pool.
 */
 #Help -> {
    return new \Butschster\Prometheus\Ast\HelpNode($children);
@@ -127,12 +128,13 @@
 * Possible values:
 * A histogram of the request duration.
 * -1: lockfile is disabled. 0: a lockfile from a previous execution was replaced. 1: lockfile creation was clean
+* Measure of memory used, as measured after the most recent garbage collection event on this pool.
 */
 #HelpDocstring -> {
    return new \Butschster\Prometheus\Ast\HelpDocstringNode($children);
 }
 : (
-    ((<T_METRIC_NAME>|<T_METRIC_TYPE>|MetricValue()|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
+    ((<T_METRIC_NAME>|<T_METRIC_TYPE>|MetricValue()|<T_EQUAL>|<T_HASH>|<T_LBRACE>|<T_RBRACE>|<T_COMMA>|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
 )
 
 /**

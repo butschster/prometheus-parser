@@ -186,6 +186,98 @@ SCHEMA
         );
     }
 
+    function testContainsEquals(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help = should not be mistaken for T_EQUALS
+# TYPE test_help summary
+test_help 0
+# HELP test_help:prefix =same should not be mistaken for T_EQUALS
+# TYPE test_help:prefix summary
+test_help:prefix 0
+SCHEMA
+        );
+
+        $this->assertSame(
+            '= should not be mistaken for T_EQUALS',
+            $node->getMetrics()['test_help']->description
+        );
+
+        $this->assertSame(
+            '=same should not be mistaken for T_EQUALS',
+            $node->getMetrics()['test_help:prefix']->description
+        );
+    }
+
+    function testContainsHash(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help # should not be mistaken for T_HASH
+# TYPE test_help summary
+test_help 0
+# HELP test_help:prefix #hashtag should not be mistaken for T_HASH
+# TYPE test_help:prefix summary
+test_help:prefix 0
+SCHEMA
+        );
+
+        $this->assertSame(
+            '# should not be mistaken for T_HASH',
+            $node->getMetrics()['test_help']->description
+        );
+
+        $this->assertSame(
+            '#hashtag should not be mistaken for T_HASH',
+            $node->getMetrics()['test_help:prefix']->description
+        );
+    }
+
+    function testContainsBraces(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help {} should not be mistaken for T_LBRACE T_RBRACE
+# TYPE test_help summary
+test_help 0
+# HELP test_help:infix should {also} not be mistaken for T_LBRACE T_RBRACE
+# TYPE test_help:infix summary
+test_help:infix 0
+SCHEMA
+        );
+
+        $this->assertSame(
+            '{} should not be mistaken for T_LBRACE T_RBRACE',
+            $node->getMetrics()['test_help']->description
+        );
+
+        $this->assertSame(
+            'should {also} not be mistaken for T_LBRACE T_RBRACE',
+            $node->getMetrics()['test_help:infix']->description
+        );
+    }
+
+    function testContainsComma(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help , should not be mistaken for T_COMMA
+# TYPE test_help summary
+test_help 0
+# HELP test_help:suffix And, should not be mistaken for T_COMMA
+# TYPE test_help:suffix summary
+test_help:suffix 0
+SCHEMA
+        );
+
+        $this->assertSame(
+            ', should not be mistaken for T_COMMA',
+            $node->getMetrics()['test_help']->description
+        );
+
+        $this->assertSame(
+            'And, should not be mistaken for T_COMMA',
+            $node->getMetrics()['test_help:suffix']->description
+        );
+    }
+
     function testContainsStartTimestamp(): void
     {
         $node = $this->parser->parse(<<<'SCHEMA'

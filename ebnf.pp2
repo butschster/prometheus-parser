@@ -78,9 +78,25 @@
             Type()
             Unit()?
             |
+            Help()
+            Unit()?
+            Type()?
+            |
+            Type()
+            Help()
+            Unit()?
+            |
             Type()
             Unit()?
             Help()?
+            |
+            Unit()
+            Type()
+            Help()?
+            |
+            Unit()
+            Help()?
+            Type()?
         )
         Metric()*
         |

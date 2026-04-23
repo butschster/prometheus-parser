@@ -1,0 +1,8 @@
+# TYPE "process.cpu.seconds" counter
+# UNIT "process.cpu.seconds" seconds
+# HELP "process.cpu.seconds" Total user and system CPU time spent in seconds.
+{"process.cpu.seconds","node.name"="my_node"} 4.20072246e+06
+# TYPE "quoting_example" gauge
+# HELP "quoting_example" Number of goroutines that currently exist.
+{"quoting_example","foo"="bar"} 4.5
+# EOF

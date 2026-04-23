@@ -90,10 +90,23 @@ SCHEMA
         );
 
         $metric = $node->getMetrics()['bare_metric']->metrics[0];
+        $this->assertSame(50, $metric->value);
         $this->assertCount(2, $metric->labels);
         $this->assertSame('method', $metric->labels[0]->name);
         $this->assertSame('GET', $metric->labels[0]->value);
         $this->assertSame('code', $metric->labels[1]->name);
         $this->assertSame('200', $metric->labels[1]->value);
+    }
+
+    function testBareMetricWithEmptyLabelSet(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+bare_metric{} 50
+SCHEMA
+        );
+
+        $metric = $node->getMetrics()['bare_metric']->metrics[0];
+        $this->assertSame(50, $metric->value);
+        $this->assertCount(0, $metric->labels);
     }
 }

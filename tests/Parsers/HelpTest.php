@@ -75,7 +75,7 @@ SCHEMA
             </Type>
             <Metric offset="97">
                 <T_METRIC_NAME offset="97">http_requests_total</T_METRIC_NAME>
-                <Labels offset="116">
+                <Labels offset="117">
                     <Label offset="117">
                         <T_METRIC_NAME offset="117">method</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="124">"post"</T_QUOTED_STRING>
@@ -94,7 +94,7 @@ SCHEMA
             </Metric>
             <Metric offset="162">
                 <T_METRIC_NAME offset="162">http_requests_total</T_METRIC_NAME>
-                <Labels offset="181">
+                <Labels offset="182">
                     <Label offset="182">
                         <T_METRIC_NAME offset="182">method</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="189">"post"</T_QUOTED_STRING>
@@ -116,7 +116,7 @@ SCHEMA
                     <T_COMMENT offset="228"># Escaping in label values:</T_COMMENT>
                 </Comment>
                 <T_METRIC_NAME offset="256">msdos_file_access_time_seconds</T_METRIC_NAME>
-                <Labels offset="286">
+                <Labels offset="287">
                     <Label offset="287">
                         <T_METRIC_NAME offset="287">path</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="292">"C:\\DIR\\FILE.TXT"</T_QUOTED_STRING>
@@ -144,7 +144,7 @@ SCHEMA
                     <T_COMMENT offset="432"># A weird metric from before the epoch:</T_COMMENT>
                 </Comment>
                 <T_METRIC_NAME offset="472">something_weird</T_METRIC_NAME>
-                <Labels offset="487">
+                <Labels offset="488">
                     <Label offset="488">
                         <T_METRIC_NAME offset="488">problem</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="496">"division by zero"</T_QUOTED_STRING>
@@ -185,7 +185,7 @@ SCHEMA
             </Type>
             <Metric offset="729">
                 <T_METRIC_NAME offset="729">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="765">
+                <Labels offset="766">
                     <Label offset="766">
                         <T_METRIC_NAME offset="766">le</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="769">"0.05"</T_QUOTED_STRING>
@@ -197,7 +197,7 @@ SCHEMA
             </Metric>
             <Metric offset="783">
                 <T_METRIC_NAME offset="783">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="819">
+                <Labels offset="820">
                     <Label offset="820">
                         <T_METRIC_NAME offset="820">le</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="823">"0.1"</T_QUOTED_STRING>
@@ -209,7 +209,7 @@ SCHEMA
             </Metric>
             <Metric offset="836">
                 <T_METRIC_NAME offset="836">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="872">
+                <Labels offset="873">
                     <Label offset="873">
                         <T_METRIC_NAME offset="873">le</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="876">"0.2"</T_QUOTED_STRING>
@@ -221,7 +221,7 @@ SCHEMA
             </Metric>
             <Metric offset="890">
                 <T_METRIC_NAME offset="890">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="926">
+                <Labels offset="927">
                     <Label offset="927">
                         <T_METRIC_NAME offset="927">le</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="930">"0.5"</T_QUOTED_STRING>
@@ -233,7 +233,7 @@ SCHEMA
             </Metric>
             <Metric offset="944">
                 <T_METRIC_NAME offset="944">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="980">
+                <Labels offset="981">
                     <Label offset="981">
                         <T_METRIC_NAME offset="981">le</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="984">"1"</T_QUOTED_STRING>
@@ -245,7 +245,7 @@ SCHEMA
             </Metric>
             <Metric offset="996">
                 <T_METRIC_NAME offset="996">http_request_duration_seconds_bucket</T_METRIC_NAME>
-                <Labels offset="1032">
+                <Labels offset="1033">
                     <Label offset="1033">
                         <T_METRIC_NAME offset="1033">le</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="1036">"+Inf"</T_QUOTED_STRING>
@@ -299,7 +299,7 @@ SCHEMA
             </Type>
             <Metric offset="1303">
                 <T_METRIC_NAME offset="1303">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1323">
+                <Labels offset="1324">
                     <Label offset="1324">
                         <T_METRIC_NAME offset="1324">quantile</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="1333">"0.01"</T_QUOTED_STRING>
@@ -311,7 +311,7 @@ SCHEMA
             </Metric>
             <Metric offset="1346">
                 <T_METRIC_NAME offset="1346">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1366">
+                <Labels offset="1367">
                     <Label offset="1367">
                         <T_METRIC_NAME offset="1367">quantile</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="1376">"0.05"</T_QUOTED_STRING>
@@ -323,7 +323,7 @@ SCHEMA
             </Metric>
             <Metric offset="1389">
                 <T_METRIC_NAME offset="1389">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1409">
+                <Labels offset="1410">
                     <Label offset="1410">
                         <T_METRIC_NAME offset="1410">quantile</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="1419">"0.5"</T_QUOTED_STRING>
@@ -335,7 +335,7 @@ SCHEMA
             </Metric>
             <Metric offset="1431">
                 <T_METRIC_NAME offset="1431">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1451">
+                <Labels offset="1452">
                     <Label offset="1452">
                         <T_METRIC_NAME offset="1452">quantile</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="1461">"0.9"</T_QUOTED_STRING>
@@ -347,7 +347,7 @@ SCHEMA
             </Metric>
             <Metric offset="1473">
                 <T_METRIC_NAME offset="1473">rpc_duration_seconds</T_METRIC_NAME>
-                <Labels offset="1493">
+                <Labels offset="1494">
                     <Label offset="1494">
                         <T_METRIC_NAME offset="1494">quantile</T_METRIC_NAME>
                         <T_QUOTED_STRING offset="1503">"0.99"</T_QUOTED_STRING>

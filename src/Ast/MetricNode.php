@@ -31,6 +31,8 @@ final class MetricNode
                 $this->exemplar = $child;
             } elseif ($child->getName() === 'T_METRIC_NAME') {
                 $this->name = \trim($child->getValue());
+            } elseif ($child->getName() === 'T_QUOTED_STRING') {
+                $this->name = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
             }
         }
     }

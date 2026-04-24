@@ -76,17 +76,17 @@ SCHEMA
             $this->node->getMetrics()['go_gc_duration_seconds']->metrics[3]->name
         );
 
-        $this->assertSame(
-            3,
-            $this->node->getMetrics()['go_gc_duration_seconds']->metrics[4]->value
-        );
-
         $this->assertNull(
             $this->node->getMetrics()['go_gc_duration_seconds']->metrics[3]->timestamp
         );
 
         $this->assertNull(
             $this->node->getMetrics()['go_gc_duration_seconds']->metrics[3]->comment
+        );
+
+        $this->assertSame(
+            3,
+            $this->node->getMetrics()['go_gc_duration_seconds']->metrics[4]->value
         );
 
         $this->assertSame(

@@ -228,8 +228,10 @@
 * metric_without_timestamp_and_labels 12.47
 * http_requests_total{method="post",code="200"} 1027 1395066363000
 * http_request_duration_seconds_sum 53423
+* bar_seconds_count{} 0
 * foo_total 17.0 1520879607.789 st@1520430000.123
-* http_requests_total{code="200"} 1027 1395066363.000 # {trace_id="abc"} 1.0 1395066363.000
+* http_requests_total{code="200"} 1027 1395066363.000 # {trace_id="abc"} 1.0 1395066363.000µ
+* {"foodb.read.errors","service.name"="my_service"} 3482
 */
 #Metric -> {
    return new \Butschster\Prometheus\Ast\MetricNode($children);
@@ -237,8 +239,15 @@
 : (
     Comment()*
     ::T_WHITESPACE::*
-    <T_METRIC_NAME>
-    Labels()?
+    (
+        <T_METRIC_NAME>
+        (::T_LBRACE::Labels()::T_RBRACE::)?
+        |
+        ::T_LBRACE::
+        <T_QUOTED_STRING>
+        (::T_COMMA::::T_WHITESPACE::*Labels())?
+        ::T_RBRACE::
+    )
     ::T_WHITESPACE::
     MetricValue()
     (
@@ -269,7 +278,9 @@
 : (
     ::T_HASH::
     ::T_WHITESPACE::
+    ::T_LBRACE::
     Labels()
+    ::T_RBRACE::
     ::T_WHITESPACE::
     MetricValue()
     (
@@ -323,17 +334,16 @@
 
 /**
 * Possible values:
-* {quantile="0", test="0.25"}
-* {problem="division by zero"}
-* {path="C:\\DIR\\FILE.TXT",error="Cannot find file:\n\"FILE.TXT\""}
-* {"unicode.label"="value"}
-* {}
+* quantile="0", test="0.25"
+* problem="division by zero"
+* path="C:\\DIR\\FILE.TXT",error="Cannot find file:\n\"FILE.TXT\""
+* "unicode.label"="value"
 */
 #Labels -> {
    return new \Butschster\Prometheus\Ast\LabelsNode($children);
 }
 : (
-    ::T_LBRACE::(Label()(::T_COMMA::::T_WHITESPACE::*)?)*::T_RBRACE::
+    (Label()(::T_COMMA::::T_WHITESPACE::*)?)*
 )
 
 /**

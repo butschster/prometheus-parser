@@ -7,7 +7,7 @@ http_requests_total{method="post",code="400"}    3 1395066363000
 msdos_file_access_time_seconds{path="C:\\DIR\\FILE.TXT",error="Cannot find file:\n\"FILE.TXT\""} 1.458255915e9
 
 # UTF-8 metric and label names:
-{"my.dotted.metric", "error.message"="Not Found"}
+{"my.dotted.metric", "error.message"="Not Found"} 0
 
 # Minimalistic line:
 metric_without_timestamp_and_labels 12.47

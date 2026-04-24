@@ -46,10 +46,14 @@ final class Parser
      * @throws \Butschster\Prometheus\Exceptions\ValidationException
      * @psalm-suppress PossiblyUndefinedMethod
      */
-    public function parse(string $schema, array $options = []): ?SchemaNode
+    public function parse(string $schema): ?SchemaNode
     {
         try {
-            $result = $this->parser->parse($schema, $options)[0] ?? null;
+            /**
+             * @psalm-suppress InvalidArgument
+             */
+            $parsed = (array)$this->parser->parse($schema);
+            $result = $parsed[0] ?? null;
         } catch (\Phplrt\Contracts\Exception\RuntimeExceptionInterface $e) {
             $this->rethrowAsParseException($e);
         }
@@ -129,15 +133,11 @@ final class Parser
     private function rethrowAsParseException(\Phplrt\Contracts\Exception\RuntimeExceptionInterface $e): void
     {
         $token = $e->getToken();
-        $source = $e->getSource();
-
-        $line = $token !== null ? $token->getOffset() : 0;
-        $value = $token !== null ? $token->getValue() : '';
 
         $message = \sprintf(
             'Unexpected token "%s" at offset %d: %s',
-            $value,
-            $line,
+            $token->getValue(),
+            $token->getOffset(),
             $e->getMessage()
         );
 

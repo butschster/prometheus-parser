@@ -261,6 +261,7 @@
 * Possible values:
 * # {trace_id="abc"} 1.0
 * # {trace_id="abc", span_id="def"} 1.0 1395066363.000
++ # {} 1.0
 */
 #Exemplar -> {
    return new \Butschster\Prometheus\Ast\ExemplarNode($children);
@@ -326,6 +327,7 @@
 * {problem="division by zero"}
 * {path="C:\\DIR\\FILE.TXT",error="Cannot find file:\n\"FILE.TXT\""}
 * {"unicode.label"="value"}
+* {}
 */
 #Labels -> {
    return new \Butschster\Prometheus\Ast\LabelsNode($children);

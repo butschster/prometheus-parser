@@ -90,6 +90,21 @@ SCHEMA
         $this->assertSame('def', $exemplar->labels[1]->value);
     }
 
+    function testExemplarWithEmptyLabelSet(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# TYPE test_counter counter
+test_counter_total 100 # {}  2.5
+SCHEMA
+        );
+
+        $exemplar = $node->getMetrics()['test_counter']->metrics[0]->exemplar;
+
+        $this->assertInstanceOf(ExemplarNode::class, $exemplar);
+        $this->assertSame(2.5, $exemplar->value);
+        $this->assertCount(0, $exemplar->labels);
+    }
+
     function testExemplarIntValue(): void
     {
         $node = $this->parser->parse(<<<'SCHEMA'

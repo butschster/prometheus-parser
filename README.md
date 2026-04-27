@@ -100,7 +100,7 @@ foreach ($metrics['go_gc_duration_seconds'] as $metric) {
 
 ---
 
-## OpenMetrics 2.0 features
+## OpenMetrics features
 
 ### `# EOF` marker
 
@@ -112,7 +112,7 @@ $schema->eof; // true or null
 
 ### `# UNIT` directive
 
-```php
+```
 # TYPE http_request_duration_seconds gauge
 # UNIT http_request_duration_seconds seconds
 ```
@@ -188,7 +188,8 @@ In addition to the standard `gauge`, `counter`, `summary` and `histogram` types,
 - `stateset`
 - `info`
 - `unknown`
-- `untyped`
+
+For backwards compatibility with Prometheus, `untyped` remains supported.
 
 ### Start timestamps (`st@`)
 
@@ -198,6 +199,25 @@ foo_total 17.0 1520879607.789 st@1520430000.123
 
 ```php
 $metric->startTimestamp; // 1520430000.123
+```
+
+### CompositeValue
+
+In OpenMetrics 2.0, `summary`, `histogram` and `gaugehistogram` use a CompositeValue instead of a number for metric values.
+
+```
+# TYPE foo summary
+foo {count:0,sum:0.0,quantile:[0.95:123.7,0.99:150]} st@1520430000.123
+```
+
+```
+# TYPE foo histogram
+foo {count:17,sum:324789.3,bucket:[0.0:0,1e-05:0,0.0001:5,0.1:8,1.0:10,10.0:11,100000.0:11,1e+06:15,1e+23:16,1.1e+23:17,+Inf:17]} st@1520430000.123
+```
+
+```
+# TYPE foo gaugehistogram
+foo {gcount:42,gsum:3289.3,bucket:[0.01:20,0.1:25,1:34,+Inf:42]}
 ```
 
 ---

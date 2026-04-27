@@ -16,8 +16,8 @@ final class LabelNode
         foreach ($children as $child) {
             if (!$nameSet) {
                 $this->name = match ($child->getName()) {
-                    'T_METRIC_NAME' => \trim($child->getValue()),
-                    default => \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"])),
+                    'T_QUOTED_STRING' => \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"])),
+                    default => \trim($child->getValue()),
                 };
                 $nameSet = true;
             } else {

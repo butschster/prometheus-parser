@@ -6,11 +6,11 @@ namespace Butschster\Prometheus\Ast\CompositeValue;
 
 final class GaugeHistogramValueNode extends CompositeValueNode
 {
-    public readonly float|int $gcount;
-    public readonly float|int $gsum;
-    public readonly int $schema;
-    public readonly float|int $zero_threshold;
-    public readonly float|int $zero_count;
+    public float|int $gcount;
+    public float|int $gsum;
+    public int $schema;
+    public float|int $zero_threshold;
+    public float|int $zero_count;
     /** @var array<string, int>|null */
     public ?array $negative_spans = null;
     /** @var array<float|int>|null */

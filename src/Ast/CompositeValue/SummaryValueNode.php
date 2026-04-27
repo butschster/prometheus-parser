@@ -6,10 +6,10 @@ namespace Butschster\Prometheus\Ast\CompositeValue;
 
 final class SummaryValueNode extends CompositeValueNode
 {
-    public readonly float|int $count;
-    public readonly float|int $sum;
+    public float|int $count;
+    public float|int $sum;
     /** @var array<string, float|int> */
-    public readonly array $quantile;
+    public array $quantile;
 
     public function __construct(array $children)
     {

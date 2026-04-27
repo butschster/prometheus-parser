@@ -32,14 +32,14 @@
 *  Syntax
 * --------------------------------------------------------------------------
 */
-%token  T_EQUAL                     \=
+%token  T_EQUAL                     =
 %token  T_COLON                     :
-%token  T_HASH                      \#
+%token  T_HASH                      #
 %token  T_LBRACE                    {
 %token  T_RBRACE                    }
 %token  T_LBRACKET                  \[
 %token  T_RBRACKET                  \]
-%token  T_COMMA                     \,
+%token  T_COMMA                     ,
 %token  T_EOR                       \r
 %token  T_EOL                       \n
 
@@ -284,9 +284,16 @@ MetricName
     )?
     (
         ::T_WHITESPACE::
-        Exemplar()
+        Exemplars()
     )?
     Eol()?
+)
+
+#Exemplars -> {
+   return new \Butschster\Prometheus\Ast\ExemplarsNode($children);
+}
+: (
+    (Exemplar()::T_WHITESPACE::?)*
 )
 
 /**

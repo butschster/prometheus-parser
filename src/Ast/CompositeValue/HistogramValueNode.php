@@ -6,11 +6,11 @@ namespace Butschster\Prometheus\Ast\CompositeValue;
 
 final class HistogramValueNode extends CompositeValueNode
 {
-    public readonly float|int $count;
-    public readonly float|int $sum;
-    public readonly int $schema;
-    public readonly float|int $zero_threshold;
-    public readonly float|int $zero_count;
+    public float|int $count;
+    public float|int $sum;
+    public int $schema;
+    public float|int $zero_threshold;
+    public float|int $zero_count;
     /** @var array<string, int>|null */
     public ?array $negative_spans = null;
     /** @var array<float|int>|null */

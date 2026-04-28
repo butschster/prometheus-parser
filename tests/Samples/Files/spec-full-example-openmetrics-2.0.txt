@@ -1,0 +1,22 @@
+# TYPE acme_http_router_request_seconds summary
+# UNIT acme_http_router_request_seconds seconds
+# HELP acme_http_router_request_seconds Latency though all of ACME's HTTP request router.
+acme_http_router_request_seconds{path="/api/v1",method="GET"} {count:807283,sum:9036.32,quantile:[0.95:2,0.99:20]} st@1605281325.0
+acme_http_router_request_seconds{path="/api/v2",method="GET"} {count:34,sum:479.3,quantile:[0.95:2.5,0.99:2.9]} st@1605301325.0
+# TYPE go_goroutines gauge
+# HELP go_goroutines Number of goroutines that currently exist.
+go_goroutines 69
+# TYPE process_cpu_seconds_total counter
+# UNIT process_cpu_seconds_total seconds
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+process_cpu_seconds_total 4.20072246e+06
+# TYPE acme_http_request_seconds histogram
+# UNIT acme_http_request_seconds seconds
+# HELP acme_http_request_seconds Latency histogram of all of ACME's HTTP requests.
+acme_http_request_seconds{path="/api/v1",method="GET"} {count:2,sum:1.2e2,schema:0,zero_threshold:1e-4,zero_count:0,positive_spans:[1:2],positive_buckets:[1,1],bucket:[0.5:1,1:2,+Inf:2]} st@1605301325.0
+# TYPE acme_http_request_seconds:rate5m gaugehistogram
+acme_http_request_seconds:rate5m{path="/api/v1",method="GET"} {gcount:0.01,gsum:2.0,schema:0,zero_threshold:1e-4,zero_count:0.0,positive_spans:[1:2],positive_buckets:[0.005,0.005]}
+# TYPE "foodb.read.errors" counter
+# HELP "foodb.read.errors" The number of errors in the read path for fooDb.
+{"foodb.read.errors","service.name"="my_service"} 3482
+# EOF

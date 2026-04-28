@@ -15,6 +15,8 @@ final class TypeNode
         foreach ($children as $child) {
             if ($child->getName() === 'T_METRIC_NAME') {
                 $this->metric = \trim($child->getValue());
+            } elseif ($child->getName() === 'T_QUOTED_STRING') {
+                $this->metric = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
             } elseif ($child->getName() === 'T_METRIC_TYPE') {
                 $this->type = \trim($child->getValue());
             }

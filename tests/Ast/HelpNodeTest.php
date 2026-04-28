@@ -209,6 +209,29 @@ SCHEMA
         );
     }
 
+    function testContainsColon(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help : should not be mistaken for T_COLON
+# TYPE test_help summary
+test_help 0
+# HELP test_help:suffix this: should not be mistaken for T_COLON
+# TYPE test_help:suffix summary
+test_help:prefix 0
+SCHEMA
+        );
+
+        $this->assertSame(
+            ': should not be mistaken for T_COLON',
+            $node->getMetrics()['test_help']->description
+        );
+
+        $this->assertSame(
+            'this: should not be mistaken for T_COLON',
+            $node->getMetrics()['test_help:suffix']->description
+        );
+    }
+
     function testContainsHash(): void
     {
         $node = $this->parser->parse(<<<'SCHEMA'
@@ -251,6 +274,29 @@ SCHEMA
 
         $this->assertSame(
             'should {also} not be mistaken for T_LBRACE T_RBRACE',
+            $node->getMetrics()['test_help:infix']->description
+        );
+    }
+
+    function testContainsBrackets(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help [] should not be mistaken for T_LBRACKET T_RBRACKET
+# TYPE test_help summary
+test_help 0
+# HELP test_help:infix should [also] not be mistaken for T_LBRACKET T_RBRACKET
+# TYPE test_help:infix summary
+test_help:infix 0
+SCHEMA
+        );
+
+        $this->assertSame(
+            '[] should not be mistaken for T_LBRACKET T_RBRACKET',
+            $node->getMetrics()['test_help']->description
+        );
+
+        $this->assertSame(
+            'should [also] not be mistaken for T_LBRACKET T_RBRACKET',
             $node->getMetrics()['test_help:infix']->description
         );
     }
@@ -321,6 +367,21 @@ SCHEMA
         $this->assertSame(
             '"test"ing should not be mistaken for T_QUOTED_STRING',
             $node->getMetrics()['test_help:prefix']->description
+        );
+    }
+
+    function testContainsCompositeValue(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help {count:17,sum:324789.3,quantile:[]} should not be mistaken for CompositeValue()
+# TYPE test_help summary
+test_help 0
+SCHEMA
+        );
+
+        $this->assertSame(
+            '{count:17,sum:324789.3,quantile:[]} should not be mistaken for CompositeValue()',
+            $node->getMetrics()['test_help']->description
         );
     }
 

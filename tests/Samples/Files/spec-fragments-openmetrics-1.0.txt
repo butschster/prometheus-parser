@@ -1,0 +1,155 @@
+# TYPE foo counter
+
+# TYPE foo_seconds counter
+# UNIT foo_seconds seconds
+
+# TYPE foo_seconds counter
+
+# TYPE foo_seconds counter
+# UNIT foo_seconds seconds
+# HELP foo_seconds Some text and \n some \" escaping
+
+bar_seconds_count 0
+
+bar_seconds_count{} 0
+
+bar_seconds_count{a="x",b="escaping\" example \n "} 0
+
+# TYPE foo_seconds summary
+# UNIT foo_seconds seconds
+foo_seconds_count{a="bb"} 0 123
+foo_seconds_sum{a="bb"} 0 123
+foo_seconds_count{a="bb"} 0 456
+foo_seconds_sum{a="bb"} 0 456
+foo_seconds_count{a="ccc"} 0 123
+foo_seconds_sum{a="ccc"} 0 123
+foo_seconds_count{a="ccc"} 0 456
+foo_seconds_sum{a="ccc"} 0 456
+
+# TYPE foo gauge
+foo 17.0
+
+# TYPE foo gauge
+foo{a="bb"} 17.0
+foo{a="ccc"} 17.0
+
+# TYPE foo gauge
+
+# TYPE foo gauge
+foo{a="b"} 17.0 1520879607.789
+
+# TYPE foo gauge
+foo 17.0 1520879607.789
+
+# TYPE foo gauge
+foo 17.0 123
+foo 18.0 456
+
+# TYPE foo counter
+foo_total 17.0
+
+# TYPE foo counter
+foo_total 17.0 1520879607.789
+
+# TYPE foo counter
+foo_total 17.0
+foo_created 1520430000.123
+
+# TYPE foo counter
+foo_total 17.0 1520879607.789
+foo_created 1520430000.123 1520879607.789
+
+# TYPE foo stateset
+foo{foo="a"} 0
+foo{foo="bb"} 1
+foo{foo="ccc"} 0
+
+# TYPE foo stateset
+foo{entity="controller",foo="a"} 1.0
+foo{entity="controller",foo="bb"} 0.0
+foo{entity="controller",foo="ccc"} 0.0
+foo{entity="replica",foo="a"} 1.0
+foo{entity="replica",foo="bb"} 0.0
+foo{entity="replica",foo="ccc"} 1.0
+
+# TYPE foo info
+foo_info{name="pretty name",version="8.2.7"} 1
+
+# TYPE foo info
+foo_info{entity="controller",name="pretty name",version="8.2.7"} 1.0
+foo_info{entity="replica",name="prettier name",version="8.1.9"} 1.0
+
+# TYPE foo summary
+foo_count 17.0
+foo_sum 324789.3
+foo_created 1520430000.123
+
+# TYPE foo summary
+foo{quantile="0.95"} 123.7
+foo{quantile="0.99"} 150.0
+
+# TYPE foo histogram
+foo_bucket{le="0.0"} 0
+foo_bucket{le="1e-05"} 0
+foo_bucket{le="0.0001"} 5
+foo_bucket{le="0.1"} 8
+foo_bucket{le="1.0"} 10
+foo_bucket{le="10.0"} 11
+foo_bucket{le="100000.0"} 11
+foo_bucket{le="1e+06"} 15
+foo_bucket{le="1e+23"} 16
+foo_bucket{le="1.1e+23"} 17
+foo_bucket{le="+Inf"} 17
+foo_count 17
+foo_sum 324789.3
+foo_created 1520430000.123
+
+# TYPE foo histogram
+foo_bucket{le="0.01"} 0
+foo_bucket{le="0.1"} 8 # {} 0.054
+foo_bucket{le="1"} 11 # {trace_id="KOO5S4vxi0o"} 0.67
+foo_bucket{le="10"} 17 # {trace_id="oHg5SJYRHA0"} 9.8 1520879607.789
+foo_bucket{le="+Inf"} 17
+foo_count 17
+foo_sum 324789.3
+foo_created  1520430000.123
+
+# TYPE foo gaugehistogram
+foo_bucket{le="0.01"} 20.0
+foo_bucket{le="0.1"} 25.0
+foo_bucket{le="1"} 34.0
+foo_bucket{le="10"} 34.0
+foo_bucket{le="+Inf"} 42.0
+foo_gcount 42.0
+foo_gsum 3289.3
+
+# TYPE foo unknown
+foo 42.23
+
+# TYPE target info
+# HELP target Target metadata
+target_info{env="prod",hostname="myhost",datacenter="sdc",region="europe",owner="frontend"} 1
+
+# HELP my_counter Good increment example
+# TYPE my_counter counter
+my_counter_total 1
+
+# HELP my_counter Good increment example
+# TYPE my_counter counter
+my_counter_total 1
+# HELP my_counter_last_increment_timestamp_seconds When my_counter was last incremented
+# TYPE my_counter_last_increment_timestamp_seconds gauge
+# UNIT my_counter_last_increment_timestamp_seconds seconds
+my_counter_last_increment_timestamp_seconds 123
+
+# TYPE my_boot_time_seconds gauge
+# HELP my_boot_time_seconds Boot time of the machine
+# UNIT my_boot_time_seconds seconds
+my_boot_time_seconds 1256060124
+
+# HELP acme_notifications_queue_capacity The capacity of the notifications queue.
+# TYPE acme_notifications_queue_capacity gauge
+acme_notifications_queue_capacity 10000
+# HELP acme_notifications_queue_length The number of notifications in the queue.
+# TYPE acme_notifications_queue_length gauge
+acme_notifications_queue_length 42

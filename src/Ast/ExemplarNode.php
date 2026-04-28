@@ -14,24 +14,25 @@ final class ExemplarNode
     /** @var LabelNode[] */
     public readonly array $labels;
     public readonly float|int $value;
-    public int|float|null $timestamp = null;
+    public readonly int|float|null $timestamp;
 
     public function __construct(array $children)
     {
-        $labels = [];
-        $value = null;
-
         foreach ($children as $child) {
             if ($child instanceof LabelsNode) {
                 $labels = $child->labels;
             } elseif ($child instanceof MetricValueNode) {
                 $value = $child->value;
             } elseif ($child instanceof MetricTimestampNode) {
-                $this->timestamp = $child->timestamp;
+                $timestamp = $child->timestamp;
             }
         }
 
-        $this->labels = $labels;
-        $this->value = $value;
+        // a LabelSet can be empty
+        $this->labels = $labels ?? [];
+        // (wouldn't parse without a value but statistical analysis can't know this)
+        $this->value = $value ?? NAN;
+        // timestamp is optional in OpenMetrics 1.0
+        $this->timestamp = $timestamp ?? null;
     }
 }

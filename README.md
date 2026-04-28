@@ -94,13 +94,13 @@ foreach ($metrics['go_gc_duration_seconds'] as $metric) {
     $metric->timestamp; // Timestamp
     $metric->startTimestamp; // Start timestamp (st@... syntax, OpenMetrics)
     $metric->labels; // Array of LabelNode objects
-    $metric->exemplar; // ExemplarNode or null (OpenMetrics)
+    $metric->exemplars; // Array of ExemplarNode objects (OpenMetrics)
 }
 ```
 
 ---
 
-## OpenMetrics 2.0 features
+## OpenMetrics features
 
 ### `# EOF` marker
 
@@ -112,7 +112,7 @@ $schema->eof; // true or null
 
 ### `# UNIT` directive
 
-```php
+```
 # TYPE http_request_duration_seconds gauge
 # UNIT http_request_duration_seconds seconds
 ```
@@ -123,19 +123,19 @@ $metrics['http_request_duration_seconds']->unit; // "seconds"
 
 ### Exemplars
 
-OpenMetrics allows an optional exemplar attached to each sample — typically used to carry a trace ID that corresponds to the measurement.
+OpenMetrics allows optional exemplars attached to each sample — typically used to carry a trace ID that corresponds to the measurement.
 
 ```
 http_requests_total{code="200"} 1027 1395066363.000 # {trace_id="abc123"} 1.0 1395066363.000
 ```
 
 ```php
-$metric->exemplar;             // ExemplarNode|null
-$metric->exemplar->value;      // 1.0
-$metric->exemplar->timestamp;  // 1395066363.000 or null
-$metric->exemplar->labels;     // array of LabelNode
-$metric->exemplar->labels[0]->name;  // "trace_id"
-$metric->exemplar->labels[0]->value; // "abc123"
+$metric->exemplars;               // array of ExemplarNode
+$metric->exemplars[0]->value;     // 1.0
+$metric->exemplars[0]->timestamp; // 1395066363.000 or null
+$metric->exemplars[0]->labels;    // array of LabelNode
+$metric->exemplars[0]->labels[0]->name;  // "trace_id"
+$metric->exemplars[0]->labels[0]->value; // "abc123"
 ```
 
 ### Sub-metric grouping
@@ -166,6 +166,7 @@ OpenMetrics 2.0 supports quoted identifiers for metric and label names containin
 # TYPE "my.metric.name" gauge
 # HELP "my.metric.name" A metric with dots in its name.
 # UNIT "my.metric.name" seconds
+{"my.metric.name"} 0.5
 
 # Quoted label names:
 my_metric{"unicode.label"="value", regular_label="other"} 1
@@ -188,7 +189,8 @@ In addition to the standard `gauge`, `counter`, `summary` and `histogram` types,
 - `stateset`
 - `info`
 - `unknown`
-- `untyped`
+
+For backwards compatibility with Prometheus, `untyped` remains supported.
 
 ### Start timestamps (`st@`)
 
@@ -198,6 +200,43 @@ foo_total 17.0 1520879607.789 st@1520430000.123
 
 ```php
 $metric->startTimestamp; // 1520430000.123
+```
+
+### CompositeValue
+
+In OpenMetrics 2.0, `summary`, `histogram` and `gaugehistogram` use a CompositeValue instead of a number for metric values.
+
+```
+# TYPE foo summary
+foo {count:0,sum:0.0,quantile:[0.95:123.7,0.99:150]} st@1520430000.123
+```
+
+```php
+$metric->value->count;    // 0
+$metric->value->sum;      // 0.0
+$metric->value->quantile; // ["0.95" => 123.7, "0.99" => 150]
+```
+
+```
+# TYPE foo histogram
+foo {count:17,sum:324789.3,bucket:[0.0:0,1e-05:0,0.0001:5,0.1:8,1.0:10,10.0:11,100000.0:11,1e+06:15,1e+23:16,1.1e+23:17,+Inf:17]} st@1520430000.123
+```
+
+```php
+$metric->value->count;  // 17
+$metric->value->sum;    // 324789.3
+$metric->value->bucket; // ["0.0" => 0, "1e-05" => 0, "0.0001" => 5, /* ... */ "+Inf" => 17]
+```
+
+```
+# TYPE foo gaugehistogram
+foo {gcount:42,gsum:3289.3,bucket:[0.01:20,0.1:25,1:34,+Inf:42]}
+```
+
+```php
+$metric->value->gcount; // 42
+$metric->value->gsum;   // 3289.3
+$metric->value->bucket; // ["0.01" => 20, "0.1" => 25, "1" => 34, "+Inf" => 42]
 ```
 
 ---

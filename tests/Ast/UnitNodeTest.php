@@ -29,6 +29,22 @@ SCHEMA
         );
     }
 
+    function testUnitContainingOtherToken(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_nanoseconds Test that the unit isn't misinterpreted as T_NAN + oseconds
+# TYPE test_nanoseconds histogram
+# UNIT test_nanoseconds nanoseconds
+test_nanoseconds_bucket{le="+Inf"} 537
+SCHEMA
+        );
+
+        $this->assertSame(
+            'nanoseconds',
+            $node->getMetrics()['test_nanoseconds']->unit
+        );
+    }
+
     function testEmptyUnit(): void
     {
         $node = $this->parser->parse(<<<'SCHEMA'

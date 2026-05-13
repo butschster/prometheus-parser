@@ -10,8 +10,13 @@ final class UnitUnitNode
 {
     public ?string $unit = null;
 
-    public function __construct(Token $value)
+    /** @param Token|Token[] $child */
+    public function __construct(Token|array $child)
     {
-        $this->unit = \trim($value->getValue());
+        if (\is_object($child)) {
+            $this->unit = $child->getValue();
+        } else {
+            $this->unit = implode('', array_map(fn($token): string => $token->getValue(), $child));
+        }
     }
 }

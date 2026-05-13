@@ -120,13 +120,19 @@
         Metric()+
     )
 
-MetricName
-:
-    <T_METRIC_NAME> |
-    // any of the OpenMetrics 2.0 composite value field names is also a syntactically valid metric/label name
-    <T_COUNT> | <T_GCOUNT> | <T_SUM> | <T_GSUM> | <T_QUANTILE> | <T_SCHEMA> | <T_ZERO_THRESHOLD> | <T_ZERO_COUNT> |
-    <T_NEGATIVE_SPANS> | <T_NEGATIVE_BUCKETS> | <T_POSITIVE_SPANS> | <T_POSITIVE_BUCKETS> | <T_BUCKET>
-;
+MetricName -> {
+   return new \Butschster\Prometheus\Ast\MetricNameNode($children);
+}
+: (
+    <T_METRIC_NAME>
+    |
+    (
+        // any of these tokens is a syntactically valid metric/label name on its own or can be at the start of one
+        <T_NAN> | <T_METRIC_TYPE> | <T_COUNT> | <T_GCOUNT> | <T_SUM> | <T_GSUM> | <T_QUANTILE> | <T_SCHEMA> |
+        <T_ZERO_THRESHOLD> | <T_ZERO_COUNT> | <T_NEGATIVE_SPANS> | <T_NEGATIVE_BUCKETS> | <T_POSITIVE_SPANS> | <T_POSITIVE_BUCKETS> | <T_BUCKET>
+    )
+    <T_METRIC_NAME>?
+)
 
 /**
 * Possible value:
@@ -174,7 +180,7 @@ MetricName
    return new \Butschster\Prometheus\Ast\HelpDocstringNode($children);
 }
 : (
-    ((MetricName()|<T_METRIC_TYPE>|MetricValue()|<T_EQUAL>|<T_COLON>|<T_HASH>|<T_LBRACE>|<T_RBRACE>|<T_LBRACKET>|<T_RBRACKET>|<T_COMMA>|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
+    ((MetricName()|MetricValue()|<T_EQUAL>|<T_COLON>|<T_HASH>|<T_LBRACE>|<T_RBRACE>|<T_LBRACKET>|<T_RBRACKET>|<T_COMMA>|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
 )
 
 /**
@@ -228,7 +234,7 @@ MetricName
    return new \Butschster\Prometheus\Ast\UnitUnitNode($children);
 }
 : (
-    <T_METRIC_NAME>
+    MetricName()
 )
 
 /**

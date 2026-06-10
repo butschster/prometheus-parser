@@ -22,10 +22,10 @@
  *  Numbers
  * --------------------------------------------------------------------------
  */
-%token  T_FLOAT                     [+-]?[0-9]*\.[0-9]+([eE][+-]?[0-9]+)?|[+-]?[0-9]+[eE][+-]?[0-9]+
-%token  T_INF                       [+-](?i)inf(inity)?
+%token  T_FLOAT                     [+-]?[0-9]*\.[0-9]+([eE][+-]?[0-9]+)?|[+-]?[0-9]+[eE][+-]?[0-9]+\b
+%token  T_INF                       [+-](?i)inf(inity)?\b
 %token  T_INT                       [+-]?[0-9]+
-%token  T_NAN                       (?i)nan
+%token  T_NAN                       \b(?i)nan\b
 
 /**
 * --------------------------------------------------------------------------
@@ -43,21 +43,21 @@
 %token  T_EOR                       \r
 %token  T_EOL                       \n
 
-%token  T_START_TIMESTAMP           st@
-%token  T_METRIC_TYPE               (summary|counter|gaugehistogram|gauge|histogram|stateset|info|unknown|untyped)
-%token  T_COUNT                     count
-%token  T_GCOUNT                    gcount
-%token  T_SUM                       sum
-%token  T_GSUM                      gsum
-%token  T_QUANTILE                  quantile
-%token  T_SCHEMA                    schema
-%token  T_ZERO_THRESHOLD            zero_threshold
-%token  T_ZERO_COUNT                zero_count
-%token  T_NEGATIVE_SPANS            negative_spans
-%token  T_NEGATIVE_BUCKETS          negative_buckets
-%token  T_POSITIVE_SPANS            positive_spans
-%token  T_POSITIVE_BUCKETS          positive_buckets
-%token  T_BUCKET                    bucket
+%token  T_START_TIMESTAMP           \bst@
+%token  T_METRIC_TYPE               \b(summary|counter|gaugehistogram|gauge|histogram|stateset|info|unknown|untyped)\b
+%token  T_COUNT                     \bcount\b
+%token  T_GCOUNT                    \bgcount\b
+%token  T_SUM                       \bsum\b
+%token  T_GSUM                      \bgsum\b
+%token  T_QUANTILE                  \bquantile\b
+%token  T_SCHEMA                    \bschema\b
+%token  T_ZERO_THRESHOLD            \bzero_threshold\b
+%token  T_ZERO_COUNT                \bzero_count\b
+%token  T_NEGATIVE_SPANS            \bnegative_spans\b
+%token  T_NEGATIVE_BUCKETS          \bnegative_buckets\b
+%token  T_POSITIVE_SPANS            \bpositive_spans\b
+%token  T_POSITIVE_BUCKETS          \bpositive_buckets\b
+%token  T_BUCKET                    \bbucket\b
 %token  T_METRIC_NAME               [a-zA-Z_:][a-zA-Z0-9_:]*
 %token  T_QUOTED_STRING             \"([^\n"\\]|\\[n"\\])+\"     // "string"
 %token  T_TEXT                      ([^\n\\]|\\[n"\\])+
@@ -120,18 +120,13 @@
         Metric()+
     )
 
-MetricName -> {
-   return new \Butschster\Prometheus\Ast\MetricNameNode($children);
-}
+MetricName
 : (
     <T_METRIC_NAME>
     |
-    (
-        // any of these tokens is a syntactically valid metric/label name on its own or can be at the start of one
-        <T_NAN> | <T_METRIC_TYPE> | <T_COUNT> | <T_GCOUNT> | <T_SUM> | <T_GSUM> | <T_QUANTILE> | <T_SCHEMA> |
-        <T_ZERO_THRESHOLD> | <T_ZERO_COUNT> | <T_NEGATIVE_SPANS> | <T_NEGATIVE_BUCKETS> | <T_POSITIVE_SPANS> | <T_POSITIVE_BUCKETS> | <T_BUCKET>
-    )
-    <T_METRIC_NAME>?
+    // any of these tokens is a syntactically valid metric/label name
+    <T_NAN> | <T_METRIC_TYPE> | <T_COUNT> | <T_GCOUNT> | <T_SUM> | <T_GSUM> | <T_QUANTILE> | <T_SCHEMA> |
+    <T_ZERO_THRESHOLD> | <T_ZERO_COUNT> | <T_NEGATIVE_SPANS> | <T_NEGATIVE_BUCKETS> | <T_POSITIVE_SPANS> | <T_POSITIVE_BUCKETS> | <T_BUCKET>
 )
 
 /**

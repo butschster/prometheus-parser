@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Butschster\Prometheus\Tests\Ast;
 
-class MetricNameNodeTest extends TestCase
+class MetricNameTest extends TestCase
 {
     function testMetricName(): void
     {

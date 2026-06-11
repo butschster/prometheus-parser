@@ -1,0 +1,640 @@
+# TYPE jvm_buffer_count gauge
+# HELP jvm_buffer_count Number of buffers in the pool.
+jvm_buffer_count{jvm_buffer_pool_name="direct",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 12.0
+# TYPE jvm_buffer_memory_limit_bytes gauge
+# UNIT jvm_buffer_memory_limit_bytes bytes
+# HELP jvm_buffer_memory_limit_bytes Measure of total memory capacity of buffers.
+jvm_buffer_memory_limit_bytes{jvm_buffer_pool_name="direct",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 5.36870912E8
+# TYPE jvm_buffer_memory_used_bytes gauge
+# UNIT jvm_buffer_memory_used_bytes bytes
+# HELP jvm_buffer_memory_used_bytes Measure of memory used by buffers.
+jvm_buffer_memory_used_bytes{jvm_buffer_pool_name="direct",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 135172.0
+# TYPE jvm_class_count gauge
+# HELP jvm_class_count Number of classes currently loaded.
+jvm_class_count{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 14244.0
+jvm_class_count{otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 14244.0
+# TYPE jvm_class_loaded counter
+# HELP jvm_class_loaded Number of classes loaded since JVM start.
+jvm_class_loaded_total{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 14244.0
+jvm_class_loaded_total{otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 14244.0
+# TYPE jvm_class_unloaded counter
+# HELP jvm_class_unloaded Number of classes unloaded since JVM start.
+jvm_class_unloaded_total{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 0.0
+jvm_class_unloaded_total{otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 0.0
+# TYPE jvm_cpu_context_switch_hertz gauge
+# UNIT jvm_cpu_context_switch_hertz hertz
+jvm_cpu_context_switch_hertz{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 1701.2987060546875
+# TYPE jvm_cpu_count gauge
+# HELP jvm_cpu_count Number of processors available to the Java virtual machine.
+jvm_cpu_count{otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 12.0
+# TYPE jvm_cpu_limit_ratio gauge
+# UNIT jvm_cpu_limit_ratio ratio
+jvm_cpu_limit_ratio{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 12.0
+# TYPE jvm_cpu_longlock_seconds histogram
+# UNIT jvm_cpu_longlock_seconds seconds
+# HELP jvm_cpu_longlock_seconds Long lock times
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 0
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 4373
+jvm_cpu_longlock_seconds_bucket{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 4373
+jvm_cpu_longlock_seconds_count{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 4373
+jvm_cpu_longlock_seconds_sum{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 40.30412711499994
+# TYPE jvm_cpu_recent_utilization_ratio gauge
+# UNIT jvm_cpu_recent_utilization_ratio ratio
+# HELP jvm_cpu_recent_utilization_ratio Recent CPU utilization for the process as reported by the JVM.
+jvm_cpu_recent_utilization_ratio{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 0.0016680567059665918
+jvm_cpu_recent_utilization_ratio{otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 0.0032228954492716255
+# TYPE jvm_cpu_time_seconds counter
+# UNIT jvm_cpu_time_seconds seconds
+# HELP jvm_cpu_time_seconds CPU time used by the process as reported by the JVM.
+jvm_cpu_time_seconds_total{otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 30.3
+# TYPE jvm_gc_duration_seconds histogram
+# UNIT jvm_gc_duration_seconds seconds
+# HELP jvm_gc_duration_seconds Duration of JVM garbage collection actions.
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of concurrent GC pause",jvm_gc_name="G1 Concurrent GC",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="0.01"} 4
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of concurrent GC pause",jvm_gc_name="G1 Concurrent GC",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="0.1"} 4
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of concurrent GC pause",jvm_gc_name="G1 Concurrent GC",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="1.0"} 4
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of concurrent GC pause",jvm_gc_name="G1 Concurrent GC",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="10.0"} 4
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of concurrent GC pause",jvm_gc_name="G1 Concurrent GC",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="+Inf"} 4
+jvm_gc_duration_seconds_count{jvm_gc_action="end of concurrent GC pause",jvm_gc_name="G1 Concurrent GC",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 4
+jvm_gc_duration_seconds_sum{jvm_gc_action="end of concurrent GC pause",jvm_gc_name="G1 Concurrent GC",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 0.008
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 0
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 2
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 2
+jvm_gc_duration_seconds_count{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 2
+jvm_gc_duration_seconds_sum{jvm_gc_action="end of major GC",jvm_gc_name="G1 Old Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 0.057703822
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 0
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 5
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 5
+jvm_gc_duration_seconds_count{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 5
+jvm_gc_duration_seconds_sum{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 0.044903906
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="0.01"} 3
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="0.1"} 6
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="1.0"} 6
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="10.0"} 6
+jvm_gc_duration_seconds_bucket{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha",le="+Inf"} 6
+jvm_gc_duration_seconds_count{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 6
+jvm_gc_duration_seconds_sum{jvm_gc_action="end of minor GC",jvm_gc_name="G1 Young Generation",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 0.055999999999999994
+# TYPE jvm_memory_allocation_bytes histogram
+# UNIT jvm_memory_allocation_bytes bytes
+# HELP jvm_memory_allocation_bytes Measure of memory allocations.
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 1
+jvm_memory_allocation_bytes_bucket{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 55
+jvm_memory_allocation_bytes_count{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 55
+jvm_memory_allocation_bytes_sum{arena="Main",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 2228864.0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 0
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 1
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 1
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 1
+jvm_memory_allocation_bytes_bucket{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 497
+jvm_memory_allocation_bytes_count{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 497
+jvm_memory_allocation_bytes_sum{arena="TLAB",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 2.50387144E8
+# TYPE jvm_memory_committed_bytes gauge
+# UNIT jvm_memory_committed_bytes bytes
+# HELP jvm_memory_committed_bytes Measure of memory committed.
+jvm_memory_committed_bytes{jvm_memory_pool_name="CodeHeap 'non-nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 2555904.0
+jvm_memory_committed_bytes{jvm_memory_pool_name="CodeHeap 'non-profiled nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 3342336.0
+jvm_memory_committed_bytes{jvm_memory_pool_name="CodeHeap 'profiled nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 1.0944512E7
+jvm_memory_committed_bytes{jvm_memory_pool_name="Compressed Class Space",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 8585216.0
+jvm_memory_committed_bytes{jvm_memory_pool_name="Compressed Class Space",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 9306112.0
+jvm_memory_committed_bytes{jvm_memory_pool_name="G1 Eden Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 3.00941312E8
+jvm_memory_committed_bytes{jvm_memory_pool_name="G1 Eden Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 3.00941312E8
+jvm_memory_committed_bytes{jvm_memory_pool_name="G1 Old Gen",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 2.1495808E8
+jvm_memory_committed_bytes{jvm_memory_pool_name="G1 Survivor Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 2.097152E7
+jvm_memory_committed_bytes{jvm_memory_pool_name="Metaspace",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 6.5732608E7
+jvm_memory_committed_bytes{jvm_memory_pool_name="Metaspace",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 7.0516736E7
+# TYPE jvm_memory_init_bytes gauge
+# UNIT jvm_memory_init_bytes bytes
+# HELP jvm_memory_init_bytes Measure of initial memory requested.
+jvm_memory_init_bytes{jvm_memory_pool_name="CodeCache",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 2555904.0
+# TYPE jvm_memory_limit_bytes gauge
+# UNIT jvm_memory_limit_bytes bytes
+# HELP jvm_memory_limit_bytes Measure of max obtainable memory.
+jvm_memory_limit_bytes{jvm_memory_pool_name="CodeHeap 'non-nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 5836800.0
+jvm_memory_limit_bytes{jvm_memory_pool_name="CodeHeap 'non-profiled nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 1.22912768E8
+jvm_memory_limit_bytes{jvm_memory_pool_name="CodeHeap 'profiled nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 1.22908672E8
+jvm_memory_limit_bytes{jvm_memory_pool_name="Compressed Class Space",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 1.073741824E9
+jvm_memory_limit_bytes{jvm_memory_pool_name="Compressed Class Space",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 1.073741824E9
+jvm_memory_limit_bytes{jvm_memory_pool_name="G1 Old Gen",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 5.36870912E8
+jvm_memory_limit_bytes{jvm_memory_pool_name="Metaspace",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 1.140850688E9
+# TYPE jvm_memory_used_after_last_gc_bytes gauge
+# UNIT jvm_memory_used_after_last_gc_bytes bytes
+# HELP jvm_memory_used_after_last_gc_bytes Measure of memory used, as measured after the most recent garbage collection event on this pool.
+jvm_memory_used_after_last_gc_bytes{jvm_memory_pool_name="G1 Eden Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 3145728.0
+jvm_memory_used_after_last_gc_bytes{jvm_memory_pool_name="G1 Eden Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 0.0
+jvm_memory_used_after_last_gc_bytes{jvm_memory_pool_name="G1 Old Gen",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 3.0956384E7
+jvm_memory_used_after_last_gc_bytes{jvm_memory_pool_name="G1 Survivor Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 2.097152E7
+jvm_memory_used_after_last_gc_bytes{jvm_memory_pool_name="G1 Survivor Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 2.097152E7
+# TYPE jvm_memory_used_bytes gauge
+# UNIT jvm_memory_used_bytes bytes
+# HELP jvm_memory_used_bytes Measure of memory used.
+jvm_memory_used_bytes{jvm_memory_pool_name="CodeHeap 'non-nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 1996416.0
+jvm_memory_used_bytes{jvm_memory_pool_name="CodeHeap 'non-profiled nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 3337984.0
+jvm_memory_used_bytes{jvm_memory_pool_name="CodeHeap 'profiled nmethods'",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 1.0870016E7
+jvm_memory_used_bytes{jvm_memory_pool_name="Compressed Class Space",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 8303488.0
+jvm_memory_used_bytes{jvm_memory_pool_name="Compressed Class Space",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 9029912.0
+jvm_memory_used_bytes{jvm_memory_pool_name="G1 Eden Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 0.0
+jvm_memory_used_bytes{jvm_memory_pool_name="G1 Eden Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 5.3477376E7
+jvm_memory_used_bytes{jvm_memory_pool_name="G1 Old Gen",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 3.0956384E7
+jvm_memory_used_bytes{jvm_memory_pool_name="G1 Survivor Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 2.097152E7
+jvm_memory_used_bytes{jvm_memory_pool_name="G1 Survivor Space",jvm_memory_type="heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 2.097152E7
+jvm_memory_used_bytes{jvm_memory_pool_name="Metaspace",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 6.5086848E7
+jvm_memory_used_bytes{jvm_memory_pool_name="Metaspace",jvm_memory_type="non_heap",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 6.9835E7
+# TYPE jvm_network_io_bytes histogram
+# UNIT jvm_network_io_bytes bytes
+# HELP jvm_network_io_bytes Network read/write bytes.
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 7
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 624
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 626
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 702
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 725
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 740
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 1021
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 1163
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 1181
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 1193
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 1208
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 1230
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 1242
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 1243
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 1244
+jvm_network_io_bytes_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 1249
+jvm_network_io_bytes_count{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 1249
+jvm_network_io_bytes_sum{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 339282.0
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 0
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 0
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 3
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 4
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 272
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 515
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 537
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 545
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 560
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 567
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 573
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 585
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 597
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 598
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 599
+jvm_network_io_bytes_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 606
+jvm_network_io_bytes_count{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 606
+jvm_network_io_bytes_sum{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 327382.0
+# TYPE jvm_network_time_seconds histogram
+# UNIT jvm_network_time_seconds seconds
+# HELP jvm_network_time_seconds Network read/write duration.
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 0
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 1249
+jvm_network_time_seconds_bucket{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 1249
+jvm_network_time_seconds_count{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 1249
+jvm_network_time_seconds_sum{mode="read",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 0.02130601700000002
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="0.0"} 0
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="25.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="50.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="75.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="100.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="250.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="500.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="750.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="1000.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="2500.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="5000.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="7500.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="10000.0"} 606
+jvm_network_time_seconds_bucket{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha",le="+Inf"} 606
+jvm_network_time_seconds_count{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 606
+jvm_network_time_seconds_sum{mode="write",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 0.06127463099999999
+# TYPE jvm_system_cpu_utilization_ratio gauge
+# UNIT jvm_system_cpu_utilization_ratio ratio
+# HELP jvm_system_cpu_utilization_ratio Recent CPU utilization for the whole system as reported by the JVM.
+jvm_system_cpu_utilization_ratio{otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 0.0033361134119331837
+# TYPE jvm_thread_count gauge
+jvm_thread_count{jvm_thread_daemon="false",jvm_thread_state="runnable",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 17.0
+jvm_thread_count{jvm_thread_daemon="false",jvm_thread_state="timed_waiting",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 9.0
+jvm_thread_count{jvm_thread_daemon="false",jvm_thread_state="waiting",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 1.0
+jvm_thread_count{jvm_thread_daemon="true",jvm_thread_state="runnable",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 6.0
+jvm_thread_count{jvm_thread_daemon="true",jvm_thread_state="timed_waiting",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 9.0
+jvm_thread_count{jvm_thread_daemon="true",jvm_thread_state="waiting",otel_scope_name="io.opentelemetry.runtime-telemetry-java8",otel_scope_version="2.22.0-alpha"} 3.0
+jvm_thread_count{jvm_thread_daemon="false",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 27.0
+jvm_thread_count{jvm_thread_daemon="true",otel_scope_name="io.opentelemetry.runtime-telemetry-java17",otel_scope_version="2.22.0-alpha"} 18.0
+# TYPE solr_client_request_duration_milliseconds histogram
+# UNIT solr_client_request_duration_milliseconds milliseconds
+# HELP solr_client_request_duration_milliseconds HTTP client request duration
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="0.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="5.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="10.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="25.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="50.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="75.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="100.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="250.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="500.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="750.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="1000.0"} 0
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="2500.0"} 1
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="5000.0"} 1
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="7500.0"} 1
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="10000.0"} 1
+solr_client_request_duration_milliseconds_bucket{otel_scope_name="org.apache.solr",le="+Inf"} 1
+solr_client_request_duration_milliseconds_count{otel_scope_name="org.apache.solr"} 1
+solr_client_request_duration_milliseconds_sum{otel_scope_name="org.apache.solr"} 1087.0
+# TYPE solr_core_disk_space_megabytes gauge
+# UNIT solr_core_disk_space_megabytes megabytes
+# HELP solr_core_disk_space_megabytes Solr core disk space metrics
+solr_core_disk_space_megabytes{category="CORE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="total_space"} 1031018.42578125
+solr_core_disk_space_megabytes{category="CORE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="usable_space"} 893868.85546875
+# TYPE solr_core_executor_thread_pool_size gauge
+# HELP solr_core_executor_thread_pool_size Thread pool size
+solr_core_executor_thread_pool_size{category="QUERY",name="httpShardExecutor",otel_scope_name="org.apache.solr",type="core"} 0.0
+solr_core_executor_thread_pool_size{category="QUERY",name="httpShardExecutor",otel_scope_name="org.apache.solr",type="max"} 2.147483647E9
+solr_core_executor_thread_pool_size{category="QUERY",name="httpShardExecutor",otel_scope_name="org.apache.solr",type="size"} 2.0
+solr_core_executor_thread_pool_size{category="UPDATE",name="recoveryExecutor",otel_scope_name="org.apache.solr",type="core"} 0.0
+solr_core_executor_thread_pool_size{category="UPDATE",name="recoveryExecutor",otel_scope_name="org.apache.solr",type="max"} 2.147483647E9
+solr_core_executor_thread_pool_size{category="UPDATE",name="recoveryExecutor",otel_scope_name="org.apache.solr",type="size"} 0.0
+solr_core_executor_thread_pool_size{category="UPDATE",name="updateOnlyExecutor",otel_scope_name="org.apache.solr",type="core"} 0.0
+solr_core_executor_thread_pool_size{category="UPDATE",name="updateOnlyExecutor",otel_scope_name="org.apache.solr",type="max"} 2.147483647E9
+solr_core_executor_thread_pool_size{category="UPDATE",name="updateOnlyExecutor",otel_scope_name="org.apache.solr",type="size"} 0.0
+# TYPE solr_core_executor_thread_pool_tasks gauge
+# HELP solr_core_executor_thread_pool_tasks Thread pool task counts
+solr_core_executor_thread_pool_tasks{category="QUERY",name="httpShardExecutor",otel_scope_name="org.apache.solr",type="active"} 2.0
+solr_core_executor_thread_pool_tasks{category="QUERY",name="httpShardExecutor",otel_scope_name="org.apache.solr",type="capacity"} 0.0
+solr_core_executor_thread_pool_tasks{category="QUERY",name="httpShardExecutor",otel_scope_name="org.apache.solr",type="completed"} 3.0
+solr_core_executor_thread_pool_tasks{category="QUERY",name="httpShardExecutor",otel_scope_name="org.apache.solr",type="queued"} 0.0
+solr_core_executor_thread_pool_tasks{category="UPDATE",name="recoveryExecutor",otel_scope_name="org.apache.solr",type="active"} 0.0
+solr_core_executor_thread_pool_tasks{category="UPDATE",name="recoveryExecutor",otel_scope_name="org.apache.solr",type="capacity"} 0.0
+solr_core_executor_thread_pool_tasks{category="UPDATE",name="recoveryExecutor",otel_scope_name="org.apache.solr",type="completed"} 0.0
+solr_core_executor_thread_pool_tasks{category="UPDATE",name="recoveryExecutor",otel_scope_name="org.apache.solr",type="queued"} 0.0
+solr_core_executor_thread_pool_tasks{category="UPDATE",name="updateOnlyExecutor",otel_scope_name="org.apache.solr",type="active"} 0.0
+solr_core_executor_thread_pool_tasks{category="UPDATE",name="updateOnlyExecutor",otel_scope_name="org.apache.solr",type="capacity"} 0.0
+solr_core_executor_thread_pool_tasks{category="UPDATE",name="updateOnlyExecutor",otel_scope_name="org.apache.solr",type="completed"} 0.0
+solr_core_executor_thread_pool_tasks{category="UPDATE",name="updateOnlyExecutor",otel_scope_name="org.apache.solr",type="queued"} 0.0
+# TYPE solr_core_field_cache_entries gauge
+# HELP solr_core_field_cache_entries Number of field cache entries
+solr_core_field_cache_entries{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_field_cache_entries{category="CACHE",otel_scope_name="org.apache.solr"} 0.0
+# TYPE solr_core_field_cache_size_bytes gauge
+# UNIT solr_core_field_cache_size_bytes bytes
+# HELP solr_core_field_cache_size_bytes Size of field cache in bytes
+solr_core_field_cache_size_bytes{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_field_cache_size_bytes{category="CACHE",otel_scope_name="org.apache.solr"} 0.0
+# TYPE solr_core_index_size_megabytes gauge
+# UNIT solr_core_index_size_megabytes megabytes
+# HELP solr_core_index_size_megabytes Index size for a Solr core
+solr_core_index_size_megabytes{category="CORE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 6.580352783203125E-5
+# TYPE solr_core_indexsearcher_cache_lookups counter
+# HELP solr_core_indexsearcher_cache_lookups Number of cumulative cache lookup results (hits and misses)
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="documentCache",otel_scope_name="org.apache.solr",replica_type="NRT",result="hit",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="documentCache",otel_scope_name="org.apache.solr",replica_type="NRT",result="miss",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="fieldValueCache",otel_scope_name="org.apache.solr",replica_type="NRT",result="hit",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="fieldValueCache",otel_scope_name="org.apache.solr",replica_type="NRT",result="miss",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="filterCache",otel_scope_name="org.apache.solr",replica_type="NRT",result="hit",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="filterCache",otel_scope_name="org.apache.solr",replica_type="NRT",result="miss",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="perSegFilter",otel_scope_name="org.apache.solr",replica_type="NRT",result="hit",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="perSegFilter",otel_scope_name="org.apache.solr",replica_type="NRT",result="miss",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="queryResultCache",otel_scope_name="org.apache.solr",replica_type="NRT",result="hit",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_lookups_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="queryResultCache",otel_scope_name="org.apache.solr",replica_type="NRT",result="miss",shard="shard1"} 0.0
+# TYPE solr_core_indexsearcher_cache_ops counter
+# HELP solr_core_indexsearcher_cache_ops Number of cumulative cache operations (inserts and evictions)
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="documentCache",ops="evictions",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="documentCache",ops="inserts",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="fieldValueCache",ops="evictions",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="fieldValueCache",ops="inserts",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="filterCache",ops="evictions",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="filterCache",ops="inserts",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="perSegFilter",ops="evictions",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="perSegFilter",ops="inserts",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="queryResultCache",ops="evictions",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_ops_total{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="queryResultCache",ops="inserts",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_indexsearcher_cache_ram_used_bytes gauge
+# UNIT solr_core_indexsearcher_cache_ram_used_bytes bytes
+# HELP solr_core_indexsearcher_cache_ram_used_bytes RAM bytes used by cache
+solr_core_indexsearcher_cache_ram_used_bytes{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="documentCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 440.0
+solr_core_indexsearcher_cache_ram_used_bytes{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="fieldValueCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 448.0
+solr_core_indexsearcher_cache_ram_used_bytes{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="filterCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 440.0
+solr_core_indexsearcher_cache_ram_used_bytes{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="perSegFilter",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 592.0
+solr_core_indexsearcher_cache_ram_used_bytes{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="queryResultCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 440.0
+# TYPE solr_core_indexsearcher_cache_size gauge
+# HELP solr_core_indexsearcher_cache_size Current number cache entries
+solr_core_indexsearcher_cache_size{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="documentCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_size{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="fieldValueCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_size{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="filterCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_size{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="perSegFilter",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_size{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="queryResultCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_indexsearcher_cache_warmup_time_milliseconds gauge
+# UNIT solr_core_indexsearcher_cache_warmup_time_milliseconds milliseconds
+# HELP solr_core_indexsearcher_cache_warmup_time_milliseconds Cache warmup time (most recent)
+solr_core_indexsearcher_cache_warmup_time_milliseconds{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="documentCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_warmup_time_milliseconds{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="fieldValueCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_warmup_time_milliseconds{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="filterCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_warmup_time_milliseconds{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="perSegFilter",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+solr_core_indexsearcher_cache_warmup_time_milliseconds{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",name="queryResultCache",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_indexsearcher_index_commit_size_megabytes gauge
+# UNIT solr_core_indexsearcher_index_commit_size_megabytes megabytes
+# HELP solr_core_indexsearcher_index_commit_size_megabytes Size of the current index commit (megabytes)
+solr_core_indexsearcher_index_commit_size_megabytes{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 6.580352783203125E-5
+# TYPE solr_core_indexsearcher_index_docs gauge
+# HELP solr_core_indexsearcher_index_docs Total number of docs in the index (including deletions)
+solr_core_indexsearcher_index_docs{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_indexsearcher_index_num_docs gauge
+# HELP solr_core_indexsearcher_index_num_docs Number of live docs in the index
+solr_core_indexsearcher_index_num_docs{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_indexsearcher_index_version gauge
+# HELP solr_core_indexsearcher_index_version Lucene index version
+solr_core_indexsearcher_index_version{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 2.0
+# TYPE solr_core_indexsearcher_live_docs_cache counter
+# HELP solr_core_indexsearcher_live_docs_cache LiveDocs cache metrics
+solr_core_indexsearcher_live_docs_cache_total{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="hits"} 0.0
+solr_core_indexsearcher_live_docs_cache_total{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="inserts"} 0.0
+solr_core_indexsearcher_live_docs_cache_total{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="naive_hits"} 0.0
+# TYPE solr_core_indexsearcher_open_time_milliseconds histogram
+# UNIT solr_core_indexsearcher_open_time_milliseconds milliseconds
+# HELP solr_core_indexsearcher_open_time_milliseconds Time to open new searchers
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="0.0"} 0
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="5.0"} 0
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="10.0"} 0
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="25.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="50.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="75.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="100.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="250.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="500.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="750.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="1000.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="2500.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="5000.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="7500.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="10000.0"} 1
+solr_core_indexsearcher_open_time_milliseconds_bucket{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",le="+Inf"} 1
+solr_core_indexsearcher_open_time_milliseconds_count{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 1
+solr_core_indexsearcher_open_time_milliseconds_sum{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 22.0
+# TYPE solr_core_indexsearcher_termstats_cache gauge
+# HELP solr_core_indexsearcher_termstats_cache Operation counts for the searcher term statistics cache, reported per operation type
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="lookups"} 0.0
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="merge_to_global"} 0.0
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="missing_global_field"} 0.0
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="missing_global_term"} 0.0
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="receive_global"} 0.0
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="retrieve"} 0.0
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="return_local"} 0.0
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="send_global"} 0.0
+solr_core_indexsearcher_termstats_cache{category="CACHE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="use_cached_global"} 0.0
+# TYPE solr_core_indexwriter_flushes counter
+# HELP solr_core_indexwriter_flushes Number of flush to disk operations triggered
+solr_core_indexwriter_flushes_total{category="INDEX",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 3.0
+# TYPE solr_core_is_leader gauge
+# HELP solr_core_is_leader Indicates whether this Solr core is currently the leader
+solr_core_is_leader{category="CORE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 1.0
+# TYPE solr_core_ref_count gauge
+# HELP solr_core_ref_count The current number of active references to a Solr core
+solr_core_ref_count{category="CORE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 1.0
+# TYPE solr_core_replication_index_generation gauge
+# HELP solr_core_replication_index_generation Current index generation
+solr_core_replication_index_generation{category="REPLICATION",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",handler="/replication",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 1.0
+# TYPE solr_core_replication_index_size_megabytes gauge
+# UNIT solr_core_replication_index_size_megabytes megabytes
+# HELP solr_core_replication_index_size_megabytes Size of the index in megabytes
+solr_core_replication_index_size_megabytes{category="REPLICATION",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",handler="/replication",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 6.580352783203125E-5
+# TYPE solr_core_replication_index_version gauge
+# HELP solr_core_replication_index_version Current index version
+solr_core_replication_index_version{category="REPLICATION",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",handler="/replication",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_replication_is_enabled gauge
+# HELP solr_core_replication_is_enabled Whether replication is enabled (1) or not (0)
+solr_core_replication_is_enabled{category="REPLICATION",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",handler="/replication",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 1.0
+# TYPE solr_core_replication_is_follower gauge
+# HELP solr_core_replication_is_follower Whether this node is a follower (1) or not (0)
+solr_core_replication_is_follower{category="REPLICATION",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",handler="/replication",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_replication_is_leader gauge
+# HELP solr_core_replication_is_leader Whether this node is a leader (1) or not (0)
+solr_core_replication_is_leader{category="REPLICATION",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",handler="/replication",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 1.0
+# TYPE solr_core_searcher_new counter
+# HELP solr_core_searcher_new Total number of new searchers opened
+solr_core_searcher_new_total{category="SEARCHER",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 1.0
+# TYPE solr_core_segments gauge
+# HELP solr_core_segments Number of segments in a Solr core
+solr_core_segments{category="CORE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_update_auto_commits counter
+# HELP solr_core_update_auto_commits Current number of auto commits
+solr_core_update_auto_commits_total{category="UPDATE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="auto_commits"} 0.0
+solr_core_update_auto_commits_total{category="UPDATE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="soft_auto_commits"} 0.0
+# TYPE solr_core_update_commit_stats gauge
+# HELP solr_core_update_commit_stats Metrics around commits
+solr_core_update_commit_stats{category="UPDATE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="auto_commit_max_time"} 15000.0
+solr_core_update_commit_stats{category="UPDATE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1",type="soft_auto_commit_max_time"} 3000.0
+# TYPE solr_core_update_docs_pending_commit gauge
+# HELP solr_core_update_docs_pending_commit Current number of documents pending commit. Value is reset to 0 on commit.
+solr_core_update_docs_pending_commit{category="UPDATE",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",ops="docs_pending",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_update_log_buffered_ops gauge
+# HELP solr_core_update_log_buffered_ops The current number of buffered operations
+solr_core_update_log_buffered_ops{category="TLOG",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_update_log_replay_logs_remaining gauge
+# HELP solr_core_update_log_replay_logs_remaining The current number of tlogs remaining to be replayed
+solr_core_update_log_replay_logs_remaining{category="TLOG",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_update_log_size_remaining_bytes gauge
+# UNIT solr_core_update_log_size_remaining_bytes bytes
+# HELP solr_core_update_log_size_remaining_bytes The total size in bytes of all tlogs remaining to be replayed
+solr_core_update_log_size_remaining_bytes{category="TLOG",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 0.0
+# TYPE solr_core_update_log_state gauge
+# HELP solr_core_update_log_state The current state of the update log. Replaying (0), buffering (1), applying buffered (2), active (3)
+solr_core_update_log_state{category="TLOG",collection="gettingstarted3",core="gettingstarted3_shard1_replica_n1",otel_scope_name="org.apache.solr",replica_type="NRT",shard="shard1"} 3.0
+# TYPE solr_cores_loaded gauge
+# HELP solr_cores_loaded Number of Solr cores loaded by CoreContainer
+solr_cores_loaded{category="CONTAINER",otel_scope_name="org.apache.solr",type="permanent"} 1.0
+solr_cores_loaded{category="CONTAINER",otel_scope_name="org.apache.solr",type="unloaded"} 0.0
+# TYPE solr_disk_space_megabytes gauge
+# UNIT solr_disk_space_megabytes megabytes
+# HELP solr_disk_space_megabytes Disk metrics for Solr's data home directory (/var/solr/data)
+solr_disk_space_megabytes{category="CONTAINER",otel_scope_name="org.apache.solr",type="total_space"} 1031018.42578125
+solr_disk_space_megabytes{category="CONTAINER",otel_scope_name="org.apache.solr",type="usable_space"} 893868.85546875
+# TYPE solr_node_executor_thread_pool_size gauge
+# HELP solr_node_executor_thread_pool_size Thread pool size
+solr_node_executor_thread_pool_size{category="ADMIN",name="asyncCoreAdminExecutor",otel_scope_name="org.apache.solr",type="core"} 50.0
+solr_node_executor_thread_pool_size{category="ADMIN",name="asyncCoreAdminExecutor",otel_scope_name="org.apache.solr",type="max"} 50.0
+solr_node_executor_thread_pool_size{category="ADMIN",name="asyncCoreAdminExecutor",otel_scope_name="org.apache.solr",type="size"} 0.0
+solr_node_executor_thread_pool_size{category="ADMIN",name="asyncCoreExpensiveAdminExecutor",otel_scope_name="org.apache.solr",type="core"} 5.0
+solr_node_executor_thread_pool_size{category="ADMIN",name="asyncCoreExpensiveAdminExecutor",otel_scope_name="org.apache.solr",type="max"} 5.0
+solr_node_executor_thread_pool_size{category="ADMIN",name="asyncCoreExpensiveAdminExecutor",otel_scope_name="org.apache.solr",type="size"} 0.0
+# TYPE solr_node_executor_thread_pool_tasks gauge
+# HELP solr_node_executor_thread_pool_tasks Thread pool task counts
+solr_node_executor_thread_pool_tasks{category="ADMIN",name="asyncCoreAdminExecutor",otel_scope_name="org.apache.solr",type="active"} 0.0
+solr_node_executor_thread_pool_tasks{category="ADMIN",name="asyncCoreAdminExecutor",otel_scope_name="org.apache.solr",type="capacity"} 2.147483647E9
+solr_node_executor_thread_pool_tasks{category="ADMIN",name="asyncCoreAdminExecutor",otel_scope_name="org.apache.solr",type="completed"} 0.0
+solr_node_executor_thread_pool_tasks{category="ADMIN",name="asyncCoreAdminExecutor",otel_scope_name="org.apache.solr",type="queued"} 0.0
+solr_node_executor_thread_pool_tasks{category="ADMIN",name="asyncCoreExpensiveAdminExecutor",otel_scope_name="org.apache.solr",type="active"} 0.0
+solr_node_executor_thread_pool_tasks{category="ADMIN",name="asyncCoreExpensiveAdminExecutor",otel_scope_name="org.apache.solr",type="capacity"} 2.147483647E9
+solr_node_executor_thread_pool_tasks{category="ADMIN",name="asyncCoreExpensiveAdminExecutor",otel_scope_name="org.apache.solr",type="completed"} 0.0
+solr_node_executor_thread_pool_tasks{category="ADMIN",name="asyncCoreExpensiveAdminExecutor",otel_scope_name="org.apache.solr",type="queued"} 0.0
+# TYPE solr_node_requests counter
+# HELP solr_node_requests HTTP Solr requests
+solr_node_requests_total{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr"} 1.0
+solr_node_requests_total{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr"} 1.0
+solr_node_requests_total{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr"} 2.0
+# TYPE solr_node_requests_times_milliseconds histogram
+# UNIT solr_node_requests_times_milliseconds milliseconds
+# HELP solr_node_requests_times_milliseconds HTTP Solr request times
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="0.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="5.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="10.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="25.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="50.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="75.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="100.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="250.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="500.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="750.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="1000.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="2500.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="5000.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="7500.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="10000.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr",le="+Inf"} 1
+solr_node_requests_times_milliseconds_count{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr"} 1
+solr_node_requests_times_milliseconds_sum{category="ADMIN",handler="/admin/collections",otel_scope_name="org.apache.solr"} 1519.0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="0.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="5.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="10.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="25.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="50.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="75.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="100.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="250.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="500.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="750.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="1000.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="2500.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="5000.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="7500.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="10000.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr",le="+Inf"} 1
+solr_node_requests_times_milliseconds_count{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr"} 1
+solr_node_requests_times_milliseconds_sum{category="ADMIN",handler="/admin/cores",otel_scope_name="org.apache.solr"} 1067.0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="0.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="5.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="10.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="25.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="50.0"} 0
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="75.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="100.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="250.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="500.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="750.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="1000.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="2500.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="5000.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="7500.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="10000.0"} 1
+solr_node_requests_times_milliseconds_bucket{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr",le="+Inf"} 1
+solr_node_requests_times_milliseconds_count{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr"} 1
+solr_node_requests_times_milliseconds_sum{category="ADMIN",handler="/admin/metrics",otel_scope_name="org.apache.solr"} 71.0
+# TYPE solr_overseer_collection_work_queue_size gauge
+# HELP solr_overseer_collection_work_queue_size Size of overseer's collection work queue
+solr_overseer_collection_work_queue_size{category="OVERSEER",otel_scope_name="org.apache.solr"} 0.0
+# TYPE solr_overseer_state_update_queue_size gauge
+# HELP solr_overseer_state_update_queue_size Size of overseer's update queue
+solr_overseer_state_update_queue_size{category="OVERSEER",otel_scope_name="org.apache.solr"} 0.0
+# TYPE solr_zk_child_fetches counter
+# HELP solr_zk_child_fetches Total number of ZooKeeper child node fetches
+solr_zk_child_fetches_total{category="CONTAINER",otel_scope_name="org.apache.solr"} 32.0
+# TYPE solr_zk_cumulative_children_fetched counter
+# HELP solr_zk_cumulative_children_fetched Total cumulative children fetched count
+solr_zk_cumulative_children_fetched_total{category="CONTAINER",otel_scope_name="org.apache.solr"} 13.0
+# TYPE solr_zk_cumulative_multi_ops counter
+# HELP solr_zk_cumulative_multi_ops Total cumulative multi-operations count
+solr_zk_cumulative_multi_ops_total{category="CONTAINER",otel_scope_name="org.apache.solr"} 12.0
+# TYPE solr_zk_ops counter
+# HELP solr_zk_ops Total number of ZooKeeper operations
+solr_zk_ops_total{category="CONTAINER",ops="delete",otel_scope_name="org.apache.solr"} 2.0
+solr_zk_ops_total{category="CONTAINER",ops="exists",otel_scope_name="org.apache.solr"} 283.0
+solr_zk_ops_total{category="CONTAINER",ops="multi",otel_scope_name="org.apache.solr"} 7.0
+solr_zk_ops_total{category="CONTAINER",ops="read",otel_scope_name="org.apache.solr"} 133.0
+solr_zk_ops_total{category="CONTAINER",ops="write",otel_scope_name="org.apache.solr"} 93.0
+# TYPE solr_zk_read_bytes counter
+# UNIT solr_zk_read_bytes bytes
+# HELP solr_zk_read_bytes Total bytes read from ZooKeeper
+solr_zk_read_bytes_total{category="CONTAINER",otel_scope_name="org.apache.solr"} 285726.0
+# TYPE solr_zk_watches_fired counter
+# HELP solr_zk_watches_fired Total number of ZooKeeper watches fired
+solr_zk_watches_fired_total{category="CONTAINER",otel_scope_name="org.apache.solr"} 26.0
+# TYPE solr_zk_written_bytes counter
+# UNIT solr_zk_written_bytes bytes
+# HELP solr_zk_written_bytes Total bytes written to ZooKeeper
+solr_zk_written_bytes_total{category="CONTAINER",otel_scope_name="org.apache.solr"} 208714.0
+# TYPE target info
+target_info{service_name="unknown_service:java",telemetry_sdk_language="java",telemetry_sdk_name="opentelemetry",telemetry_sdk_version="1.56.0"} 1
+# EOF

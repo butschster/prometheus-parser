@@ -8,7 +8,7 @@
 
 ![Github cover Prometheus parser](https://user-images.githubusercontent.com/773481/199663705-3540ce54-086e-476e-bf91-cd607c98df9f.jpg)
 
-Welcome to the Prometheus Metrics Parser! This package makes it easy to extract valuable information from metrics in the Prometheus text-based format. Whether you're looking to analyze your metrics data, integrate it into other systems, or just want a better way to visualize it, this package has you covered.
+Welcome to the Prometheus Metrics Parser! This package makes it easy to extract valuable information from metrics in the Prometheus text-based format and the **OpenMetrics 2.0** format. Whether you're looking to analyze your metrics data, integrate it into other systems, or just want a better way to visualize it, this package has you covered.
 
 With just a few lines of code, you can easily extract valuable insights from your Prometheus metrics.
 
@@ -80,19 +80,224 @@ rpc_duration_seconds_count 2693
 ### Schema data
 
 ```php
-$metrics = $schema->getMetrics(); // array of Metric
+$metrics = $schema->getMetrics(); // array of MetricDataNode
 
 $metrics['http_requests_total']->description; // The total number of HTTP requests.
 $metrics['http_requests_total']->type; // counter
 $metrics['http_requests_total']->name; // http_requests_total
+$metrics['http_requests_total']->unit; // null (if not set)
+$metrics['http_requests_total']->eof; // true if # EOF was present (OpenMetrics)
 
 foreach ($metrics['go_gc_duration_seconds'] as $metric) {
     $metric->name; // go_gc_duration_seconds
     $metric->value; // Value
     $metric->timestamp; // Timestamp
-    $metric->labels; // Array of labels
+    $metric->startTimestamp; // Start timestamp (st@... syntax, OpenMetrics)
+    $metric->labels; // Array of LabelNode objects
+    $metric->exemplars; // Array of ExemplarNode objects (OpenMetrics)
 }
 ```
+
+---
+
+## OpenMetrics features
+
+### `# EOF` marker
+
+OpenMetrics expositions must end with `# EOF`. The `SchemaNode::$eof` property is `true` when the marker is present and `null` for plain Prometheus format.
+
+```php
+$schema->eof; // true or null
+```
+
+### `# UNIT` directive
+
+```
+# TYPE http_request_duration_seconds gauge
+# UNIT http_request_duration_seconds seconds
+```
+
+```php
+$metrics['http_request_duration_seconds']->unit; // "seconds"
+```
+
+### Exemplars
+
+OpenMetrics allows optional exemplars attached to each sample — typically used to carry a trace ID that corresponds to the measurement.
+
+```
+http_requests_total{code="200"} 1027 1395066363.000 # {trace_id="abc123"} 1.0 1395066363.000
+```
+
+```php
+$metric->exemplars;               // array of ExemplarNode
+$metric->exemplars[0]->value;     // 1.0
+$metric->exemplars[0]->timestamp; // 1395066363.000 or null
+$metric->exemplars[0]->labels;    // array of LabelNode
+$metric->exemplars[0]->labels[0]->name;  // "trace_id"
+$metric->exemplars[0]->labels[0]->value; // "abc123"
+```
+
+### Sub-metric grouping
+
+Counter, histogram, summary and gaugehistogram families have well-known suffixes (`_total`, `_created`, `_sum`, `_count`, `_bucket`, `_gsum`, `_gcount`). `MetricDataNode` exposes convenience accessors:
+
+```php
+// counter
+$metrics['requests']->getTotal();    // MetricNode for requests_total
+$metrics['requests']->getCreated();  // MetricNode for requests_created (optional)
+
+// histogram / summary
+$metrics['http_request_duration']->getSum();     // MetricNode for _sum
+$metrics['http_request_duration']->getCount();   // MetricNode for _count
+$metrics['http_request_duration']->getBuckets(); // MetricNode[] for _bucket
+$metrics['http_request_duration']->getCreated(); // MetricNode for _created
+
+// gaugehistogram
+$metrics['http_request_size']->getGSum();   // MetricNode for _gsum
+$metrics['http_request_size']->getGCount(); // MetricNode for _gcount
+```
+
+### Unicode metric and label names
+
+OpenMetrics 2.0 supports quoted identifiers for metric and label names containing characters not allowed in plain Prometheus format (dots, hyphens, etc.):
+
+```
+# TYPE "my.metric.name" gauge
+# HELP "my.metric.name" A metric with dots in its name.
+# UNIT "my.metric.name" seconds
+{"my.metric.name"} 0.5
+
+# Quoted label names:
+my_metric{"unicode.label"="value", regular_label="other"} 1
+```
+
+### Headerless (bare) metric blocks
+
+Metrics without a `# TYPE` / `# HELP` header are valid — they are parsed with `type = "unknown"` and the family name derived from the first sample's name:
+
+```
+bare_metric{code="200"} 50
+bare_metric{code="400"} 5
+```
+
+### Extended metric types
+
+In addition to the standard `gauge`, `counter`, `summary` and `histogram` types, the following OpenMetrics-specific types are supported:
+
+- `gaugehistogram`
+- `stateset`
+- `info`
+- `unknown`
+
+For backwards compatibility with Prometheus, `untyped` remains supported.
+
+### Start timestamps (`st@`)
+
+```
+foo_total 17.0 1520879607.789 st@1520430000.123
+```
+
+```php
+$metric->startTimestamp; // 1520430000.123
+```
+
+### CompositeValue
+
+In OpenMetrics 2.0, `summary`, `histogram` and `gaugehistogram` use a CompositeValue instead of a number for metric values.
+
+```
+# TYPE foo summary
+foo {count:0,sum:0.0,quantile:[0.95:123.7,0.99:150]} st@1520430000.123
+```
+
+```php
+$metric->value->count;    // 0
+$metric->value->sum;      // 0.0
+$metric->value->quantile; // ["0.95" => 123.7, "0.99" => 150]
+```
+
+```
+# TYPE foo histogram
+foo {count:17,sum:324789.3,bucket:[0.0:0,1e-05:0,0.0001:5,0.1:8,1.0:10,10.0:11,100000.0:11,1e+06:15,1e+23:16,1.1e+23:17,+Inf:17]} st@1520430000.123
+```
+
+```php
+$metric->value->count;  // 17
+$metric->value->sum;    // 324789.3
+$metric->value->bucket; // ["0.0" => 0, "1e-05" => 0, "0.0001" => 5, /* ... */ "+Inf" => 17]
+```
+
+```
+# TYPE foo gaugehistogram
+foo {gcount:42,gsum:3289.3,bucket:[0.01:20,0.1:25,1:34,+Inf:42]}
+```
+
+```php
+$metric->value->gcount; // 42
+$metric->value->gsum;   // 3289.3
+$metric->value->bucket; // ["0.01" => 20, "0.1" => 25, "1" => 34, "+Inf" => 42]
+```
+
+---
+
+## Validation layer (OpenMetrics strict mode)
+
+Attach one or more validators to the parser to enforce OpenMetrics correctness rules. Validators are called after each successful parse and throw a `ValidationException` subclass on violation.
+
+```php
+use Butschster\Prometheus\ParserFactory;
+use Butschster\Prometheus\Validation\InfoTypeValidator;
+use Butschster\Prometheus\Validation\StateSetTypeValidator;
+use Butschster\Prometheus\Validation\UnitSuffixValidator;
+
+$parser = ParserFactory::create();
+$parser->addValidator(new InfoTypeValidator());    // info families must end in _info and have value=1
+$parser->addValidator(new StateSetTypeValidator()); // stateset samples must have value 0 or 1
+$parser->addValidator(new UnitSuffixValidator());  // family name must end with _<unit>
+```
+
+### Available validators
+
+| Validator | Rule |
+|-----------|------|
+| `InfoTypeValidator` | Family name must end with `_info`; all sample values must be `1`. |
+| `StateSetTypeValidator` | Each sample must have a label named after the family; sample value must be `0` or `1`. |
+| `UnitSuffixValidator` | When `# UNIT` is declared, the family name must end with `_<unit>`. |
+
+### Implementing a custom validator
+
+```php
+use Butschster\Prometheus\Ast\SchemaNode;
+use Butschster\Prometheus\Exceptions\ValidationException;
+use Butschster\Prometheus\Validation\ValidatorInterface;
+
+final class MyValidator implements ValidatorInterface
+{
+    public function validate(SchemaNode $schema): void
+    {
+        foreach ($schema->getMetrics() as $family) {
+            // ... your rules ...
+            // throw new ValidationException('...') on violation
+        }
+    }
+}
+```
+
+---
+
+## Structured exceptions
+
+| Exception | When |
+|-----------|------|
+| `ParseException` | Base class for all parse failures. |
+| `UnexpectedTokenException` | Parser encountered an unexpected token (extends `ParseException`). |
+| `ValidationException` | Base class for all validation failures. |
+| `InvalidMetricValueException` | A metric value violates a rule (extends `ValidationException`). |
+| `InvalidLabelValueException` | A label value violates a rule (extends `ValidationException`). |
+| `InvalidUnitSuffixException` | Family name does not end with declared unit (extends `ValidationException`). |
+
+---
 
 # Enjoy!
 

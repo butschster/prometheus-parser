@@ -11,7 +11,10 @@ final class MetricNode
     public readonly mixed $value;
     public int|float|null $timestamp = null;
     public int|float|null $startTimestamp = null;
+    /** @var LabelNode[] */
     public array $labels = [];
+    /** @var ExemplarNode[] */
+    public array $exemplars = [];
 
     public function __construct(array $children)
     {
@@ -26,7 +29,11 @@ final class MetricNode
                 $this->startTimestamp = $child->startTimestamp;
             } elseif ($child instanceof CommentNode) {
                 $this->comment = $child->comment;
-            } elseif ($child->getName() === 'T_METRIC_NAME') {
+            } elseif ($child instanceof ExemplarsNode) {
+                $this->exemplars = $child->exemplars;
+            } elseif ($child->getName() === 'T_QUOTED_STRING') {
+                $this->name = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
+            } else {
                 $this->name = \trim($child->getValue());
             }
         }

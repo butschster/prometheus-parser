@@ -6,6 +6,9 @@ namespace Butschster\Prometheus;
 
 use Butschster\Prometheus\Ast\SchemaNode;
 use Butschster\Prometheus\Exceptions\GrammarFileNotFoundException;
+use Butschster\Prometheus\Exceptions\ParseException;
+use Butschster\Prometheus\Exceptions\UnexpectedTokenException;
+use Butschster\Prometheus\Validation\ValidatorInterface;
 use Phplrt\Contracts\Lexer\LexerInterface;
 use Phplrt\Lexer\Lexer;
 use Phplrt\Parser\Parser as PhplrtParser;
@@ -17,6 +20,9 @@ final class Parser
 {
     private readonly ParserInterface $parser;
 
+    /** @var ValidatorInterface[] */
+    private array $validators = [];
+
     public function __construct(array $grammar)
     {
         $lexer = $this->createLexer($grammar);
@@ -26,13 +32,39 @@ final class Parser
     }
 
     /**
+     * Register a validator to be applied after each successful parse.
+     */
+    public function addValidator(ValidatorInterface $validator): static
+    {
+        $this->validators[] = $validator;
+        return $this;
+    }
+
+    /**
      * Parse schema
-     * @throws \Phplrt\Contracts\Exception\RuntimeExceptionInterface
+     * @throws ParseException
+     * @throws \Butschster\Prometheus\Exceptions\ValidationException
      * @psalm-suppress PossiblyUndefinedMethod
      */
-    public function parse(string $schema, array $options = []): ?SchemaNode
+    public function parse(string $schema): ?SchemaNode
     {
-        return $this->parser->parse($schema, $options)[0] ?? null;
+        try {
+            /**
+             * @psalm-suppress InvalidArgument
+             */
+            $parsed = (array)$this->parser->parse($schema);
+            $result = $parsed[0] ?? null;
+        } catch (\Phplrt\Contracts\Exception\RuntimeExceptionInterface $e) {
+            $this->rethrowAsParseException($e);
+        }
+
+        if ($result !== null) {
+            foreach ($this->validators as $validator) {
+                $validator->validate($result);
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -92,6 +124,26 @@ final class Parser
         ]);
     }
 
+    /**
+     * Rethrow a phplrt runtime exception as a typed ParseException.
+     *
+     * @throws ParseException
+     * @return never
+     */
+    private function rethrowAsParseException(\Phplrt\Contracts\Exception\RuntimeExceptionInterface $e): void
+    {
+        $token = $e->getToken();
+
+        $message = \sprintf(
+            'Unexpected token "%s" at offset %d: %s',
+            $token->getValue(),
+            $token->getOffset(),
+            $e->getMessage()
+        );
+
+        throw new UnexpectedTokenException($message, (int)$e->getCode(), $e);
+    }
+
     private function ensureGrammarFileExists(string $grammarFilePatch): void
     {
         if (!file_exists($grammarFilePatch)) {
@@ -101,3 +153,4 @@ final class Parser
         }
     }
 }
+

@@ -96,7 +96,7 @@ SCHEMA
         );
 
         $this->assertSame(
-            [1 => 2],
+            [[1, 2]],
             $metric->value->negative_spans
         );
 
@@ -106,7 +106,7 @@ SCHEMA
         );
 
         $this->assertSame(
-            [-1 => 2, 3 => 4],
+            [[-1, 2], [3, 4]],
             $metric->value->positive_spans
         );
 
@@ -224,7 +224,7 @@ SCHEMA
         );
 
         $this->assertSame(
-            [1 => 2],
+            [[1, 2]],
             $metric->value->positive_spans
         );
 

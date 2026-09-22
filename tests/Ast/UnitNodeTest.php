@@ -71,4 +71,47 @@ SCHEMA
             $node->getMetrics()['test_no_unit']->unit
         );
     }
+
+    /**
+     * A family named after a keyword token must still pick up its unit.
+     *
+     * @testWith ["count"]
+     *           ["sum"]
+     *           ["bucket"]
+     *           ["info"]
+     *           ["gauge"]
+     */
+    function testKeywordAsMetricName(string $name): void
+    {
+        $node = $this->parser->parse(<<<SCHEMA
+# UNIT $name seconds
+$name 0
+SCHEMA
+        );
+
+        $family = $node->getMetrics()[$name];
+        $this->assertSame($name, $family->name);
+        $this->assertSame('seconds', $family->unit);
+    }
+
+    /**
+     * The unit itself may be spelled like one of the keyword tokens; dropping it
+     * silently would also disable UnitSuffixValidator for the family.
+     *
+     * @testWith ["count"]
+     *           ["sum"]
+     *           ["info"]
+     *           ["schema"]
+     */
+    function testUnitThatIsAKeywordToken(string $unit): void
+    {
+        $node = $this->parser->parse(<<<SCHEMA
+# TYPE test_$unit gauge
+# UNIT test_$unit $unit
+test_$unit 0
+SCHEMA
+        );
+
+        $this->assertSame($unit, $node->getMetrics()["test_$unit"]->unit);
+    }
 }

@@ -34,7 +34,9 @@ abstract class CompositeValueNode
 
         while (($child = array_shift($children)) instanceof NumberNode) {
             array_shift($children); // T_COLON
-            $items[$child->value] = array_shift($children)->value;
+            // Offsets are deltas, so they may repeat and their order matters:
+            // spans are kept as a list of [offset, length] pairs.
+            $items[] = [$child->value, array_shift($children)->value];
             array_shift($children); // T_COMMA or T_RBRACKET
         }
 

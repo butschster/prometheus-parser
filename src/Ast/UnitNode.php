@@ -13,14 +13,19 @@ final class UnitNode
     {
         // UNIT with empty value string must be treated as if it were not present
         $unit = null;
+        // The family name may lex as any token that MetricName() admits, so it
+        // is taken by position rather than by token name.
+        $nameSet = false;
 
         foreach ($children as $child) {
             if ($child instanceof UnitUnitNode) {
                 $unit = $child->unit;
-            } elseif ($child->getName() === 'T_METRIC_NAME') {
-                $this->metric = \trim($child->getValue());
-            } elseif ($child->getName() === 'T_QUOTED_STRING') {
-                $this->metric = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
+            } elseif (!$nameSet) {
+                $this->metric = match ($child->getName()) {
+                    'T_QUOTED_STRING' => \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"])),
+                    default => \trim($child->getValue()),
+                };
+                $nameSet = true;
             }
         }
 

@@ -33,7 +33,10 @@
 * --------------------------------------------------------------------------
 */
 %token  T_EQUAL                     =
-%token  T_COLON                     :
+// A separator colon always follows a key or a number (count:17, 0.5:1), while a
+// recording rule name starts with one (:node_cpu:rate5m). The lookbehind keeps
+// this token from shadowing such a name in T_METRIC_NAME, which is declared later.
+%token  T_COLON                     (?<=[a-zA-Z0-9_]):
 %token  T_HASH                      #
 %token  T_LBRACE                    {
 %token  T_RBRACE                    }

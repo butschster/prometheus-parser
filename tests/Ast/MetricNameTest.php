@@ -163,4 +163,34 @@ SCHEMA
         $this->assertSame('seconds', $family->unit);
         $this->assertSame(5, $family->metrics[0]->value);
     }
+
+    /**
+     * Prometheus recording rule names legally start with a colon.
+     */
+    function testRecordingRuleMetricName(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+:node_cpu_utilisation:avg1m 0.5
+SCHEMA
+        );
+
+        $this->assertArrayHasKey(':node_cpu_utilisation:avg1m', $node->getMetrics());
+        $metric = $node->getMetrics()[':node_cpu_utilisation:avg1m']->metrics[0];
+        $this->assertSame(0.5, $metric->value);
+    }
+
+    function testRecordingRuleMetricNameInHeaders(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP :job:rate5m A recording rule name starting with a colon.
+# TYPE :job:rate5m gauge
+:job:rate5m{job="api"} 1
+SCHEMA
+        );
+
+        $family = $node->getMetrics()[':job:rate5m'];
+        $this->assertSame('A recording rule name starting with a colon.', $family->description);
+        $this->assertSame('gauge', $family->type);
+        $this->assertSame(1, $family->metrics[0]->value);
+    }
 }

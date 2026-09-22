@@ -12,10 +12,15 @@ final class LabelNode
     /** @param \Phplrt\Lexer\Token\Token[] $children */
     public function __construct(array $children)
     {
+        $nameSet = false;
         foreach ($children as $child) {
-            if ($child->getName() === 'T_METRIC_NAME') {
-                $this->name = \trim($child->getValue());
-            } elseif ($child->getName() === 'T_QUOTED_STRING') {
+            if (!$nameSet) {
+                $this->name = match ($child->getName()) {
+                    'T_QUOTED_STRING' => \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"])),
+                    default => \trim($child->getValue()),
+                };
+                $nameSet = true;
+            } else {
                 $this->value = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
             }
         }

@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Butschster\Prometheus\Ast;
 
-use Phplrt\Lexer\Token\Token;
-
 final class UnitUnitNode
 {
     public ?string $unit = null;
 
-    public function __construct(Token $value)
+    public function __construct(array $children)
     {
-        $this->unit = \trim($value->getValue());
+        foreach ($children as $child) {
+            if ($child->getName() === 'T_METRIC_NAME') {
+                $this->unit = $child->getValue();
+            }
+        }
     }
 }

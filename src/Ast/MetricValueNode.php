@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace Butschster\Prometheus\Ast;
 
-use Phplrt\Lexer\Token\Token;
-
 final class MetricValueNode
 {
-    public readonly float|int $value;
-    public readonly string $originalValue;
+    public readonly float|int|CompositeValue\CompositeValueNode $value;
+    private readonly NumberNode|CompositeValue\CompositeValueNode $node;
 
-    public function __construct(Token $value)
+    public function __construct(NumberNode|CompositeValue\CompositeValueNode $node)
     {
-        $this->originalValue = $value->getValue();
-        $this->value = match ($value->getName()) {
-            'T_INT' => (int)$value->getValue(),
-            'T_FLOAT' => (float)$value->getValue(),
-            'T_INF' => INF,
-            'T_NAN' => NAN,
-        };
+        $this->node = $node;
+
+        if ($node instanceof NumberNode) {
+            $this->value = $node->value;
+        } else {
+            $this->value = $node;
+        }
+    }
+
+    public function __toString(): string
+    {
+        return (string)$this->node;
     }
 }

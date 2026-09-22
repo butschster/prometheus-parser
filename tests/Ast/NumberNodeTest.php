@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Butschster\Prometheus\Tests\Ast;
 
-class NumberTest extends TestCase
+class NumberNodeTest extends TestCase
 {
     function testInt(): void
     {
@@ -284,7 +284,21 @@ SCHEMA
 
         $metrics = $node->getMetrics()['test_inf']->metrics;
 
-        foreach (range(0, 11) as $i) {
+        foreach (range(0, 5) as $i) {
+            $this->assertLessThan(
+                0,
+                $metrics[$i]->value
+            );
+            $this->assertInfinite(
+                $metrics[$i]->value
+            );
+        }
+
+        foreach (range(6, 11) as $i) {
+            $this->assertGreaterThan(
+                0,
+                $metrics[$i]->value
+            );
             $this->assertInfinite(
                 $metrics[$i]->value
             );

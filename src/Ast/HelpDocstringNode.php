@@ -12,7 +12,7 @@ final class HelpDocstringNode
     {
         foreach ($children as $child) {
             if ($child instanceof MetricValueNode) {
-                $this->description .= $child->originalValue;
+                $this->description .= (string)$child;
             } elseif ($child->getName() === 'T_TEXT') {
                 $this->description .= \stripslashes(\strtr(\trim($child->getValue()), ['\n' => "\n"]));
             } else {

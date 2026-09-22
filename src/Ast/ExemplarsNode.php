@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Butschster\Prometheus\Ast;
 
-final class LabelsNode
+final class ExemplarsNode
 {
-    /** @var LabelNode[] */
-    public readonly array $labels;
+    /** @var ExemplarNode[] */
+    public readonly array $exemplars;
 
     public function __construct(array $children)
     {
-        $this->labels = $children;
+        $this->exemplars = $children;
     }
 }

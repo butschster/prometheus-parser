@@ -23,7 +23,7 @@
  * --------------------------------------------------------------------------
  */
 %token  T_FLOAT                     [+-]?[0-9]*\.[0-9]+([eE][+-]?[0-9]+)?|[+-]?[0-9]+[eE][+-]?[0-9]+\b
-%token  T_INF                       [+-](?i)inf(inity)?\b
+%token  T_INF                       [+-]?(?i)inf(inity)?\b
 %token  T_INT                       [+-]?[0-9]+
 %token  T_NAN                       \b(?i)nan\b(?!:)
 
@@ -350,6 +350,16 @@ MetricName
     (<T_FLOAT>|<T_INT>|<T_INF>|<T_NAN>)
 )
 
+/**
+* An integral number, used where a fraction makes no sense (a histogram schema).
+*/
+#IntNumber -> {
+   return new \Butschster\Prometheus\Ast\NumberNode($children);
+}
+: (
+    <T_INT>
+)
+
 CompositeValue : (
     (SummaryValue()|HistogramValue()|GaugeHistogramValue())
 )
@@ -417,7 +427,7 @@ ClassicBuckets : (
 )
 
 NativeBuckets : (
-    <T_SCHEMA><T_COLON>Number()
+    <T_SCHEMA><T_COLON>IntNumber()
     <T_COMMA><T_ZERO_THRESHOLD><T_COLON>Number()
     <T_COMMA><T_ZERO_COUNT><T_COLON>Number()
     (<T_COMMA><T_NEGATIVE_SPANS><T_COLON><T_LBRACKET>QuantileOrBucketCount()(<T_COMMA>QuantileOrBucketCount())*<T_RBRACKET>)?

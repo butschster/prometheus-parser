@@ -26,7 +26,7 @@ return [
             'T_EOF' => 'EOF',
             'T_COMMENT' => '^\\#(?![\\x20\\t]+(?:HELP|TYPE|UNIT|EOF))[\\x20\\t]+([^\\n\\\\]|\\\\[n"\\\\])+$',
             'T_FLOAT' => '[+-]?[0-9]*\\.[0-9]+([eE][+-]?[0-9]+)?|[+-]?[0-9]+[eE][+-]?[0-9]+\\b',
-            'T_INF' => '[+-](?i)inf(inity)?\\b',
+            'T_INF' => '[+-]?(?i)inf(inity)?\\b',
             'T_INT' => '[+-]?[0-9]+',
             'T_NAN' => '\\b(?i)nan\\b(?!:)',
             'T_EQUAL' => '=',
@@ -219,7 +219,7 @@ return [
         154 => new \Phplrt\Parser\Grammar\Lexeme('T_COMMA', true),
         155 => new \Phplrt\Parser\Grammar\Lexeme('T_RBRACE', true),
         156 => new \Phplrt\Parser\Grammar\Concatenation([198, 199, 200, 186, 201, 202]),
-        157 => new \Phplrt\Parser\Grammar\Concatenation([239, 240, 'Number', 241, 242, 243, 'Number', 244, 245, 246, 'Number', 247, 248, 249, 250]),
+        157 => new \Phplrt\Parser\Grammar\Concatenation([239, 240, 'IntNumber', 241, 242, 243, 'Number', 244, 245, 246, 'Number', 247, 248, 249, 250]),
         158 => new \Phplrt\Parser\Grammar\Lexeme('T_COMMA', true),
         159 => new \Phplrt\Parser\Grammar\Concatenation([158, 156]),
         160 => new \Phplrt\Parser\Grammar\Optional(159),
@@ -343,6 +343,7 @@ return [
         'Help' => new \Phplrt\Parser\Grammar\Concatenation([50, 51, 52, 53, 54, 55, 56, 57]),
         'HelpDocstring' => new \Phplrt\Parser\Grammar\Concatenation([73, 74]),
         'HistogramValue' => new \Phplrt\Parser\Grammar\Concatenation([162, 149, 163, 150, 164, 165, 166]),
+        'IntNumber' => new \Phplrt\Parser\Grammar\Lexeme('T_INT', true),
         'Label' => new \Phplrt\Parser\Grammar\Concatenation([265, 266, 267]),
         'Labels' => new \Phplrt\Parser\Grammar\Repetition(263, 0, INF),
         'Metric' => new \Phplrt\Parser\Grammar\Concatenation([125, 126, 127, 128, 'MetricValue', 129, 130, 131, 132]),
@@ -381,6 +382,9 @@ return [
         },
         'HistogramValue' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\CompositeValue\HistogramValueNode($children);
+        },
+        'IntNumber' => static function (\Phplrt\Parser\Context $ctx, $children) {
+            return new \Butschster\Prometheus\Ast\NumberNode($children);
         },
         'Label' => static function (\Phplrt\Parser\Context $ctx, $children) {
             return new \Butschster\Prometheus\Ast\LabelNode($children);

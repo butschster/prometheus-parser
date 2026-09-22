@@ -12,12 +12,17 @@ final class TypeNode
     /** @param \Phplrt\Lexer\Token\Token[] $children */
     public function __construct(array $children)
     {
+        // The family name may lex as any token that MetricName() admits, which
+        // includes T_METRIC_TYPE, so name and type are told apart by position.
+        $nameSet = false;
         foreach ($children as $child) {
-            if ($child->getName() === 'T_METRIC_NAME') {
-                $this->metric = \trim($child->getValue());
-            } elseif ($child->getName() === 'T_QUOTED_STRING') {
-                $this->metric = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
-            } elseif ($child->getName() === 'T_METRIC_TYPE') {
+            if (!$nameSet) {
+                $this->metric = match ($child->getName()) {
+                    'T_QUOTED_STRING' => \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"])),
+                    default => \trim($child->getValue()),
+                };
+                $nameSet = true;
+            } else {
                 $this->type = \trim($child->getValue());
             }
         }

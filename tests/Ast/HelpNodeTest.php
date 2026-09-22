@@ -446,4 +446,59 @@ SCHEMA
         $this->assertSame($name, $family->name);
         $this->assertSame('A family named after a token.', $family->description);
     }
+
+    /**
+     * HelpDocstring() lists the tokens a description may contain, but not
+     * T_HELP, T_TYPE, T_UNIT and T_EOF, so those words break the line.
+     *
+     * @testWith ["HELP"]
+     *           ["TYPE"]
+     *           ["UNIT"]
+     *           ["EOF"]
+     */
+    function testDescriptionContainingADirectiveKeyword(string $word): void
+    {
+        $node = $this->parser->parse(<<<SCHEMA
+# HELP test_help The $word of the thing.
+test_help 1
+SCHEMA
+        );
+
+        $this->assertSame(
+            "The $word of the thing.",
+            $node->getMetrics()['test_help']->description
+        );
+    }
+
+    /**
+     * No token matches a lone backslash, so one stray backslash anywhere makes
+     * the whole document unlexable rather than failing a single line.
+     */
+    function testDescriptionContainingAStrayBackslash(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help Path is C:\dir here.
+test_help 1
+SCHEMA
+        );
+
+        $this->assertSame(
+            'Path is C:\dir here.',
+            $node->getMetrics()['test_help']->description
+        );
+    }
+
+    function testDescriptionWithEscapedBackslashFollowedByN(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+# HELP test_help Path is C:\\new here.
+test_help 1
+SCHEMA
+        );
+
+        $this->assertSame(
+            'Path is C:\new here.',
+            $node->getMetrics()['test_help']->description
+        );
+    }
 }

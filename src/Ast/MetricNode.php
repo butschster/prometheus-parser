@@ -32,7 +32,7 @@ final class MetricNode
             } elseif ($child instanceof ExemplarsNode) {
                 $this->exemplars = $child->exemplars;
             } elseif ($child->getName() === 'T_QUOTED_STRING') {
-                $this->name = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
+                $this->name = EscapeSequence::unquote($child->getValue());
             } else {
                 $this->name = \trim($child->getValue());
             }

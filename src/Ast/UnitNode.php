@@ -22,7 +22,7 @@ final class UnitNode
                 $unit = $child->unit;
             } elseif (!$nameSet) {
                 $this->metric = match ($child->getName()) {
-                    'T_QUOTED_STRING' => \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"])),
+                    'T_QUOTED_STRING' => EscapeSequence::unquote($child->getValue()),
                     default => \trim($child->getValue()),
                 };
                 $nameSet = true;

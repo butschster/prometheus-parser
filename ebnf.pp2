@@ -11,11 +11,11 @@
 */
 %token  T_WHITESPACE                [\x20\t]+     // any number of blanks and/or tabs
 
-%token  T_HELP                      HELP
-%token  T_TYPE                      TYPE
-%token  T_UNIT                      UNIT
-%token  T_EOF                       EOF
-%token  T_COMMENT                   ^\#(?![\x20\t]+(?:HELP|TYPE|UNIT|EOF))[\x20\t]+([^\n\\]|\\[n"\\])+$
+%token  T_HELP                      \bHELP\b
+%token  T_TYPE                      \bTYPE\b
+%token  T_UNIT                      \bUNIT\b
+%token  T_EOF                       \bEOF\b
+%token  T_COMMENT                   ^\#(?![\x20\t]+(?:HELP|TYPE|UNIT|EOF)\b)[\x20\t]*([^\n\\]|\\[n"\\]|\\)*$
 
 /**
  * --------------------------------------------------------------------------
@@ -23,9 +23,9 @@
  * --------------------------------------------------------------------------
  */
 %token  T_FLOAT                     [+-]?[0-9]*\.[0-9]+([eE][+-]?[0-9]+)?|[+-]?[0-9]+[eE][+-]?[0-9]+\b
-%token  T_INF                       [+-](?i)inf(inity)?\b
+%token  T_INF                       [+-]?(?i)inf(inity)?\b
 %token  T_INT                       [+-]?[0-9]+
-%token  T_NAN                       \b(?i)nan\b
+%token  T_NAN                       \b(?i)nan\b(?!:)
 
 /**
 * --------------------------------------------------------------------------
@@ -47,23 +47,23 @@
 %token  T_EOL                       \n
 
 %token  T_START_TIMESTAMP           \bst@
-%token  T_METRIC_TYPE               \b(summary|counter|gaugehistogram|gauge|histogram|stateset|info|unknown|untyped)\b
-%token  T_COUNT                     \bcount\b
-%token  T_GCOUNT                    \bgcount\b
-%token  T_SUM                       \bsum\b
-%token  T_GSUM                      \bgsum\b
-%token  T_QUANTILE                  \bquantile\b
-%token  T_SCHEMA                    \bschema\b
-%token  T_ZERO_THRESHOLD            \bzero_threshold\b
-%token  T_ZERO_COUNT                \bzero_count\b
-%token  T_NEGATIVE_SPANS            \bnegative_spans\b
-%token  T_NEGATIVE_BUCKETS          \bnegative_buckets\b
-%token  T_POSITIVE_SPANS            \bpositive_spans\b
-%token  T_POSITIVE_BUCKETS          \bpositive_buckets\b
-%token  T_BUCKET                    \bbucket\b
+%token  T_METRIC_TYPE               \b(summary|counter|gaugehistogram|gauge|histogram|stateset|info|unknown|untyped)\b(?!:)
+%token  T_COUNT                     (?<=[{,])\bcount\b
+%token  T_GCOUNT                    (?<=[{,])\bgcount\b
+%token  T_SUM                       (?<=[{,])\bsum\b
+%token  T_GSUM                      (?<=[{,])\bgsum\b
+%token  T_QUANTILE                  (?<=[{,])\bquantile\b
+%token  T_SCHEMA                    (?<=[{,])\bschema\b
+%token  T_ZERO_THRESHOLD            (?<=[{,])\bzero_threshold\b
+%token  T_ZERO_COUNT                (?<=[{,])\bzero_count\b
+%token  T_NEGATIVE_SPANS            (?<=[{,])\bnegative_spans\b
+%token  T_NEGATIVE_BUCKETS          (?<=[{,])\bnegative_buckets\b
+%token  T_POSITIVE_SPANS            (?<=[{,])\bpositive_spans\b
+%token  T_POSITIVE_BUCKETS          (?<=[{,])\bpositive_buckets\b
+%token  T_BUCKET                    (?<=[{,])\bbucket\b
 %token  T_METRIC_NAME               [a-zA-Z_:][a-zA-Z0-9_:]*
-%token  T_QUOTED_STRING             \"([^\n"\\]|\\[n"\\])+\"     // "string"
-%token  T_TEXT                      ([^\n\\]|\\[n"\\])+
+%token  T_QUOTED_STRING             \"([^\n"\\]|\\[n"\\])*\"     // "string", possibly empty
+%token  T_TEXT                      ([^\n\\]|\\[n"\\]|\\)+
 
 
 /**
@@ -82,6 +82,7 @@
    return new \Butschster\Prometheus\Ast\SchemaNode($children);
 }
 :
+    Eol()?
     MetricData()*
     Eof()?
 ;
@@ -120,7 +121,9 @@
         Metric()*
         |
         Comment()*
-        Metric()+
+        Metric()
+        |
+        Comment()+
     )
 
 MetricName
@@ -178,7 +181,7 @@ MetricName
    return new \Butschster\Prometheus\Ast\HelpDocstringNode($children);
 }
 : (
-    ((MetricName()|MetricValue()|<T_EQUAL>|<T_COLON>|<T_HASH>|<T_LBRACE>|<T_RBRACE>|<T_LBRACKET>|<T_RBRACKET>|<T_COMMA>|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
+    ((MetricName()|MetricValue()|<T_HELP>|<T_TYPE>|<T_UNIT>|<T_EOF>|<T_EQUAL>|<T_COLON>|<T_HASH>|<T_LBRACE>|<T_RBRACE>|<T_LBRACKET>|<T_RBRACKET>|<T_COMMA>|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
 )
 
 /**
@@ -350,6 +353,16 @@ MetricName
     (<T_FLOAT>|<T_INT>|<T_INF>|<T_NAN>)
 )
 
+/**
+* An integral number, used where a fraction makes no sense (a histogram schema).
+*/
+#IntNumber -> {
+   return new \Butschster\Prometheus\Ast\NumberNode($children);
+}
+: (
+    <T_INT>
+)
+
 CompositeValue : (
     (SummaryValue()|HistogramValue()|GaugeHistogramValue())
 )
@@ -417,7 +430,7 @@ ClassicBuckets : (
 )
 
 NativeBuckets : (
-    <T_SCHEMA><T_COLON>Number()
+    <T_SCHEMA><T_COLON>IntNumber()
     <T_COMMA><T_ZERO_THRESHOLD><T_COLON>Number()
     <T_COMMA><T_ZERO_COUNT><T_COLON>Number()
     (<T_COMMA><T_NEGATIVE_SPANS><T_COLON><T_LBRACKET>QuantileOrBucketCount()(<T_COMMA>QuantileOrBucketCount())*<T_RBRACKET>)?
@@ -484,5 +497,5 @@ QuantileOrBucketCount : (
 )
 
 Eol: (
-    (::T_WHITESPACE::*::T_EOL::)+
+    (::T_WHITESPACE::*::T_EOR::?::T_EOL::)+
 )

@@ -13,7 +13,7 @@ final class MetricTimestampNode
     public function __construct(Token $value)
     {
         $this->timestamp = match ($value->getName()) {
-            'T_INT' => (int)$value->getValue(),
+            'T_INT' => NumberNode::toInteger($value->getValue()),
             'T_FLOAT' => (float)$value->getValue(),
         };
     }

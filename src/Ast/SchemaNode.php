@@ -27,8 +27,13 @@ final class SchemaNode implements \IteratorAggregate
         foreach ($children as $child) {
             if ($child instanceof EofNode) {
                 $eof = true;
-            } else {
-                $this->metrics[$child->name] = $child;
+            } elseif ($child->name !== '' || $child->metrics !== []) {
+                // a block of comments alone carries no family
+                if (isset($this->metrics[$child->name])) {
+                    $this->metrics[$child->name]->merge($child);
+                } else {
+                    $this->metrics[$child->name] = $child;
+                }
             }
         }
 

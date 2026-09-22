@@ -109,4 +109,58 @@ SCHEMA
         $this->assertSame(50, $metric->value);
         $this->assertCount(0, $metric->labels);
     }
+
+    /**
+     * Metric()+ swallows every consecutive header-less sample into one block
+     * whose name comes from the first sample, so unrelated families collapse
+     * into one. This is the normal shape of header-less exposition.
+     */
+    function testBareMetricBlockWithDistinctNames(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+node_cpu_seconds_total 1
+node_memory_bytes 2
+node_disk_bytes 3
+SCHEMA
+        );
+
+        $metrics = $node->getMetrics();
+
+        $this->assertCount(3, $metrics);
+        $this->assertArrayHasKey('node_cpu_seconds_total', $metrics);
+        $this->assertArrayHasKey('node_memory_bytes', $metrics);
+        $this->assertArrayHasKey('node_disk_bytes', $metrics);
+
+        $this->assertSame(1, $metrics['node_cpu_seconds_total']->metrics[0]->value);
+        $this->assertSame(2, $metrics['node_memory_bytes']->metrics[0]->value);
+        $this->assertSame(3, $metrics['node_disk_bytes']->metrics[0]->value);
+    }
+
+    function testBareMetricBlockGroupsSamplesOfTheSameName(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+node_cpu_seconds_total{cpu="0"} 1
+node_cpu_seconds_total{cpu="1"} 2
+node_memory_bytes 3
+SCHEMA
+        );
+
+        $metrics = $node->getMetrics();
+
+        $this->assertCount(2, $metrics);
+        $this->assertCount(2, $metrics['node_cpu_seconds_total']->metrics);
+        $this->assertCount(1, $metrics['node_memory_bytes']->metrics);
+    }
+
+    function testBareMetricBlockSeparatedByBlankLines(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+node_cpu_seconds_total 1
+
+node_memory_bytes 2
+SCHEMA
+        );
+
+        $this->assertCount(2, $node->getMetrics());
+    }
 }

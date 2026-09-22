@@ -15,7 +15,7 @@ final class ParserFactory
     {
         $path = __DIR__ . '/grammar.php';
         if (!file_exists($path)) {
-            throw new GrammarFileNotFoundException(\sprintf("Grammar file %s not found." . $path));
+            throw new GrammarFileNotFoundException(\sprintf('Grammar file %s not found.', $path));
         }
 
         /** @var array $data */

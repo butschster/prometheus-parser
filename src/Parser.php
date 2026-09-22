@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Butschster\Prometheus;
 
 use Butschster\Prometheus\Ast\SchemaNode;
-use Butschster\Prometheus\Exceptions\GrammarFileNotFoundException;
 use Butschster\Prometheus\Exceptions\ParseException;
 use Butschster\Prometheus\Exceptions\UnexpectedTokenException;
 use Butschster\Prometheus\Validation\ValidatorInterface;
@@ -142,15 +141,6 @@ final class Parser
         );
 
         throw new UnexpectedTokenException($message, (int)$e->getCode(), $e);
-    }
-
-    private function ensureGrammarFileExists(string $grammarFilePatch): void
-    {
-        if (!file_exists($grammarFilePatch)) {
-            throw new GrammarFileNotFoundException(
-                "File {$grammarFilePatch} not found"
-            );
-        }
     }
 }
 

@@ -13,7 +13,7 @@ final class MetricStartTimestampNode
     {
         foreach ($children as $child) {
             $this->startTimestamp = match ($child->getName()) {
-                'T_INT' => (int)$child->getValue(),
+                'T_INT' => NumberNode::toInteger($child->getValue()),
                 'T_FLOAT' => (float)$child->getValue(),
             };
         }

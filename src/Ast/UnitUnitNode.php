@@ -10,10 +10,12 @@ final class UnitUnitNode
 
     public function __construct(array $children)
     {
-        foreach ($children as $child) {
-            if ($child->getName() === 'T_METRIC_NAME') {
-                $this->unit = $child->getValue();
-            }
+        // UnitUnit() is a MetricName(), so the unit may lex as a keyword token
+        // such as T_COUNT; dropping it would also disable UnitSuffixValidator.
+        $child = \reset($children);
+
+        if ($child !== false) {
+            $this->unit = $child->getValue();
         }
     }
 }

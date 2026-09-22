@@ -13,7 +13,7 @@ final class MetricDataNode implements \IteratorAggregate
     public readonly ?string $unit;
     public readonly string $name;
     /** @var MetricNode[] */
-    public array $metrics;
+    public array $metrics = [];
 
     public function __construct(array $children)
     {

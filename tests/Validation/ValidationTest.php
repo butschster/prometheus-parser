@@ -226,4 +226,61 @@ SCHEMA
             $this->assertInstanceOf(UnexpectedTokenException::class, $e);
         }
     }
+
+    // -------------------------------------------------------------------------
+    //  Families without samples
+    // -------------------------------------------------------------------------
+
+    function testValidatorsAcceptFamilyWithoutSamples(): void
+    {
+        $parser = ParserFactory::create();
+        $parser->addValidator(new InfoTypeValidator());
+        $parser->addValidator(new StateSetTypeValidator());
+
+        $schema = $parser->parse(<<<'SCHEMA'
+# TYPE target_info info
+# TYPE feature_flags stateset
+# EOF
+
+SCHEMA
+        );
+
+        $this->assertSame([], $schema->getMetrics()['target_info']->metrics);
+        $this->assertSame([], $schema->getMetrics()['feature_flags']->metrics);
+    }
+
+    /**
+     * A unit spelled like a keyword token must still be validated against the
+     * family name, instead of being skipped as if no unit had been declared.
+     */
+    function testUnitSuffixInvalidWhenUnitIsAKeywordToken(): void
+    {
+        $this->expectException(InvalidUnitSuffixException::class);
+        $this->expectExceptionMessageMatches('/_count/');
+
+        $parser = ParserFactory::create();
+        $parser->addValidator(new UnitSuffixValidator());
+
+        $parser->parse(<<<'SCHEMA'
+# TYPE wrong_name gauge
+# UNIT wrong_name count
+wrong_name 0
+SCHEMA
+        );
+    }
+
+    function testUnitSuffixValidWhenUnitIsAKeywordToken(): void
+    {
+        $parser = ParserFactory::create();
+        $parser->addValidator(new UnitSuffixValidator());
+
+        $schema = $parser->parse(<<<'SCHEMA'
+# TYPE requests_count gauge
+# UNIT requests_count count
+requests_count 0
+SCHEMA
+        );
+
+        $this->assertSame('count', $schema->getMetrics()['requests_count']->unit);
+    }
 }

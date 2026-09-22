@@ -423,4 +423,27 @@ SCHEMA
             $node->getMetrics()['test_help:whitespace']->description
         );
     }
+
+    /**
+     * A family named after a keyword token must still pick up its description.
+     *
+     * @testWith ["count"]
+     *           ["sum"]
+     *           ["quantile"]
+     *           ["bucket"]
+     *           ["info"]
+     *           ["gauge"]
+     */
+    function testKeywordAsMetricName(string $name): void
+    {
+        $node = $this->parser->parse(<<<SCHEMA
+# HELP $name A family named after a token.
+$name 1
+SCHEMA
+        );
+
+        $family = $node->getMetrics()[$name];
+        $this->assertSame($name, $family->name);
+        $this->assertSame('A family named after a token.', $family->description);
+    }
 }

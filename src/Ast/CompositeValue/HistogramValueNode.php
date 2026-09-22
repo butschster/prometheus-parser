@@ -8,9 +8,9 @@ final class HistogramValueNode extends CompositeValueNode
 {
     public float|int $count;
     public float|int $sum;
-    public int $schema;
-    public float|int $zero_threshold;
-    public float|int $zero_count;
+    public ?int $schema = null;
+    public float|int|null $zero_threshold = null;
+    public float|int|null $zero_count = null;
     /** @var array<string, int>|null */
     public ?array $negative_spans = null;
     /** @var array<float|int>|null */

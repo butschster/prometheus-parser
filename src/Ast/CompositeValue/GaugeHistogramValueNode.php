@@ -8,9 +8,9 @@ final class GaugeHistogramValueNode extends CompositeValueNode
 {
     public float|int $gcount;
     public float|int $gsum;
-    public int $schema;
-    public float|int $zero_threshold;
-    public float|int $zero_count;
+    public ?int $schema = null;
+    public float|int|null $zero_threshold = null;
+    public float|int|null $zero_count = null;
     /** @var array<string, int>|null */
     public ?array $negative_spans = null;
     /** @var array<float|int>|null */

@@ -30,7 +30,7 @@ return [
             'T_INT' => '[+-]?[0-9]+',
             'T_NAN' => '\\b(?i)nan\\b',
             'T_EQUAL' => '=',
-            'T_COLON' => ':',
+            'T_COLON' => '(?<=[a-zA-Z0-9_]):',
             'T_HASH' => '#',
             'T_LBRACE' => '{',
             'T_RBRACE' => '}',

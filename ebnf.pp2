@@ -11,10 +11,10 @@
 */
 %token  T_WHITESPACE                [\x20\t]+     // any number of blanks and/or tabs
 
-%token  T_HELP                      HELP
-%token  T_TYPE                      TYPE
-%token  T_UNIT                      UNIT
-%token  T_EOF                       EOF
+%token  T_HELP                      \bHELP\b
+%token  T_TYPE                      \bTYPE\b
+%token  T_UNIT                      \bUNIT\b
+%token  T_EOF                       \bEOF\b
 %token  T_COMMENT                   ^\#(?![\x20\t]+(?:HELP|TYPE|UNIT|EOF))[\x20\t]+([^\n\\]|\\[n"\\])+$
 
 /**
@@ -178,7 +178,7 @@ MetricName
    return new \Butschster\Prometheus\Ast\HelpDocstringNode($children);
 }
 : (
-    ((MetricName()|MetricValue()|<T_EQUAL>|<T_COLON>|<T_HASH>|<T_LBRACE>|<T_RBRACE>|<T_LBRACKET>|<T_RBRACKET>|<T_COMMA>|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
+    ((MetricName()|MetricValue()|<T_HELP>|<T_TYPE>|<T_UNIT>|<T_EOF>|<T_EQUAL>|<T_COLON>|<T_HASH>|<T_LBRACE>|<T_RBRACE>|<T_LBRACKET>|<T_RBRACKET>|<T_COMMA>|<T_START_TIMESTAMP>|<T_QUOTED_STRING>)<T_WHITESPACE>*)*<T_TEXT>?
 )
 
 /**

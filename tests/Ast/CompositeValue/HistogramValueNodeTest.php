@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Butschster\Prometheus\Tests\Ast\CompositeValue;
 
+use Butschster\Prometheus\Exceptions\ParseException;
 use Butschster\Prometheus\Tests\Ast\TestCase;
 
 class HistogramValueNodeTest extends TestCase
@@ -271,6 +272,26 @@ SCHEMA
 
         $this->assertNull(
             $metric->startTimestamp
+        );
+    }
+
+    /**
+     * NativeBuckets binds schema to Number(), which also admits floats, NaN and
+     * Inf, so a non-integral schema escapes the parser as a raw TypeError
+     * instead of a ParseException.
+     *
+     * @testWith ["1.0"]
+     *           ["NaN"]
+     *           ["+Inf"]
+     */
+    function testNonIntegralSchemaIsAParseError(string $schema): void
+    {
+        $this->expectException(ParseException::class);
+
+        $this->parser->parse(<<<SCHEMA
+# TYPE acme_http_request_seconds histogram
+acme_http_request_seconds {count:1,sum:1,schema:$schema,zero_threshold:1e-4,zero_count:0}
+SCHEMA
         );
     }
 }

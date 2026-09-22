@@ -193,4 +193,54 @@ SCHEMA
         $this->assertSame('gauge', $family->type);
         $this->assertSame(1, $family->metrics[0]->value);
     }
+
+    /**
+     * A recording rule name whose first segment is a reserved keyword: the
+     * keyword token wins the alternation and the colon that follows it is then
+     * lexed as T_COLON instead of being part of the name.
+     *
+     * @testWith ["sum"]
+     *           ["count"]
+     *           ["gsum"]
+     *           ["gcount"]
+     *           ["bucket"]
+     *           ["quantile"]
+     *           ["schema"]
+     *           ["info"]
+     *           ["gauge"]
+     *           ["counter"]
+     */
+    function testRecordingRuleMetricNameStartingWithAKeyword(string $keyword): void
+    {
+        $name = "$keyword:http_requests:rate5m";
+
+        $node = $this->parser->parse(<<<SCHEMA
+$name 1
+SCHEMA
+        );
+
+        $this->assertArrayHasKey($name, $node->getMetrics());
+        $this->assertSame(1, $node->getMetrics()[$name]->metrics[0]->value);
+    }
+
+    /**
+     * T_HELP, T_TYPE, T_UNIT and T_EOF carry no word boundary and are declared
+     * before T_METRIC_NAME, so a name that merely starts with those letters is
+     * mis-lexed.
+     *
+     * @testWith ["HELPER_total"]
+     *           ["TYPEX_total"]
+     *           ["UNITS_total"]
+     *           ["EOFS_total"]
+     */
+    function testMetricNameStartingWithADirectiveKeyword(string $name): void
+    {
+        $node = $this->parser->parse(<<<SCHEMA
+$name 1
+SCHEMA
+        );
+
+        $this->assertArrayHasKey($name, $node->getMetrics());
+        $this->assertSame(1, $node->getMetrics()[$name]->metrics[0]->value);
+    }
 }

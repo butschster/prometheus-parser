@@ -111,4 +111,66 @@ SCHEMA
         $this->assertSame('label.with.dots', $metric->labels[1]->name);
         $this->assertSame('v2', $metric->labels[1]->value);
     }
+
+    /**
+     * T_QUOTED_STRING requires at least one character, so an empty label value
+     * cannot be parsed at all, although both formats allow it.
+     */
+    function testEmptyLabelValue(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+test_metric{label_1="",label_2="v2"} 1
+SCHEMA
+        );
+
+        $metric = $node->getMetrics()['test_metric']->metrics[0];
+
+        $this->assertSame('', $metric->labels[0]->value);
+        $this->assertSame('v2', $metric->labels[1]->value);
+    }
+
+    function testEmptyQuotedLabelName(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+test_metric{""="v1"} 1
+SCHEMA
+        );
+
+        $metric = $node->getMetrics()['test_metric']->metrics[0];
+
+        $this->assertSame('', $metric->labels[0]->name);
+        $this->assertSame('v1', $metric->labels[0]->value);
+    }
+
+    /**
+     * An escaped backslash must stay a backslash even when the next character
+     * is n: the \n substitution is applied before \\ is honoured, so a Windows
+     * path turns into a line feed.
+     */
+    function testEscapedBackslashFollowedByN(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+test_metric{path="C:\\new\\dir"} 1
+SCHEMA
+        );
+
+        $this->assertSame(
+            'C:\new\dir',
+            $node->getMetrics()['test_metric']->metrics[0]->labels[0]->value
+        );
+    }
+
+    function testEscapeSequencesInLabelValue(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+test_metric{a="line\nbreak",b="quote\"inside",c="back\\slash"} 1
+SCHEMA
+        );
+
+        $labels = $node->getMetrics()['test_metric']->metrics[0]->labels;
+
+        $this->assertSame("line\nbreak", $labels[0]->value);
+        $this->assertSame('quote"inside', $labels[1]->value);
+        $this->assertSame('back\slash', $labels[2]->value);
+    }
 }

@@ -325,4 +325,56 @@ SCHEMA
             );
         }
     }
+
+    /**
+     * T_INF makes the sign mandatory, while T_NAN accepts a bare nan. Go's
+     * ParseFloat, which Prometheus itself uses, reads unsigned Inf.
+     *
+     * @testWith ["Inf"]
+     *           ["inf"]
+     *           ["Infinity"]
+     *           ["infinity"]
+     */
+    function testUnsignedInfinity(string $literal): void
+    {
+        $node = $this->parser->parse(<<<SCHEMA
+test_unsigned_inf $literal
+SCHEMA
+        );
+
+        $this->assertSame(
+            \INF,
+            $node->getMetrics()['test_unsigned_inf']->metrics[0]->value
+        );
+    }
+
+    /**
+     * An integer literal beyond PHP_INT_MAX is cast to int and silently clamped;
+     * it must be kept as a float instead, as Prometheus does.
+     */
+    function testIntegerBeyondPhpIntMax(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+test_huge_int 99999999999999999999
+SCHEMA
+        );
+
+        $this->assertSame(
+            1.0e20,
+            $node->getMetrics()['test_huge_int']->metrics[0]->value
+        );
+    }
+
+    function testTimestampBeyondPhpIntMax(): void
+    {
+        $node = $this->parser->parse(<<<'SCHEMA'
+test_huge_ts 1 99999999999999999999
+SCHEMA
+        );
+
+        $this->assertSame(
+            1.0e20,
+            $node->getMetrics()['test_huge_ts']->metrics[0]->timestamp
+        );
+    }
 }

@@ -86,7 +86,6 @@ $metrics['http_requests_total']->description; // The total number of HTTP reques
 $metrics['http_requests_total']->type; // counter
 $metrics['http_requests_total']->name; // http_requests_total
 $metrics['http_requests_total']->unit; // null (if not set)
-$metrics['http_requests_total']->eof; // true if # EOF was present (OpenMetrics)
 
 foreach ($metrics['go_gc_duration_seconds'] as $metric) {
     $metric->name; // go_gc_duration_seconds
@@ -236,7 +235,8 @@ foo {gcount:42,gsum:3289.3,bucket:[0.01:20,0.1:25,1:34,+Inf:42]}
 ```php
 $metric->value->gcount; // 42
 $metric->value->gsum;   // 3289.3
-$metric->value->bucket; // ["0.01" => 20, "0.1" => 25, "1" => 34, "+Inf" => 42]
+$metric->value->bucket; // ["0.01" => 20, "0.1" => 25, 1 => 34, "+Inf" => 42]
+                        // note: PHP casts integral numeric string keys to int
 ```
 
 Native (sparse) histograms carry their buckets as spans instead. Span offsets are

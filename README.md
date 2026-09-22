@@ -173,12 +173,21 @@ my_metric{"unicode.label"="value", regular_label="other"} 1
 
 ### Headerless (bare) metric blocks
 
-Metrics without a `# TYPE` / `# HELP` header are valid — they are parsed with `type = "unknown"` and the family name derived from the first sample's name:
+Metrics without a `# TYPE` / `# HELP` header are valid — they are parsed with `type = "unknown"` and grouped into a family per metric name:
 
 ```
 bare_metric{code="200"} 50
 bare_metric{code="400"} 5
+other_bare_metric 1
 ```
+
+```php
+$metrics['bare_metric']->type;    // "unknown"
+$metrics['bare_metric']->metrics; // both samples
+$metrics['other_bare_metric'];    // its own family
+```
+
+A family may also be declared by more than one block. The blocks are merged: samples are appended in the order they appear, and each of `description`, `type` and `unit` is taken from the first block that declares it.
 
 ### Extended metric types
 

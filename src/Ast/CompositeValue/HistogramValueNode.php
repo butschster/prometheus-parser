@@ -11,11 +11,11 @@ final class HistogramValueNode extends CompositeValueNode
     public ?int $schema = null;
     public float|int|null $zero_threshold = null;
     public float|int|null $zero_count = null;
-    /** @var array<string, int>|null */
+    /** @var list<array{int|float, int|float}>|null */
     public ?array $negative_spans = null;
     /** @var array<float|int>|null */
     public ?array $negative_buckets = null;
-    /** @var array<string, int>|null */
+    /** @var list<array{int|float, int|float}>|null */
     public ?array $positive_spans = null;
     /** @var array<float|int>|null */
     public ?array $positive_buckets = null;

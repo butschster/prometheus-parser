@@ -239,6 +239,29 @@ $metric->value->gsum;   // 3289.3
 $metric->value->bucket; // ["0.01" => 20, "0.1" => 25, "1" => 34, "+Inf" => 42]
 ```
 
+Native (sparse) histograms carry their buckets as spans instead. Span offsets are
+deltas, so the same offset may appear more than once and the order is significant:
+spans are exposed as a list of `[offset, length]` pairs.
+
+```
+# TYPE foo histogram
+foo {count:59,sum:1.2e2,schema:7,zero_threshold:1e-4,zero_count:0,negative_spans:[1:2],negative_buckets:[5,7],positive_spans:[-1:2,3:4],positive_buckets:[5,7,10,9,8,8]}
+```
+
+```php
+$metric->value->schema;           // 7
+$metric->value->zero_threshold;   // 0.0001
+$metric->value->zero_count;       // 0
+$metric->value->negative_spans;   // [[1, 2]]
+$metric->value->negative_buckets; // [5, 7]
+$metric->value->positive_spans;   // [[-1, 2], [3, 4]]
+$metric->value->positive_buckets; // [5, 7, 10, 9, 8, 8]
+```
+
+On the classic `{count,sum,bucket}` form the native fields (`schema`, `zero_threshold`,
+`zero_count`, the spans and their buckets) are `null`, and on the native form `bucket`
+is `null` unless both forms are present.
+
 ---
 
 ## Validation layer (OpenMetrics strict mode)

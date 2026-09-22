@@ -8,9 +8,11 @@ use Traversable;
 
 final class MetricDataNode implements \IteratorAggregate
 {
-    public readonly ?string $description;
-    public readonly string $type;
-    public readonly ?string $unit;
+    // not readonly: a family may be declared by more than one block, and the
+    // blocks are merged into the first of them, see merge()
+    public ?string $description;
+    public string $type;
+    public ?string $unit;
     public readonly string $name;
     /** @var MetricNode[] */
     public array $metrics = [];
@@ -25,6 +27,8 @@ final class MetricDataNode implements \IteratorAggregate
         $unit = null;
         // from either HELP, TYPE, or UNIT
         $name = '';
+        // from a comment preceding the first sample of the block
+        $comment = null;
 
         foreach ($children as $child) {
             if ($child instanceof HelpNode) {
@@ -36,7 +40,12 @@ final class MetricDataNode implements \IteratorAggregate
             } elseif ($child instanceof UnitNode) {
                 $unit = $child->unit;
                 $name = $child->metric;
+            } elseif ($child instanceof CommentNode) {
+                $comment = $child->comment;
             } elseif ($child instanceof MetricNode) {
+                // a comment ahead of the block belongs to its first sample
+                $child->comment ??= $comment;
+                $comment = null;
                 $this->metrics[] = $child;
             }
         }
@@ -50,6 +59,24 @@ final class MetricDataNode implements \IteratorAggregate
         $this->type = $type;
         $this->unit = $unit;
         $this->name = $name;
+    }
+
+    /**
+     * Merge a later block declaring the same family: its samples are appended
+     * and its headers fill in whatever this block did not declare.
+     */
+    public function merge(self $other): void
+    {
+        foreach ($other->metrics as $metric) {
+            $this->metrics[] = $metric;
+        }
+
+        $this->description ??= $other->description;
+        $this->unit ??= $other->unit;
+
+        if ($this->type === 'unknown') {
+            $this->type = $other->type;
+        }
     }
 
     public function getIterator(): Traversable

@@ -121,7 +121,7 @@
         Metric()*
         |
         Comment()*
-        Metric()+
+        Metric()
         |
         Comment()+
     )

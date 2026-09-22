@@ -29,7 +29,11 @@ final class SchemaNode implements \IteratorAggregate
                 $eof = true;
             } elseif ($child->name !== '' || $child->metrics !== []) {
                 // a block of comments alone carries no family
-                $this->metrics[$child->name] = $child;
+                if (isset($this->metrics[$child->name])) {
+                    $this->metrics[$child->name]->merge($child);
+                } else {
+                    $this->metrics[$child->name] = $child;
+                }
             }
         }
 

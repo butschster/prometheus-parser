@@ -55,7 +55,7 @@ return [
             'T_POSITIVE_BUCKETS' => '\\bpositive_buckets\\b',
             'T_BUCKET' => '\\bbucket\\b',
             'T_METRIC_NAME' => '[a-zA-Z_:][a-zA-Z0-9_:]*',
-            'T_QUOTED_STRING' => '\\"([^\\n"\\\\]|\\\\[n"\\\\])+\\"',
+            'T_QUOTED_STRING' => '\\"([^\\n"\\\\]|\\\\[n"\\\\])*\\"',
             'T_TEXT' => '([^\\n\\\\]|\\\\[n"\\\\])+',
         ],
     ],

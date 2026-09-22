@@ -16,12 +16,12 @@ final class LabelNode
         foreach ($children as $child) {
             if (!$nameSet) {
                 $this->name = match ($child->getName()) {
-                    'T_QUOTED_STRING' => \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"])),
+                    'T_QUOTED_STRING' => EscapeSequence::unquote($child->getValue()),
                     default => \trim($child->getValue()),
                 };
                 $nameSet = true;
             } else {
-                $this->value = \stripslashes(\strtr(\substr($child->getValue(), 1, -1), ['\n' => "\n"]));
+                $this->value = EscapeSequence::unquote($child->getValue());
             }
         }
     }

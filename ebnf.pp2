@@ -15,7 +15,7 @@
 %token  T_TYPE                      \bTYPE\b
 %token  T_UNIT                      \bUNIT\b
 %token  T_EOF                       \bEOF\b
-%token  T_COMMENT                   ^\#(?![\x20\t]+(?:HELP|TYPE|UNIT|EOF)\b)[\x20\t]*([^\n\\]|\\[n"\\])*$
+%token  T_COMMENT                   ^\#(?![\x20\t]+(?:HELP|TYPE|UNIT|EOF)\b)[\x20\t]*([^\n\\]|\\[n"\\]|\\)*$
 
 /**
  * --------------------------------------------------------------------------
@@ -63,7 +63,7 @@
 %token  T_BUCKET                    (?<=[{,])\bbucket\b
 %token  T_METRIC_NAME               [a-zA-Z_:][a-zA-Z0-9_:]*
 %token  T_QUOTED_STRING             \"([^\n"\\]|\\[n"\\])*\"     // "string", possibly empty
-%token  T_TEXT                      ([^\n\\]|\\[n"\\])+
+%token  T_TEXT                      ([^\n\\]|\\[n"\\]|\\)+
 
 
 /**

@@ -14,7 +14,7 @@ final class HelpDocstringNode
             if ($child instanceof MetricValueNode) {
                 $this->description .= (string)$child;
             } elseif ($child->getName() === 'T_TEXT') {
-                $this->description .= \stripslashes(\strtr(\trim($child->getValue()), ['\n' => "\n"]));
+                $this->description .= EscapeSequence::unescape(\trim($child->getValue()));
             } else {
                 $this->description .= $child->getValue();
             }
